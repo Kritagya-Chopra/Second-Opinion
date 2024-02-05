@@ -21,8 +21,20 @@ public class UserServiceImpl implements UserService{
 		UserEntity user = map.map(u, UserEntity.class);
 		UserEntity addedUser = userRepository.save(user);
 		ResponseDTO resp  = new ResponseDTO();
+		if(addedUser == null)
+		{
+			resp.setStatus(false);
+			resp.setData(null);
+			resp.setMessage("Some Error Occered, kindly Contact");
+			resp.setCode("ERROR");
+		}
+		else
+		{
 		resp.setStatus(true);
 		resp.setData(addedUser);
+		resp.setMessage("User Added Successfully");
+		resp.setCode("Ok");
+		}
 		return resp;
 	}
 	
