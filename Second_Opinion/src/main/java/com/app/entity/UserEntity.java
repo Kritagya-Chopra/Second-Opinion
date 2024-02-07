@@ -2,6 +2,7 @@ package com.app.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Table;
 
 import com.app.enums.ERole;
 
@@ -11,6 +12,7 @@ import lombok.Setter;
 @Entity
 @Getter
 @Setter
+@Table(name = "users")
 public class UserEntity extends BaseEntity{
 	
 	private ERole role;
