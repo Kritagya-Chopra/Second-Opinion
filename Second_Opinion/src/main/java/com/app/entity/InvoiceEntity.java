@@ -14,7 +14,7 @@ import lombok.Setter;
 @Table(name = "invoices")
 @Getter
 @Setter
-public class BillEntity {
+public class InvoiceEntity {
 	private LocalDateTime invoiceTime;
 	private double totalAmount;
 	@Column(name = "payment_status")
