@@ -2,6 +2,8 @@ package com.app.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.MapsId;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 
@@ -25,4 +27,12 @@ public class AddressEntity extends BaseEntity {
 	private char zipcode;
 	@Column(nullable = false,length=10)
 	private char region;
+	
+	@OneToOne
+	@MapsId
+	private PatientEntity patient;
+	
+	@OneToOne
+	@MapsId
+	private DoctorEntity doctor;
 }
