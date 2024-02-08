@@ -4,6 +4,8 @@ import java.time.LocalDateTime;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import lombok.Getter;
@@ -19,4 +21,7 @@ public class OpinionEntity extends BaseEntity {
 	private LocalDateTime opinionTime;
 	@Column(name = "is_read")
 	private boolean isRead;
+	@ManyToOne
+	@JoinColumn(name = "case_id")
+	private CaseEntity myCase;
 }
