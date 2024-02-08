@@ -4,7 +4,9 @@ import java.time.LocalDateTime;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 
@@ -21,5 +23,15 @@ public class FeedbackEntity extends BaseEntity {
 	private float rating;
 	@Column(name="respone_time",nullable = false)
 	private LocalDateTime responseTime;
+	
+	// Feedbacks *<--->1 Patient
+	@ManyToOne
+	@JoinColumn(name = "patient_id",nullable = false)
+	private PatientEntity patient;
+	
+	// Feedbacks *<--->1 Doctor
+	@ManyToOne
+	@JoinColumn(name = "doctor_id",nullable = false)
+	private DoctorEntity doctor;
 	
 }
