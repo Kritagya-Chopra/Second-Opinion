@@ -5,6 +5,8 @@ import java.time.LocalDate;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Lob;
+import javax.persistence.MapsId;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import lombok.Getter;
@@ -24,10 +26,8 @@ public class QualificationEntity extends BaseEntity {
 	
 	@Lob
 	private byte[] document;
-	
-	@Column(name="license_no",length=30,nullable=false)
-	private String licenseNo;
-	
-	@Column(name="license_expiry",nullable=false)
-	private LocalDate licenseExpiry;
+
+	@OneToOne
+	@MapsId
+	private DoctorEntity doctor;
 }
