@@ -3,6 +3,7 @@ package com.app.entity;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import com.app.enums.ERole;
 
@@ -14,13 +15,14 @@ import lombok.Setter;
 @Setter
 @Table(name = "users")
 public class UserEntity extends BaseEntity{
-	
+	@Column(nullable = false)
 	private ERole role;
-	private String username;
+	@Column(unique = true,nullable = false)
+	private String userName;
+	@Column(nullable = false)
 	private String password;
-	private String email;
-	@Column(name = "first_name")
-	private String firstName;
-	@Column(name = "last_name")
-	private String lastName;
+	
+	@Transient
+	private String repeatPassword;
+	
 }
