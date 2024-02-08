@@ -60,14 +60,25 @@ public class PatientEntity extends BaseEntity {
 	private List<FeedbackEntity> feedbacks = new ArrayList<>(); 
 	
 	//helper method (add)
-	void addFeedback(FeedbackEntity feedback) {
+	public void addFeedback(FeedbackEntity feedback) {
 		this.feedbacks.add(feedback);
 		feedback.setPatient(this);
 	}
 	
 	//helper method (remove)
-	void removeFeedback(FeedbackEntity feedback) {
+	public void removeFeedback(FeedbackEntity feedback) {
 		this.feedbacks.remove(feedback);
 		feedback.setPatient(null);
 	}
+
+	public void addCase(CaseEntity c) {
+		this.cases.add(c);
+		c.setPatient(this);
+	}
+	
+	public void removeCase(CaseEntity c) {
+		cases.remove(c);
+		c.setPatient(null);
+	}
+
 }

@@ -20,7 +20,7 @@ public class FeedbackEntity extends BaseEntity {
 	@Lob
 	private String review;
 	@Column(nullable = false)
-	private float rating;
+	private int rating;
 	@Column(name="respone_time",nullable = false)
 	private LocalDateTime responseTime;
 	

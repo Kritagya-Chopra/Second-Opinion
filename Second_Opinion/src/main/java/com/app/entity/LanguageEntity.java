@@ -17,7 +17,7 @@ import lombok.Setter;
 @Table(name = "languages")
 public class LanguageEntity extends BaseEntity {
 
-	@Column(nullable = false)
+	@Column(nullable = false,length=30)
 	private String name;
 	
 	@ManyToMany

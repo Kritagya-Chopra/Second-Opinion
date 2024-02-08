@@ -62,6 +62,9 @@ public class DoctorEntity extends BaseEntity {
 	@MapsId
 	private UserEntity user;
 	
+	@OneToMany(mappedBy = "doctor",cascade = CascadeType.ALL,orphanRemoval = true)
+	private List<CaseEntity> myCases = new ArrayList<CaseEntity>();
+	
 	public void addFeedback(FeedbackEntity feedback)
 	{
 		this.feedbacks.add(feedback);
@@ -86,6 +89,16 @@ public class DoctorEntity extends BaseEntity {
 	{
 		this.blogs.remove(blog);
 		blog.setDoctor(null);
+	}
+	
+	public void addCase(CaseEntity c) {
+		this.myCases.add(c);
+		c.setDoctor(this);
+	}
+	
+	public void removeCase(CaseEntity c) {
+		myCases.remove(c);
+		c.setDoctor(null);
 	}
 
 	@Override
@@ -112,6 +125,7 @@ public class DoctorEntity extends BaseEntity {
 			return false;
 		return true;
 	}
+	
 	
 	
 }

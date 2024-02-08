@@ -20,7 +20,7 @@ public class SymptomEntity extends BaseEntity {
 	@Column(length = 30)
 	private String name;
 	@Lob
-	private String text;
+	private String description;
 	@ManyToMany
 	private Set<CaseEntity> myCases=new HashSet<CaseEntity>();
 	@Override

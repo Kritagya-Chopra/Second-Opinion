@@ -18,13 +18,13 @@ import lombok.Setter;
 @Getter
 @Setter
 @Table(name = "testimonials")
-public class TestimonialEntity {
+public class TestimonialEntity extends BaseEntity {
 	@Lob
 	@Column(nullable = false)
 	private String testimony;
 	
 	@Column(nullable = false)
-	private float rating;
+	private int rating;
 	
 	@Column(nullable = false,name="created_at")
 	private LocalDateTime createdAt;

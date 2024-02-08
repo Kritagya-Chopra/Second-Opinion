@@ -3,6 +3,7 @@ package com.app.entity;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import com.app.enums.ERole;
 
@@ -20,5 +21,8 @@ public class UserEntity extends BaseEntity{
 	private String userName;
 	@Column(nullable = false)
 	private String password;
+	
+	@Transient
+	private String repeatPassword;
 	
 }

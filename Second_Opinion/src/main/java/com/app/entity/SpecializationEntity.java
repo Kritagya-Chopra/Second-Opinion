@@ -30,6 +30,9 @@ public class SpecializationEntity extends BaseEntity {
 	@OneToMany(mappedBy = "specialization" , cascade = CascadeType.ALL , orphanRemoval = true)
 	private List<DoctorEntity> doctors = new ArrayList<DoctorEntity>();
 	
+	@OneToOne
+	private DiseaseEntity disease ;
+	
 	public void addDoctor(DoctorEntity doctor)
 	{
 		this.doctors.add(doctor);

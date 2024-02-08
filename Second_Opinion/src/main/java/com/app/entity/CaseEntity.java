@@ -31,8 +31,11 @@ public class CaseEntity extends BaseEntity {
 	@Lob
 	@Column(nullable = false)
 	private String description;
+	@Column(nullable = false,length=50)
 	private String title;
+	@Column(nullable = false)
 	private char status;
+	@Lob
 	private byte[] document;
 	@Column(name = "open_time")
 	private LocalDateTime openTime;
@@ -46,6 +49,44 @@ public class CaseEntity extends BaseEntity {
 	private List<NotificationEntity> notifications=new ArrayList<>();
 	@ManyToMany
 	private Set<SymptomEntity> symptoms=new HashSet<SymptomEntity>();
+	
+	@ManyToOne
+	@JoinColumn(name="disease_id")
+	private DiseaseEntity disease;
+	
+	@ManyToOne
+	@JoinColumn(name="doctor_id")
+	private DoctorEntity doctor;
+	
+	@ManyToOne
+	@JoinColumn(name="patient_id")
+	private PatientEntity patient;
+	
+	
+	public void addNotification(NotificationEntity notification) {
+		this.notifications.add(notification);
+		notification.setMyCase(this);
+	}
+	
+	public void removeNotification(NotificationEntity notification) {
+		this.notifications.remove(notification);
+		notification.setMyCase(null);
+	}
+	
+	public void addOpinion(OpinionEntity o) {
+		this.opinions.add(o);
+		o.setMyCase(this);
+	}
+	
+	public void removeOpinion(OpinionEntity o) {
+		this.opinions.remove(o);
+		o.setMyCase(null);
+	}
+	
+	
+	
+	
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -75,15 +116,5 @@ public class CaseEntity extends BaseEntity {
 			return false;
 		return true;
 	}
-	@ManyToOne
-	@JoinColumn(name="disease_id")
-	private DiseaseEntity disease;
 	
-	@ManyToOne
-	@JoinColumn(name="doctor_id")
-	private DoctorEntity doctor;
-	
-	@ManyToOne
-	@JoinColumn(name="patient_id")
-	private PatientEntity patient;
 }
