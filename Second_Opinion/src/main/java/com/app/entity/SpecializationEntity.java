@@ -21,11 +21,4 @@ public class SpecializationEntity extends BaseEntity {
 	private String name;
 	
 	
-	@Column(length = 100,nullable=false)
-	private String university;
-	
-	@Lob
-	@Column(length = 100,nullable=false)
-	private byte[] document;
-	
 }

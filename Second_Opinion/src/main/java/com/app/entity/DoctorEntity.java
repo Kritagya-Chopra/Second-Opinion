@@ -18,9 +18,6 @@ public class DoctorEntity extends BaseEntity {
 	@Column(name = "name", length = 50,nullable = false)
 	private String name;
 	
-	@Column(name="license_no",length=30,nullable=false)
-	private String licenseNo;
-	
 	@Column(name="years_of_experience",length=2,nullable=false)
 	private int yearsOfExperience;
 	
