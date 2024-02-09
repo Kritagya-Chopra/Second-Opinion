@@ -10,6 +10,7 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
@@ -48,6 +49,7 @@ public class CaseEntity extends BaseEntity {
 	@OneToMany(mappedBy="myCase")
 	private List<NotificationEntity> notifications=new ArrayList<>();
 	@ManyToMany
+	@JoinTable(name="case_symptoms")
 	private Set<SymptomEntity> symptoms=new HashSet<SymptomEntity>();
 	
 	@ManyToOne
