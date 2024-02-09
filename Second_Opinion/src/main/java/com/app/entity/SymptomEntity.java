@@ -21,7 +21,7 @@ public class SymptomEntity extends BaseEntity {
 	private String name;
 	@Lob
 	private String description;
-	@ManyToMany
+	@ManyToMany(mappedBy = "symptoms")
 	private Set<CaseEntity> myCases=new HashSet<CaseEntity>();
 	@Override
 	public int hashCode() {

@@ -5,6 +5,8 @@ import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
@@ -21,6 +23,7 @@ public class LanguageEntity extends BaseEntity {
 	private String name;
 	
 	@ManyToMany
+	@JoinTable(name="doctor_languages")
 	private Set<DoctorEntity> doctors = new HashSet<DoctorEntity>();
 
 	@Override

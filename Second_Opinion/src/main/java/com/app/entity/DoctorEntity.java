@@ -48,7 +48,7 @@ public class DoctorEntity extends BaseEntity {
 	@OneToMany(mappedBy = "doctor" , cascade=CascadeType.ALL,orphanRemoval = true)
 	private List<BlogEntity> blogs = new ArrayList<BlogEntity>();
 	
-	@ManyToMany
+	@ManyToMany(mappedBy = "doctors")
 	private Set<LanguageEntity> languagesSpoken = new HashSet<LanguageEntity>();
 	
 	@OneToMany(mappedBy = "doctor" , cascade = CascadeType.ALL , orphanRemoval = true)
