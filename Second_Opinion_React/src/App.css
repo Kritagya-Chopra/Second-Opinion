@@ -1,3 +1,11 @@
+.header-container{
+  display: flex;
+  justify-content: center;
+  margin-left: 15%;
+  position: absolute;
+}
+
+
 .App {
   text-align: center;
 }

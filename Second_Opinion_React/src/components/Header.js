@@ -10,10 +10,10 @@ export default class Header extends Component {
     const { activeItem } = this.state
 
     return (
-      <Container className='ui fixed menu'>
-  
-        
-            <img src="logo.png" />
+    
+   <div className='ui menu'>
+   
+      <img src="logo.png" />
       <Menu secondary>
      
         <MenuItem>  <h1 style={{color:'#2AB8C3'}}>Second Opinion</h1></MenuItem>
@@ -50,8 +50,8 @@ export default class Header extends Component {
         
       </Menu>
      
-     
-      </Container>
+      </div>
+      
     )
   }
 }
