@@ -1,7 +1,8 @@
 package com.app.service;
 
-import com.app.entity.Login;
+import com.app.dto.UserRequestDTO;
+import com.app.entity.UserEntity;
 
 public interface LoginService {
-	Login validateUser(Login user);
+	public UserEntity validateUser(UserRequestDTO user);
 }
