@@ -8,14 +8,24 @@ import org.springframework.stereotype.Service;
 
 import com.app.custom_exceptions.ResourceNotFoundException;
 import com.app.dto.DoctorDTO;
+import com.app.entity.AddressEntity;
 import com.app.entity.DoctorEntity;
+import com.app.entity.UserEntity;
+import com.app.repository.AddressRepository;
 import com.app.repository.DoctorRepository;
+import com.app.repository.UserRepository;
 
 @Service
 @Transactional
 public class DoctorServiceImpl implements DoctorService {
 	@Autowired
 	DoctorRepository doctorRepository;	
+	
+	@Autowired
+	UserRepository userRepository;
+	
+	@Autowired
+	AddressRepository addressRepository;
 	
 	@Autowired 
 	ModelMapper mapper;
@@ -26,9 +36,24 @@ public class DoctorServiceImpl implements DoctorService {
 	}
 
 	@Override
-	public DoctorEntity saveDoctor(DoctorDTO doc) {
+	public DoctorEntity saveDoctor(Long userId , DoctorDTO doc) {
 		DoctorEntity d = mapper.map(doc, DoctorEntity.class);
-		return doctorRepository.save(d);
+		UserEntity user = userRepository.findById(userId).orElseGet(()->new UserEntity());
+		d.setUser(user);
+		AddressEntity address = mapper.map(doc.getAddress(), AddressEntity.class);
+		DoctorEntity persistentDoctor = doctorRepository.save(d);
+		address.setId(userId);
+		addressRepository.save(address);
+		
+		
+		return persistentDoctor;
 	}
 
+	@Override
+	public DoctorEntity updateDoctor(Long id , DoctorDTO doc) {
+		DoctorEntity d = mapper.map(doc, DoctorEntity.class);
+		d.setId(id);
+		return doctorRepository.save(d);
+	}
+	
 }

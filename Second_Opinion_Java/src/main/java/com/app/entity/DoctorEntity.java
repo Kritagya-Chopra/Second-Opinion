@@ -38,7 +38,7 @@ public class DoctorEntity extends BaseEntity {
 	private int yearsOfExperience;
 	
 	@Column(name="avg_response_time")
-	private LocalDateTime avgResponseTime;
+	private float avgResponseTime;
 	
 	@Column(name="avg_rating")
 	private float avgRating;
@@ -62,7 +62,7 @@ public class DoctorEntity extends BaseEntity {
 	@JoinColumn(name = "specialization_id")
 	private SpecializationEntity specialization ;
 	
-	@OneToOne
+	@OneToOne(cascade = CascadeType.ALL)
 	@MapsId
 	private UserEntity user;
 	
@@ -128,6 +128,11 @@ public class DoctorEntity extends BaseEntity {
 		} else if (!licenseNo.equals(other.licenseNo))
 			return false;
 		return true;
+	}
+
+	public void setUser(Long id , UserEntity user) {
+		this.setId(id);
+		this.user = user;
 	}
 	
 	

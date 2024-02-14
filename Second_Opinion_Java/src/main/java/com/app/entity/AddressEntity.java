@@ -24,9 +24,9 @@ public class AddressEntity extends BaseEntity {
 	@Column(nullable = false,length=30)
 	private String country;
 	@Column(nullable = false,length=10)
-	private char zipcode;
+	private String zipcode;
 	@Column(nullable = false,length=10)
-	private char region;
+	private String region;
 	
 	@OneToOne
 	@MapsId
