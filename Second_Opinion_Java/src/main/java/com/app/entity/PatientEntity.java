@@ -7,6 +7,7 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Lob;
 import javax.persistence.MapsId;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
@@ -25,6 +26,9 @@ public class PatientEntity extends BaseEntity {
 	@Column(nullable = false,length=50,name="name")
 	private String name;
 	
+	@Lob
+	private byte[] photo;
+	
 	@Column(nullable = false,length=1)
 	private char gender;
 	
@@ -42,6 +46,7 @@ public class PatientEntity extends BaseEntity {
 	
 	@Column(nullable = false,name="date_of_birth")
 	private LocalDate dateOfBirth;
+	
 
 	@OneToOne
 	@MapsId
