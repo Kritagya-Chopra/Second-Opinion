@@ -57,8 +57,10 @@ public class PatientServiceImpl implements PatientService {
 
 	@Override
 	public PatientEntity updatePatient(Long id, PatientDTO pat) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		PatientEntity p = mapper.map(pat, PatientEntity.class);
+		p.setId(id);
+		return patientRepository.save(p);
 	}
 
 	

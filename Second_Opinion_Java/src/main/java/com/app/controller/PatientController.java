@@ -81,4 +81,23 @@ public class PatientController {
 		 }
 		return response;
 	}
+	
+	@PutMapping("/{id}")
+	public ResponseDTO updatePatient(@PathVariable Long id,@RequestBody PatientDTO patdto) {
+		ResponseDTO response = new ResponseDTO();
+		PatientEntity pat = patientService.updatePatient(id, patdto);
+		if(pat!=null) {
+			response.setData(pat);
+			 response.setStatus(true);
+			 response.setCode("OK");
+			 response.setMessage("Patient data present");
+		 }
+		 else {
+			 response.setData(pat);
+			 response.setStatus(false);
+			 response.setCode("ERROR");
+			 response.setMessage("Some error , null patient found");
+		 }
+		return response;
+	}
 }
