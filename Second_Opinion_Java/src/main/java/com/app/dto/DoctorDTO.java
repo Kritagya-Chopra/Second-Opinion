@@ -1,9 +1,8 @@
 package com.app.dto;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 
-import com.app.entity.AddressEntity;
+
 
 import lombok.Getter;
 import lombok.Setter;
@@ -18,5 +17,7 @@ public class DoctorDTO {
 	private float avgRating;
 	private String licenseNo;
 	private LocalDate licenseExpiry;
+	private QualificationDTO qualification;
 	private AddressDTO address;
+	
 }

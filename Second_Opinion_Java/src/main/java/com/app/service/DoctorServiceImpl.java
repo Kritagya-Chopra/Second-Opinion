@@ -8,11 +8,15 @@ import org.springframework.stereotype.Service;
 
 import com.app.custom_exceptions.ResourceNotFoundException;
 import com.app.dto.DoctorDTO;
+import com.app.dto.QualificationDTO;
 import com.app.entity.AddressEntity;
 import com.app.entity.DoctorEntity;
+import com.app.entity.QualificationEntity;
 import com.app.entity.UserEntity;
 import com.app.repository.AddressRepository;
 import com.app.repository.DoctorRepository;
+
+import com.app.repository.QualificationRepository;
 import com.app.repository.UserRepository;
 
 @Service
@@ -24,15 +28,21 @@ public class DoctorServiceImpl implements DoctorService {
 	@Autowired
 	UserRepository userRepository;
 	
+//	@Autowired
+//	AddressRepository addressRepository;
 	@Autowired
-	AddressRepository addressRepository;
-	
+	private QualificationRepository qualificationRepository;
 	@Autowired 
 	ModelMapper mapper;
 
 	@Override
-	public DoctorEntity getDoctor(Long id) {
-		return doctorRepository.findById(id).orElseThrow(()->new ResourceNotFoundException("DOCTOR NOT FOUND"));
+	public DoctorDTO getDoctor(Long id) {
+		DoctorEntity e= doctorRepository.findById(id).orElseThrow(()->new ResourceNotFoundException("DOCTOR NOT FOUND"));
+		QualificationEntity qualification=qualificationRepository.findById(id).orElseThrow(()->new ResourceNotFoundException("NO QUALIFICATION PROVIDED"));
+		QualificationDTO qDto=mapper.map(qualification,QualificationDTO.class);
+		DoctorDTO dDto=mapper.map(e, DoctorDTO.class);
+		dDto.setQualification(qDto);
+		return dDto;
 	}
 
 	@Override
@@ -40,11 +50,13 @@ public class DoctorServiceImpl implements DoctorService {
 		DoctorEntity d = mapper.map(doc, DoctorEntity.class);
 		UserEntity user = userRepository.findById(userId).orElseGet(()->new UserEntity());
 		d.setUser(user);
-		AddressEntity address = mapper.map(doc.getAddress(), AddressEntity.class);
+		QualificationEntity qualification=mapper.map(doc.getQualification(), QualificationEntity.class);
+		//AddressEntity address = mapper.map(doc.getAddress(), AddressEntity.class);
+		//address.setId(userId);
+		//addressRepository.save(address);
 		DoctorEntity persistentDoctor = doctorRepository.save(d);
-		address.setId(userId);
-		addressRepository.save(address);
-		
+		qualification.setDoctor(persistentDoctor);
+		qualificationRepository.save(qualification);
 		
 		return persistentDoctor;
 	}

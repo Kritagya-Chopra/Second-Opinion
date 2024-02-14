@@ -25,7 +25,7 @@ public class DoctorController {
 	@GetMapping("/get/{id}")
 	public ResponseDTO index(@PathVariable Long id) {
 		ResponseDTO response = new ResponseDTO();
-		DoctorEntity doc = doctorService.getDoctor(id);
+		DoctorDTO doc = doctorService.getDoctor(id);
 		if (doc != null) {
 			response.setData(doc);
 			response.setStatus(true);
