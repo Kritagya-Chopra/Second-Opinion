@@ -3,6 +3,8 @@ package com.app.dto;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
+import com.app.entity.AddressEntity;
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -16,11 +18,13 @@ public class DoctorDTO {
 	
 	private int yearsOfExperience;
 	
-	private LocalDateTime avgResponseTime;
+	private float avgResponseTime;
 	
 	private float avgRating;
 	
 	private String licenseNo;
 	
 	private LocalDate licenseExpiry;
+	
+	
 }
