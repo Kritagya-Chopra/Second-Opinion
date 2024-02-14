@@ -7,7 +7,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class PatientRequestDTO {
+public class PatientDTO {
 
 	private String name;
 	private char gender;
@@ -17,4 +17,6 @@ public class PatientRequestDTO {
 	private float height;
 	private float weight;
 	private byte[] photo;
+	private AddressDTO addressDTO;
+
 }

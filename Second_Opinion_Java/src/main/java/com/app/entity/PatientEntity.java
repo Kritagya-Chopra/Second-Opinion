@@ -7,6 +7,7 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Lob;
 import javax.persistence.MapsId;
 import javax.persistence.OneToMany;
@@ -36,7 +37,7 @@ public class PatientEntity extends BaseEntity {
 	private String contact;
 	
 	@Column(nullable = false,length=3,name="blood_group")
-	private char bloodGroup;
+	private String bloodGroup;
 	
 	@Column(nullable = false)
 	private float height;

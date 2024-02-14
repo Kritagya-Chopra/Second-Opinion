@@ -1,8 +1,16 @@
 package com.app.service;
 
-import com.app.dto.PatientRequestDTO;
-import com.app.dto.ResponseDTO;
+import com.app.dto.PatientDTO;
+import com.app.entity.PatientEntity;
 
 public interface PatientService {
-	ResponseDTO addPatient(PatientRequestDTO patient);
+
+	PatientDTO getPatient(Long id);
+
+	PatientEntity savePatient(Long userId, PatientDTO pat);
+
+	PatientEntity updatePatient(Long id, PatientDTO pat);
+	
+	Boolean deletePatient(Long id);
+	
 }

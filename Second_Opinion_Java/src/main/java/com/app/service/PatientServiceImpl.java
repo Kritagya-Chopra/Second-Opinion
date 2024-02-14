@@ -5,10 +5,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.app.dto.PatientRequestDTO;
-import com.app.dto.ResponseDTO;
+import com.app.custom_exceptions.ResourceNotFoundException;
+import com.app.dto.DoctorDTO;
+import com.app.dto.PatientDTO;
+import com.app.entity.AddressEntity;
+import com.app.entity.DoctorEntity;
 import com.app.entity.PatientEntity;
+import com.app.entity.UserEntity;
 import com.app.repository.PatientRepository;
+import com.app.repository.UserRepository;
 
 @Service
 @Transactional
@@ -16,26 +21,45 @@ public class PatientServiceImpl implements PatientService {
 	
 	@Autowired
 	private PatientRepository patientRepository;
-
+	
+	@Autowired
+	private UserRepository userRepository;
+	
+	@Autowired 
+	ModelMapper mapper;
+	
 	@Override
-	public ResponseDTO addPatient(PatientRequestDTO patient) {
-		ModelMapper mapper = new ModelMapper();
-		PatientEntity pat=mapper.map(patient, PatientEntity.class);
-		PatientEntity addedPatient = patientRepository.save(pat);
-		ResponseDTO responseDTO = new ResponseDTO();
-		if(addedPatient==null) {
-			responseDTO.setStatus(false);
-			responseDTO.setCode("ERROR");
-			responseDTO.setData(null);
-			responseDTO.setMessage("Error in Adding Patient");
-		}else {
-			responseDTO.setStatus(true);
-			responseDTO.setCode("OK");
-			responseDTO.setData(addedPatient);
-			responseDTO.setMessage("Patient Added Successfully");
-		}
-		return responseDTO;
+	public PatientDTO getPatient(Long id) {
+		
+		PatientEntity pat = patientRepository.findById(id).orElseThrow(()->new ResourceNotFoundException("PATIENT NOT FOUND"));
+		PatientDTO patDto=mapper.map(pat, PatientDTO.class);		
+		return patDto;
 	}
 	
+	@Override
+	public PatientEntity savePatient(Long userId , PatientDTO pat) {
+		PatientEntity p = mapper.map(pat, PatientEntity.class);
+		UserEntity user = userRepository.findById(userId).orElseGet(()->new UserEntity());
+		p.setUser(user);
+		PatientEntity persistentPatient = patientRepository.save(p);
+		return persistentPatient;
+	}
+	
+	@Override
+	public Boolean deletePatient(Long id) {
+		try {
+			patientRepository.deleteById(id);
+			return true;
+		}catch(Exception e){
+			return false;
+		}
+	}
+
+	@Override
+	public PatientEntity updatePatient(Long id, PatientDTO pat) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 	
 }
