@@ -8,7 +8,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.app.dto.ResponseDTO;
-import com.app.entity.Login;
+import com.app.dto.UserRequestDTO;
+
+import com.app.entity.UserEntity;
 import com.app.service.LoginService;
 
 
@@ -23,10 +25,9 @@ public class LoginController {
 	@Autowired
 	private LoginService loginService;
 	@PostMapping
-	public ResponseDTO validUser(@RequestBody Login User) {
-		System.out.println(User.getUser());
+	public ResponseDTO validUser(@RequestBody UserRequestDTO user) {
 		ResponseDTO response=new ResponseDTO();
-		 Login u=loginService.validateUser(User);
+		 UserEntity u=loginService.validateUser(user);
 		 if(u!=null) {
 			 response.setData(u);
 			 response.setStatus(true);
