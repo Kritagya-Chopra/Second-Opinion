@@ -1,5 +1,7 @@
 package com.app.service;
 
+import javax.transaction.Transactional;
+
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -10,6 +12,7 @@ import com.app.entity.UserEntity;
 import com.app.repository.UserRepository;
 
 @Service
+@Transactional
 public class UserServiceImpl implements UserService{
 	@Autowired
 	private UserRepository userRepository;
