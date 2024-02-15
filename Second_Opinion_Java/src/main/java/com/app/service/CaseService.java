@@ -7,12 +7,14 @@ import com.app.entity.CaseEntity;
 
 public interface CaseService {
 
-	List<CaseEntity> getCasesByPatientId(Long id);
+	List<CaseDTO> getCasesByPatientId(Long id);
 
-	List<CaseEntity> getCasesByDoctorId(Long id);
+	List<CaseDTO> getCasesByDoctorId(Long id);
 
 	CaseDTO createCase(CaseDTO c);
 
 	void deleteCase(Long id);
+
+	CaseDTO getCasesById(Long id);
 
 }

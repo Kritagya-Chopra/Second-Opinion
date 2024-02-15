@@ -31,12 +31,14 @@ import lombok.Setter;
 @Getter
 @Setter
 public class CaseDTO {
+	@JsonProperty(access = Access.WRITE_ONLY)
 	private Long patientId;
-	
+	@JsonProperty(access = Access.WRITE_ONLY)
 	private Long doctorId;
-	
+	@JsonProperty(access = Access.WRITE_ONLY)
 	private Long diseaseId;
-	
+	@JsonProperty(access = Access.READ_ONLY)
+	private Long Id;
 	private String description;
 	
 	private String title;

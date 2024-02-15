@@ -1,5 +1,6 @@
 package com.app.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.transaction.Transactional;
@@ -34,13 +35,28 @@ public class CaseServiceImpl implements CaseService {
 	ModelMapper mapper;
 
 	@Override
-	public List<CaseEntity> getCasesByPatientId(Long id) {
-		return caseRepository.findAllByPatientId(id);
+	public List<CaseDTO> getCasesByPatientId(Long id) {
+		List<CaseEntity> entityCases = caseRepository.findAllByPatientId(id);
+		List<CaseDTO> dtoCases = new ArrayList<CaseDTO>();
+		for(CaseEntity e : entityCases)
+		{
+			CaseDTO c = mapper.map(e, CaseDTO.class);
+			dtoCases.add(c);
+		}
+		return dtoCases;
 	}
 
 	@Override
-	public List<CaseEntity> getCasesByDoctorId(Long id) {
-		return caseRepository.findAllByDoctorId(id);
+	public List<CaseDTO> getCasesByDoctorId(Long id) {
+
+		List<CaseEntity> entityCases = caseRepository.findAllByDoctorId(id);
+		List<CaseDTO> dtoCases = new ArrayList<CaseDTO>();
+		for(CaseEntity e : entityCases)
+		{
+			CaseDTO c = mapper.map(e, CaseDTO.class);
+			dtoCases.add(c);
+		}
+		return dtoCases;
 	}
 
 	@Override
@@ -56,6 +72,11 @@ public class CaseServiceImpl implements CaseService {
 	@Override
 	public void deleteCase(Long id) {
 		caseRepository.deleteById(id);
+	}
+
+	@Override
+	public CaseDTO getCasesById(Long id) {
+		return mapper.map(caseRepository.findById(id).orElseThrow(()->new ResourceNotFoundException("Case Not Found")), CaseDTO.class);
 	}
 
 }

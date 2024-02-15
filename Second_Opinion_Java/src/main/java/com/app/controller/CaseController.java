@@ -24,13 +24,18 @@ public class CaseController {
 	@Autowired
 	private CaseService caseService;
 
+	@GetMapping("/{id}")
+	public CaseDTO getCaseById(@PathVariable Long id) {
+		return caseService.getCasesById(id);
+	}
+
 	@GetMapping("/patient/{id}")
-	public List<CaseEntity> getCasesByPatientId(@PathVariable Long id) {
+	public List<CaseDTO> getCasesByPatientId(@PathVariable Long id) {
 		return caseService.getCasesByPatientId(id);
 	}
 
 	@GetMapping("/doctor/{id}")
-	public List<CaseEntity> getCasesByDoctorId(@PathVariable Long id) {
+	public List<CaseDTO> getCasesByDoctorId(@PathVariable Long id) {
 		return caseService.getCasesByDoctorId(id);
 	}
 
