@@ -2,8 +2,6 @@
 Servers
 node_modules/
 
-application.properties
-*.properties
 
 HELP.md
 target/
