@@ -6,4 +6,8 @@ import com.app.entity.OpinionEntity;
 
 public interface OpinionRepository extends JpaRepository<OpinionEntity, Long> {
 
+	Object findByMyCaseId(Long id);
+
+	void deleteByMyCaseId(Long id);
+
 }

@@ -28,14 +28,14 @@ public class OpinionServiceImpl implements OpinionService {
 
 	@Override
 	public OpinionDTO getOpinion(Long id) {
-		return mapper.map(opinionRepository.findById(id), OpinionDTO.class);
+		return mapper.map(opinionRepository.findByMyCaseId(id), OpinionDTO.class);
 	}
 
 	@Override
-	public OpinionEntity saveOpinion(Long caseId, OpinionDTO o) {
+	public OpinionDTO saveOpinion(Long caseId, OpinionDTO o) {
 		OpinionEntity opinion = mapper.map(o, OpinionEntity.class);
 		opinion.setMyCase(caseRepository.findById(caseId).orElseThrow(()->new ResourceNotFoundException("CASE Not found")));
-		return opinionRepository.save(opinion);
+		return mapper.map(opinionRepository.save(opinion), OpinionDTO.class) ;
 	}
 
 	@Override
@@ -48,7 +48,7 @@ public class OpinionServiceImpl implements OpinionService {
 	@Override
 	public Boolean deleteOpinion(Long id) {
 		try {
-			opinionRepository.deleteById(id);
+			opinionRepository.deleteByMyCaseId(id);
 			return true;
 		}catch(Exception e){
 			return false;

@@ -13,5 +13,5 @@ public class OpinionDTO {
 
 	private LocalDateTime opinionTime;
 
-	private boolean isRead;
+
 }

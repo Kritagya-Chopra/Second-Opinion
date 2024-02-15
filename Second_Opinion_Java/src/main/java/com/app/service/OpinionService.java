@@ -7,7 +7,7 @@ public interface OpinionService {
 
 	OpinionDTO getOpinion(Long id);
 
-	OpinionEntity saveOpinion(Long caseId, com.app.dto.OpinionDTO d);
+	OpinionDTO saveOpinion(Long caseId, com.app.dto.OpinionDTO d);
 
 	OpinionEntity updateOpinion(Long id, com.app.dto.OpinionDTO d);
 

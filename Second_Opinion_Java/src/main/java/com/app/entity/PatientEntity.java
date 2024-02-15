@@ -86,5 +86,17 @@ public class PatientEntity extends BaseEntity {
 		cases.remove(c);
 		c.setPatient(null);
 	}
+	
+	//helper method (add)
+	public void addTestimonial(TestimonialEntity t) {
+		this.testimonials.add(t);
+		t.setPatient(this);
+	}
+	
+	//helper method (remove)
+	public void removeTestimonial(TestimonialEntity t) {
+		this.testimonials.remove(t);
+		t.setPatient(null);
+	}
 
 }

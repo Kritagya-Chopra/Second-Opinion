@@ -44,7 +44,7 @@ public class OpinionController {
 	@PostMapping("/add")
 	public ResponseDTO addOpinion(@RequestParam Long caseId , @RequestBody OpinionDTO d) {
 		ResponseDTO response = new ResponseDTO();
-		OpinionEntity opinion = opinionService.saveOpinion(caseId , d);
+		OpinionDTO opinion = opinionService.saveOpinion(caseId , d);
 		if (opinion != null) {
 			response.setData(opinion);
 			response.setStatus(true);
