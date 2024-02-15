@@ -10,6 +10,7 @@ import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
@@ -52,7 +53,7 @@ public class DoctorEntity extends BaseEntity {
 	@OneToMany(mappedBy = "doctor" , cascade=CascadeType.ALL,orphanRemoval = true)
 	private List<BlogEntity> blogs = new ArrayList<BlogEntity>();
 	
-	@ManyToMany(mappedBy = "doctors")
+	@ManyToMany(mappedBy = "doctors" , cascade = CascadeType.ALL , fetch = FetchType.EAGER)
 	private Set<LanguageEntity> languagesSpoken = new HashSet<LanguageEntity>();
 	
 	@OneToMany(mappedBy = "doctor" , cascade = CascadeType.ALL , orphanRemoval = true)
@@ -62,7 +63,7 @@ public class DoctorEntity extends BaseEntity {
 	@JoinColumn(name = "specialization_id")
 	private SpecializationEntity specialization ;
 	
-	@OneToOne(cascade = CascadeType.ALL)
+	@OneToOne(cascade = CascadeType.ALL , orphanRemoval = true)
 	@MapsId
 	private UserEntity user;
 	

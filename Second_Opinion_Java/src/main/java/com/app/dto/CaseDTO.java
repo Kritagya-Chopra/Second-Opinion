@@ -39,6 +39,7 @@ public class CaseDTO {
 	private Long diseaseId;
 	@JsonProperty(access = Access.READ_ONLY)
 	private Long Id;
+	
 	private String description;
 	
 	private String title;
