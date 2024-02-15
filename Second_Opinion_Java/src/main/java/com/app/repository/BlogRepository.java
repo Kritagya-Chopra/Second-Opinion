@@ -2,10 +2,12 @@ package com.app.repository;
 
 
 
+import java.util.List;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.app.entity.BlogEntity;
 
 public interface BlogRepository extends JpaRepository<BlogEntity, Long> {
-	//public BlogEntity findById(Long id);
+	public List<BlogEntity> findByDoctorId(Long id);
 }
