@@ -7,6 +7,8 @@ import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
+import javax.persistence.MapsId;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import lombok.Getter;
@@ -26,8 +28,12 @@ public class OpinionEntity extends BaseEntity {
 	
 	@Column(name = "is_read")
 	private boolean isRead;
-	@ManyToOne
-	@JoinColumn(name = "case_id")
+	
+	@Lob
+	private byte[] document;
+	
+	@OneToOne
+	@MapsId
 	private CaseEntity myCase;
 	
 	

@@ -16,7 +16,7 @@ import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.Fetch;
@@ -48,8 +48,8 @@ public class CaseEntity extends BaseEntity {
 	private LocalDateTime closeTime;
 	@Column(name = "response_time")
 	private LocalDateTime responseTime; 
-	@OneToMany(mappedBy = "myCase",cascade = CascadeType.ALL,orphanRemoval = true , fetch = FetchType.EAGER)
-	private List<OpinionEntity> opinions=new ArrayList<>();
+	@OneToOne(mappedBy = "myCase",cascade = CascadeType.ALL,orphanRemoval = true , fetch = FetchType.EAGER)
+	private OpinionEntity opinion;
 	@OneToMany(mappedBy="myCase" , cascade = CascadeType.ALL , orphanRemoval = true , fetch = FetchType.EAGER)
 	@Fetch(FetchMode.SUBSELECT)
 	private List<NotificationEntity> notifications=new ArrayList<>();
@@ -79,19 +79,6 @@ public class CaseEntity extends BaseEntity {
 		this.notifications.remove(notification);
 		notification.setMyCase(null);
 	}
-	
-	public void addOpinion(OpinionEntity o) {
-		this.opinions.add(o);
-		o.setMyCase(this);
-	}
-	
-	public void removeOpinion(OpinionEntity o) {
-		this.opinions.remove(o);
-		o.setMyCase(null);
-	}
-	
-	
-	
 	
 	
 	@Override
