@@ -1,6 +1,7 @@
 package com.app.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -22,7 +23,7 @@ public class DoctorController {
 	@Autowired
 	DoctorService doctorService;
 
-	@GetMapping("/get/{id}")
+	@GetMapping("/{id}")
 	public ResponseDTO index(@PathVariable Long id) {
 		ResponseDTO response = new ResponseDTO();
 		DoctorDTO doc = doctorService.getDoctor(id);
@@ -58,7 +59,7 @@ public class DoctorController {
 		return response;
 	}
 
-	@PutMapping("/update/{id}")
+	@PutMapping("/{id}")
 	public ResponseDTO updateDoctor(@PathVariable Long id, @RequestBody DoctorDTO d) {
 		ResponseDTO response = new ResponseDTO();
 		DoctorEntity doc = doctorService.updateDoctor(id , d);
@@ -73,6 +74,24 @@ public class DoctorController {
 			response.setCode("ERROR");
 			response.setMessage("Some error , Cant update doctor");
 		}
+		return response;
+	}
+	
+	@DeleteMapping("/{id}")
+	public ResponseDTO deleteDoctor(@PathVariable Long id)
+	{
+		ResponseDTO response = new ResponseDTO();
+		Boolean b = doctorService.deleteDoctor(id);
+		 if(b) {
+			 response.setStatus(true);
+			 response.setCode("OK");
+			 response.setMessage("Doctor data successfully deleted");
+		 }
+		 else {
+			 response.setStatus(false);
+			 response.setCode("ERROR");
+			 response.setMessage("Some error");
+		 }
 		return response;
 	}
 }

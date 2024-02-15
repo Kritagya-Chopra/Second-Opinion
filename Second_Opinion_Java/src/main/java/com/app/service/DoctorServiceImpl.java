@@ -67,5 +67,15 @@ public class DoctorServiceImpl implements DoctorService {
 		d.setId(id);
 		return doctorRepository.save(d);
 	}
+
+	@Override
+	public Boolean deleteDoctor(Long id) {
+		try {
+			doctorRepository.deleteById(id);
+			return true;
+		}catch(Exception e){
+			return false;
+		}
+	}
 	
 }
