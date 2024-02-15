@@ -13,7 +13,7 @@ public interface CaseService {
 
 	CaseDTO createCase(CaseDTO c);
 
-	void deleteCase(Long id);
+	boolean deleteCase(Long id);
 
 	CaseDTO getCasesById(Long id);
 
