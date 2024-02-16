@@ -24,16 +24,55 @@ public class BlogController {
 	@Autowired
 	private BlogService blogService;
 	@GetMapping("/doctors/{id}/blogs")
-	public List<BlogDTO> getBlog(@PathVariable Long id){
-		return blogService.getAllBlogs(id);
+	public ResponseDTO getBlog(@PathVariable Long id){
+		List<BlogDTO> bDto=blogService.getAllBlogs(id);
+		if(bDto.size()>0) {
+			rDto.setCode("success");
+			rDto.setData(bDto);
+			rDto.setMessage("Deleted Successfully");
+			rDto.setStatus(true);
+		}
+		else {
+			rDto.setCode("falied");
+			rDto.setData(false);
+			rDto.setMessage("Deletion Failed");
+			rDto.setStatus(false);
+		}
+		return rDto;
 	}
 	@PostMapping("/doctors/{id}/blogs")
-	public BlogDTO addBlog(@RequestBody BlogDTO blog,@PathVariable Long id) {
-		return blogService.add(blog,id);
+	public ResponseDTO addBlog(@RequestBody BlogDTO blog,@PathVariable Long id) {
+		BlogDTO bDto=blogService.add(blog,id);
+		if(bDto!=null) {
+			rDto.setCode("success");
+			rDto.setData(bDto);
+			rDto.setMessage("Deleted Successfully");
+			rDto.setStatus(true);
+		}
+		else {
+			rDto.setCode("falied");
+			rDto.setData(false);
+			rDto.setMessage("Deletion Failed");
+			rDto.setStatus(false);
+		}
+		return rDto;
 	}
 	@GetMapping("/blogs")
-	public List<BlogDTO> getAllBlog(){
-		return blogService.allBlogs();
+	public ResponseDTO getAllBlog(){
+		List<BlogDTO> bDto=blogService.allBlogs();
+		if(bDto.size()>0) {
+			rDto.setCode("success");
+			rDto.setData(bDto);
+			rDto.setMessage("Deleted Successfully");
+			rDto.setStatus(true);
+		}
+		else {
+			rDto.setCode("falied");
+			rDto.setData(false);
+			rDto.setMessage("Deletion Failed");
+			rDto.setStatus(false);
+		}
+		return rDto;
 	}
 	@DeleteMapping("/doctors/{id}/blogs")
 	public ResponseDTO deleteDoctorBlog(@PathVariable Long id) {

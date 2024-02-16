@@ -23,8 +23,10 @@ public class LoginServiceImpl implements LoginService {
 		
 		UserEntity u=lDao.findByUserName(user.getUserName());
 		if(u!=null) {
-			if(u.getPassword().equals(user.getPassword())) {
-				return u;
+			if(u.isValid()) {
+				if(u.getPassword().equals(user.getPassword())) {
+					return u;
+				}
 			}
 		}
 		return null;
