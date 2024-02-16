@@ -1,6 +1,7 @@
 package com.app.dto;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import com.app.entity.AddressEntity;
 import com.app.entity.QualificationEntity;
@@ -20,5 +21,7 @@ public class DoctorDTO {
 	private LocalDate licenseExpiry;
 	private AddressEntity address;
 	private QualificationEntity qualification;
+	private Long specializationId;
+	private List<Long> languages;
 	
 }

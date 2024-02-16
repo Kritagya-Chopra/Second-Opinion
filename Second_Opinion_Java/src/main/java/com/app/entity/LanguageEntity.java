@@ -22,10 +22,6 @@ public class LanguageEntity extends BaseEntity {
 	@Column(nullable = false,length=30)
 	private String name;
 	
-	@ManyToMany
-	@JoinTable(name="doctor_languages")
-	private Set<DoctorEntity> doctors = new HashSet<DoctorEntity>();
-
 	@Override
 	public int hashCode() {
 		final int prime = 31;
