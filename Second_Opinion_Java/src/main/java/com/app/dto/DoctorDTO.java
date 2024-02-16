@@ -22,5 +22,6 @@ public class DoctorDTO {
 	private AddressEntity address;
 	private QualificationEntity qualification;
 	private Long specializationId;
+	private List<Long> languages;
 	
 }

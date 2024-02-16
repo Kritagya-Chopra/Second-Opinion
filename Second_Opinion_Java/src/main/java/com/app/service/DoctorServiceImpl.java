@@ -1,5 +1,8 @@
 package com.app.service;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import javax.transaction.Transactional;
 
 import org.modelmapper.ModelMapper;
@@ -9,9 +12,11 @@ import org.springframework.stereotype.Service;
 import com.app.custom_exceptions.ResourceNotFoundException;
 import com.app.dto.DoctorDTO;
 import com.app.entity.DoctorEntity;
+import com.app.entity.LanguageEntity;
 import com.app.entity.SpecializationEntity;
 import com.app.entity.UserEntity;
 import com.app.repository.DoctorRepository;
+import com.app.repository.LanguageRepository;
 import com.app.repository.SpecializationRepository;
 import com.app.repository.UserRepository;
 
@@ -26,6 +31,9 @@ public class DoctorServiceImpl implements DoctorService {
 	
 	@Autowired
 	SpecializationRepository specializationRepository;
+	
+	@Autowired
+	LanguageRepository languageRepository;
 	
 	@Autowired 
 	ModelMapper mapper;
@@ -44,6 +52,10 @@ public class DoctorServiceImpl implements DoctorService {
 		DoctorEntity d = mapper.map(doc, DoctorEntity.class);
 		d.setUser(user);
 		specialization.addDoctor(d);
+		List<LanguageEntity> list = doc.getLanguages().stream().map((Long id )->
+			languageRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("LANGUAGE NOT FOUND"))
+		).collect(Collectors.toList());
+		d.getLanguagesSpoken().addAll(list);
 		return doctorRepository.save(d);
 	}
 
