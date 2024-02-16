@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.app.entity.NotificationEntity;
 import com.app.entity.OpinionEntity;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonProperty.Access;
 
@@ -36,15 +37,15 @@ public class CaseDTO {
 	private LocalDateTime openTime;
 	
 	private LocalDateTime closeTime;
-	
+	@JsonProperty(access = Access.WRITE_ONLY)
 	private LocalDateTime responseTime;
-	
+	@JsonProperty(access = Access.WRITE_ONLY)
 	private List<Long> symptomIds;
+	@JsonProperty(access = Access.READ_ONLY)
+	private List<SymptomDTO> symptoms;
 	
 	@JsonProperty(access = Access.READ_ONLY)
-	private List<OpinionEntity> opinions;
-	@JsonProperty(access = Access.READ_ONLY)
-	private List<NotificationEntity> notifications;
+	private OpinionEntity opinion;
 	
 	
 }
