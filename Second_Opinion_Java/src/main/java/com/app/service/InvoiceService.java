@@ -15,7 +15,7 @@ public interface InvoiceService {
 
 	Boolean deleteInvoice(Long id);
 
-	List<InvoiceDTO> getInvoiceByPatientId(Long id);
+	//List<InvoiceDTO> getInvoiceByPatientId(Long id);
 
 
 }

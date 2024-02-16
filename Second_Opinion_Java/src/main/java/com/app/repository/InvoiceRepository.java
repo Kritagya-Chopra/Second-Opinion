@@ -12,6 +12,6 @@ public interface InvoiceRepository extends JpaRepository<InvoiceEntity, Long> {
 
 	void deleteByMyCaseId(Long id);
 
-	List<InvoiceEntity> findAllByCasePatientId(Long id);
+	//List<InvoiceEntity> findAllByCasePatientId(Long id);
 
 }

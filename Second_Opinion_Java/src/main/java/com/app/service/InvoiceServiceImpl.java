@@ -57,10 +57,10 @@ public class InvoiceServiceImpl implements InvoiceService {
 		}
 	}
 
-	@Override
-	public List<InvoiceDTO> getInvoiceByPatientId(Long id) {
-		List<InvoiceEntity> invoices = invoiceRepository.findAllByCasePatientId(id);
-		return invoices.stream().map((InvoiceEntity i)->mapper.map(i, InvoiceDTO.class)).collect(Collectors.toList());
-	}
+	//@Override
+	//public List<InvoiceDTO> getInvoiceByPatientId(Long id) {
+		//List<InvoiceEntity> invoices = invoiceRepository.findAllByCasePatientId(id);
+		//return invoices.stream().map((InvoiceEntity i)->mapper.map(i, InvoiceDTO.class)).collect(Collectors.toList());
+	//}
 
 }

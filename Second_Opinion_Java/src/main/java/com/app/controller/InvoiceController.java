@@ -43,23 +43,23 @@ public class InvoiceController {
 		return response;
 	}
 	
-	@GetMapping("/patient/{id}")
-	public ResponseDTO patientInvoice(@PathVariable Long id) {
-		ResponseDTO response = new ResponseDTO();
-		List<InvoiceDTO> invoices = invoiceService.getInvoiceByPatientId(id);
-		if (invoices != null) {
-			response.setData(invoices);
-			response.setStatus(true);
-			response.setCode("OK");
-			response.setMessage("Invoice Available");
-		} else {
-			response.setData(invoices);
-			response.setStatus(false);
-			response.setCode("ERROR");
-			response.setMessage("Some error , null invoice found");
-		}
-		return response;
-	}
+	//@GetMapping("/patient/{id}")
+	//public ResponseDTO patientInvoice(@PathVariable Long id) {
+		//ResponseDTO response = new ResponseDTO();
+		//List<InvoiceDTO> invoices = invoiceService.getInvoiceByPatientId(id);
+		//if (invoices != null) {
+			//response.setData(invoices);
+			//response.setStatus(true);
+			//response.setCode("OK");
+			//response.setMessage("Invoice Available");
+		//} else {
+			//response.setData(invoices);
+			//response.setStatus(false);
+			//response.setCode("ERROR");
+			//response.setMessage("Some error , null invoice found");
+		//}
+		//return response;
+	//}
 
 	@PostMapping("/add")
 	public ResponseDTO addInvoice(@RequestParam Long caseId , @RequestBody InvoiceDTO d) {

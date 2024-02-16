@@ -48,6 +48,8 @@ public class OpinionServiceImpl implements OpinionService {
 	@Override
 	public Boolean deleteOpinion(Long id) {
 		try {
+			OpinionEntity opinion =opinionRepository.findById(id).orElseThrow(()->new ResourceNotFoundException("Opinion not found"));
+			opinion.setMyCase(null);
 			opinionRepository.deleteByMyCaseId(id);
 			return true;
 		}catch(Exception e){
