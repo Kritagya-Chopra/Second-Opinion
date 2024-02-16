@@ -69,7 +69,8 @@ public class CaseServiceImpl implements CaseService {
 	@Override
 	public boolean deleteCase(Long id) {
 		try {
-			caseRepository.deleteById(id);
+			CaseEntity myCase = caseRepository.findById(id).orElseThrow(()->new ResourceNotFoundException("CASE NOT FOUND"));
+			myCase.setStatus('C');
 			return true;
 		} catch (Exception e) {
 			return false;

@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
@@ -48,6 +49,16 @@ public class DoctorEntity extends BaseEntity {
 	@Column(name="license_expiry",nullable=false)
 	private LocalDate licenseExpiry;
 	
+	@Embedded
+	private QualificationEntity qualification;
+	
+	@Embedded
+	private AddressEntity address;
+
+	@OneToOne
+	@MapsId
+	private UserEntity user;
+	
 	@OneToMany(mappedBy = "doctor" , cascade=CascadeType.ALL,orphanRemoval = true)
 	private List<BlogEntity> blogs = new ArrayList<BlogEntity>();
 	
@@ -60,10 +71,6 @@ public class DoctorEntity extends BaseEntity {
 	@ManyToOne
 	@JoinColumn(name = "specialization_id")
 	private SpecializationEntity specialization ;
-	
-	@OneToOne(cascade = CascadeType.ALL , orphanRemoval = true)
-	@MapsId
-	private UserEntity user;
 	
 	@OneToMany(mappedBy = "doctor",cascade = CascadeType.ALL,orphanRemoval = true)
 	private List<CaseEntity> myCases = new ArrayList<CaseEntity>();
@@ -128,12 +135,4 @@ public class DoctorEntity extends BaseEntity {
 			return false;
 		return true;
 	}
-
-	public void setUser(Long id , UserEntity user) {
-		this.setId(id);
-		this.user = user;
-	}
-	
-	
-	
 }

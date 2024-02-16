@@ -2,6 +2,8 @@ package com.app.dto;
 
 import java.time.LocalDateTime;
 
+import javax.persistence.Column;
+import javax.persistence.Lob;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -13,5 +15,8 @@ public class OpinionDTO {
 
 	private LocalDateTime opinionTime;
 
+	private boolean isRead;
+	
+	private byte[] document;
 
 }

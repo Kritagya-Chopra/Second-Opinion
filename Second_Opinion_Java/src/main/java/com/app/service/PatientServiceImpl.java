@@ -48,7 +48,9 @@ public class PatientServiceImpl implements PatientService {
 	@Override
 	public Boolean deletePatient(Long id) {
 		try {
-			patientRepository.deleteById(id);
+			UserEntity user = userRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("USER NOT FOUND"));
+			user.setValid(false);
+			user.setUserName(""+user.getId());
 			return true;
 		}catch(Exception e){
 			return false;

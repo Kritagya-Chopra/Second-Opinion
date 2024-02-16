@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Lob;
@@ -31,7 +32,7 @@ public class PatientEntity extends BaseEntity {
 	private byte[] photo;
 	
 	@Column(nullable = false,length=1)
-	private char gender;
+	private String gender;
 	
 	@Column(nullable = false,length=14)
 	private String contact;
@@ -48,6 +49,8 @@ public class PatientEntity extends BaseEntity {
 	@Column(nullable = false,name="date_of_birth")
 	private LocalDate dateOfBirth;
 	
+	@Embedded
+	private AddressEntity address;
 
 	@OneToOne
 	@MapsId

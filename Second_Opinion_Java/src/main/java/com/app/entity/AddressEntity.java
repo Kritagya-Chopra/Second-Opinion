@@ -1,20 +1,16 @@
 package com.app.entity;
 
 import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.MapsId;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
-
+import javax.persistence.Embeddable;
 
 import lombok.Getter;
 import lombok.Setter;
 
-@Entity
+
 @Getter
 @Setter
-@Table(name = "address")
-public class AddressEntity extends BaseEntity {
+@Embeddable
+public class AddressEntity {
 	@Column(nullable = false,length=50)
 	private String street;
 	@Column(nullable = false,length=30)
@@ -27,12 +23,5 @@ public class AddressEntity extends BaseEntity {
 	private String zipcode;
 	@Column(nullable = false,length=10)
 	private String region;
-	
-	@OneToOne
-	@MapsId
-	private PatientEntity patient;
-	
-	@OneToOne
-	@MapsId
-	private DoctorEntity doctor;
+
 }

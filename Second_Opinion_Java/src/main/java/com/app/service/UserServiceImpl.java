@@ -22,6 +22,7 @@ public class UserServiceImpl implements UserService{
 	public ResponseDTO addUser(UserRequestDTO u) {
 		ModelMapper map = new ModelMapper();
 		UserEntity user = map.map(u, UserEntity.class);
+		user.setValid(true);
 		UserEntity addedUser = userRepository.save(user);
 		ResponseDTO resp  = new ResponseDTO();
 		if(addedUser == null)

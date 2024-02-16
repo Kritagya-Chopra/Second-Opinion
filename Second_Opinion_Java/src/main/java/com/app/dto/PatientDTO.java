@@ -2,6 +2,8 @@ package com.app.dto;
 
 import java.time.LocalDate;
 
+import com.app.entity.AddressEntity;
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -10,13 +12,13 @@ import lombok.Setter;
 public class PatientDTO {
 
 	private String name;
-	private char gender;
+	private String gender;
 	private String contact;
 	private LocalDate dateOfBirth;
 	private String bloodGroup;
 	private float height;
 	private float weight;
 	private byte[] photo;
-	private AddressDTO addressDTO;
+	private AddressEntity address;
 
 }
