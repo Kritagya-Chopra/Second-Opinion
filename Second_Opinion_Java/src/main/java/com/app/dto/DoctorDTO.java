@@ -25,7 +25,9 @@ public class DoctorDTO {
 	private LocalDate licenseExpiry;
 	private AddressEntity address;
 	private QualificationEntity qualification;
+	@JsonProperty(access = Access.WRITE_ONLY)
 	private Long specializationId;
+	@JsonProperty(access = Access.WRITE_ONLY)
 	private List<Long> languages;
 	@JsonProperty(access = Access.READ_ONLY)
 	private SpecializationDTO specialization;

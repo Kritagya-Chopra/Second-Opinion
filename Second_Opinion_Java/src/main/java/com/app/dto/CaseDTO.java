@@ -39,7 +39,7 @@ public class CaseDTO {
 	
 	private LocalDateTime responseTime;
 	
-	private List<Long> symptoms;
+	private List<Long> symptomIds;
 	
 	@JsonProperty(access = Access.READ_ONLY)
 	private List<OpinionEntity> opinions;
