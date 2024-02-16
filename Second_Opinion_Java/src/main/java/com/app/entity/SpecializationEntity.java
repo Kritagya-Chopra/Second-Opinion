@@ -31,7 +31,7 @@ public class SpecializationEntity extends BaseEntity {
 	private List<DoctorEntity> doctors = new ArrayList<DoctorEntity>();
 	
 	@OneToOne
-	private DiseaseEntity disease ;
+	private DiseaseEntity disease;
 	
 	public void addDoctor(DoctorEntity doctor)
 	{

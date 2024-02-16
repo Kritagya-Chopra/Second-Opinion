@@ -9,8 +9,10 @@ import org.springframework.stereotype.Service;
 import com.app.custom_exceptions.ResourceNotFoundException;
 import com.app.dto.DoctorDTO;
 import com.app.entity.DoctorEntity;
+import com.app.entity.SpecializationEntity;
 import com.app.entity.UserEntity;
 import com.app.repository.DoctorRepository;
+import com.app.repository.SpecializationRepository;
 import com.app.repository.UserRepository;
 
 @Service
@@ -21,6 +23,9 @@ public class DoctorServiceImpl implements DoctorService {
 	
 	@Autowired
 	UserRepository userRepository;
+	
+	@Autowired
+	SpecializationRepository specializationRepository;
 	
 	@Autowired 
 	ModelMapper mapper;
@@ -34,9 +39,11 @@ public class DoctorServiceImpl implements DoctorService {
 
 	@Override
 	public DoctorEntity saveDoctor(Long userId , DoctorDTO doc) {
+		SpecializationEntity specialization = specializationRepository.findById(doc.getSpecializationId()).orElseThrow(()-> new ResourceNotFoundException("Specialization not found"));
 		UserEntity user = userRepository.findById(userId).orElseThrow(()->new ResourceNotFoundException("USER NOT FOUND"));
 		DoctorEntity d = mapper.map(doc, DoctorEntity.class);
 		d.setUser(user);
+		specialization.addDoctor(d);
 		return doctorRepository.save(d);
 	}
 
