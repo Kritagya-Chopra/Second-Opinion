@@ -72,6 +72,8 @@ public class TestimonialServiceImpl implements TestimonialService {
 		List<TestimonialEntity> tEntityList = testimonialRepository.findAll();
 		List<TestimonialDTO> tDtoList = new ArrayList<TestimonialDTO>();
 		for (TestimonialEntity testimonialEntity : tEntityList) {
+			TestimonialDTO tDto=mapper.map(testimonialEntity, TestimonialDTO.class);
+			tDto.setPatientId(testimonialEntity.getPatient().getId());
 			tDtoList.add(mapper.map(testimonialEntity, TestimonialDTO.class));
 		}
 		return tDtoList;

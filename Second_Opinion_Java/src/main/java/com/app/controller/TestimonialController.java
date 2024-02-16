@@ -9,10 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
-import com.app.dto.FeedbackDTO;
 import com.app.dto.ResponseDTO;
 import com.app.dto.TestimonialDTO;
 import com.app.service.TestimonialService;
@@ -44,14 +41,41 @@ public class TestimonialController {
 	}
 	
 	@GetMapping("/patient/{id}")
-	public List<TestimonialDTO> getTestimonialsByPatientId(@PathVariable Long id) {
-		
-		return testimonialService.getTestimonialsByPatientId(id);	
+	public ResponseDTO getTestimonialsByPatientId(@PathVariable Long id) {
+		List<TestimonialDTO> tDto=testimonialService.getTestimonialsByPatientId(id);
+		ResponseDTO response = new ResponseDTO();
+		if(tDto.size()>0) {
+			response.setData(tDto);
+			 response.setStatus(true);
+			 response.setCode("OK");
+			 response.setMessage("Testimonial data present");
+		 }
+		 else {
+			 response.setData(tDto);
+			 response.setStatus(false);
+			 response.setCode("ERROR");
+			 response.setMessage("Some error , null testimonial found");
+		 }
+		return response;	
 	}
 	
 	@GetMapping("/all")
-	public List<TestimonialDTO> getAllTestimonials(){
-		return testimonialService.getAllTestimonials();
+	public ResponseDTO getAllTestimonials(){
+		List<TestimonialDTO> tDto=testimonialService.getAllTestimonials();
+		ResponseDTO response = new ResponseDTO();
+		if(tDto.size()>0) {
+			response.setData(tDto);
+			 response.setStatus(true);
+			 response.setCode("OK");
+			 response.setMessage("Testimonial data present");
+		 }
+		 else {
+			 response.setData(tDto);
+			 response.setStatus(false);
+			 response.setCode("ERROR");
+			 response.setMessage("Some error , null testimonial found");
+		 }
+		return response;
 	}
 	
 	@PostMapping
