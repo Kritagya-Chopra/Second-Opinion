@@ -46,7 +46,7 @@ public class DoctorServiceImpl implements DoctorService {
 	}
 
 	@Override
-	public DoctorEntity saveDoctor(Long userId , DoctorDTO doc) {
+	public DoctorDTO saveDoctor(Long userId , DoctorDTO doc) {
 		SpecializationEntity specialization = specializationRepository.findById(doc.getSpecializationId()).orElseThrow(()-> new ResourceNotFoundException("Specialization not found"));
 		UserEntity user = userRepository.findById(userId).orElseThrow(()->new ResourceNotFoundException("USER NOT FOUND"));
 		DoctorEntity d = mapper.map(doc, DoctorEntity.class);
@@ -56,7 +56,7 @@ public class DoctorServiceImpl implements DoctorService {
 			languageRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("LANGUAGE NOT FOUND"))
 		).collect(Collectors.toList());
 		d.getLanguagesSpoken().addAll(list);
-		return doctorRepository.save(d);
+		return mapper.map(doctorRepository.save(d),DoctorDTO.class);
 	}
 
 	@Override

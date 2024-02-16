@@ -4,7 +4,11 @@ import java.time.LocalDate;
 import java.util.List;
 
 import com.app.entity.AddressEntity;
+import com.app.entity.LanguageEntity;
 import com.app.entity.QualificationEntity;
+import com.app.entity.SpecializationEntity;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonProperty.Access;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -23,5 +27,9 @@ public class DoctorDTO {
 	private QualificationEntity qualification;
 	private Long specializationId;
 	private List<Long> languages;
+	@JsonProperty(access = Access.READ_ONLY)
+	private SpecializationDTO specialization;
+	@JsonProperty(access = Access.READ_ONLY)
+	private List<LanguageDTO> languagesSpoken;
 	
 }

@@ -72,11 +72,7 @@ public class CaseServiceImpl implements CaseService {
 		CaseEntity newCase = mapper.map(c, CaseEntity.class);
 		doctor.addCase(newCase);
 		patient.addCase(newCase);
-		Set<SymptomEntity> list = c.getSymptoms().stream()
-				.map((Long id) -> symptomRepository.findById(id)
-						.orElseThrow(() -> new ResourceNotFoundException("Symptom NOT FOUND")))
-				.collect(Collectors.toSet());
-		newCase.getSymptoms().addAll(list);
+		newCase.getSymptoms().addAll(symptomRepository.findAllById(c.getSymptoms()));
 		DiseaseEntity disease = diseaseRepository.findById(c.getDiseaseId()).orElseThrow(()->new ResourceNotFoundException("DISEASE NOT FOUND"));
 		newCase.setDisease(disease);
 		
