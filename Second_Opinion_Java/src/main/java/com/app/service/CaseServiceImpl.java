@@ -1,6 +1,5 @@
 package com.app.service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -12,14 +11,17 @@ import org.springframework.stereotype.Service;
 
 import com.app.custom_exceptions.ResourceNotFoundException;
 import com.app.dto.CaseDTO;
-import com.app.dto.FeedbackDTO;
+
 import com.app.entity.CaseEntity;
+import com.app.entity.DiseaseEntity;
 import com.app.entity.DoctorEntity;
-import com.app.entity.FeedbackEntity;
 import com.app.entity.PatientEntity;
+import com.app.entity.SymptomEntity;
 import com.app.repository.CaseRepository;
+import com.app.repository.DiseaseRepository;
 import com.app.repository.DoctorRepository;
 import com.app.repository.PatientRepository;
+import com.app.repository.SymptomRepository;
 
 @Service
 @Transactional
@@ -33,6 +35,12 @@ public class CaseServiceImpl implements CaseService {
 
 	@Autowired
 	DoctorRepository doctorRepository;
+
+	@Autowired
+	SymptomRepository symptomRepository;
+
+	@Autowired
+	DiseaseRepository diseaseRepository;
 
 	@Autowired
 	ModelMapper mapper;
@@ -63,13 +71,22 @@ public class CaseServiceImpl implements CaseService {
 		CaseEntity newCase = mapper.map(c, CaseEntity.class);
 		doctor.addCase(newCase);
 		patient.addCase(newCase);
+		List<SymptomEntity> list = c.getSymptoms().stream()
+				.map((Long id) -> symptomRepository.findById(id)
+						.orElseThrow(() -> new ResourceNotFoundException("Symptom NOT FOUND")))
+				.collect(Collectors.toList());
+		newCase.getSymptoms().addAll(list);
+		DiseaseEntity disease = diseaseRepository.findById(c.getDiseaseId()).orElseThrow(()->new ResourceNotFoundException("DISEASE NOT FOUND"));
+		newCase.setDisease(disease);
+		
 		return mapper.map(caseRepository.save(newCase), CaseDTO.class);
 	}
 
 	@Override
 	public boolean deleteCase(Long id) {
 		try {
-			CaseEntity myCase = caseRepository.findById(id).orElseThrow(()->new ResourceNotFoundException("CASE NOT FOUND"));
+			CaseEntity myCase = caseRepository.findById(id)
+					.orElseThrow(() -> new ResourceNotFoundException("CASE NOT FOUND"));
 			myCase.setStatus('C');
 			return true;
 		} catch (Exception e) {
