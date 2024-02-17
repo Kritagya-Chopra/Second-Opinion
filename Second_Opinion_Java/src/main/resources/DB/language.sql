@@ -32,4 +32,26 @@ insert into languages(name) values('English');
  insert into symptoms(description,name) values('Unexplained weight loss refers to a significant reduction in body weight that occurs
  unintentionally and without a clear cause.','Weight loss');
 
+INSERT INTO specializations (name)
+VALUES
+    ('Oncology'),
+    ('Cardiology'),
+    ('Dermatology'),
+    ('Endocrinology'),
+    ('Gastroenterology'),
+    ('Hematology')
+    ;
+
+INSERT INTO diseases (description, name, severity, specialization_id)
+VALUES
+('A group of diseases characterized by the uncontrolled growth and spread of abnormal cells.', 'Cancer', 3, 1);
+    ('A condition affecting the heart and blood vessels.', 'Heart Disease', 3, 2),  
+    ('A skin condition characterized by inflammation.', 'Eczema', 1, 3),            
+    ('A disorder of the endocrine system.', 'Diabetes', 1, 4),                    
+    ('A condition affecting the gastrointestinal tract.', 'Ulcerative Colitis', 2, 5), 
+    ('A disorder involving abnormal bleeding and clotting.', 'Hemophilia', 2, 6)   
+    ;
+
+
+
  
