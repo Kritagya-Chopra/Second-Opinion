@@ -1,0 +1,64 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+.slider-container {
+  display: flex;
+  background-color: #99eff4;
+}
+
+.slider-content {
+  display: flex;
+  margin-top: 3vh;
+  margin-left: 3vw;
+  margin-right: 3vw;
+}
+.left {
+  display: flex;
+  flex-direction: column;
+  line-height: 3vh;
+  padding: 10px 10px;
+  position: relative;
+  left: 18vw;
+}
+
+.heading3 {
+  color: gray;
+  margin-top: 30%;
+}
+
+.heading2 {
+  color: #0bb8c2;
+}
+
+.para1 {
+  color: gray;
+}
+.para2 {
+  font-size: large;
+  font-weight: bold;
+  margin-top: 30%;
+  margin-left: 40%;
+}
+
+.para3 {
+  margin-left: 40%;
+}
+
+.slider-button {
+  outline: none;
+}
+
+.slider-button {
+  background-color: transparent;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  font-size: 26px;
+  color: #333;
+  padding: 2%;
+}
+
+.slider-button:hover {
+  color: #555; /* Darker color on hover */
+}

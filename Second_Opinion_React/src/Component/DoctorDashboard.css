@@ -1,0 +1,35 @@
+.logo {
+  margin-left: 75%;
+  margin-top: 4vh;
+  border: 1px solid gray;
+  width: 6vw;
+  height: 12vh;
+  border-radius: 50%;
+  background-color: black;
+}
+
+.welcome {
+  font-size: 500%;
+  text-align: center;
+  font-weight: lighter;
+  color: gray;
+}
+
+.buttons {
+  display: flex;
+  justify-content: space-evenly;
+}
+.buttons button {
+  font-size: 16px;
+  font-weight: bold;
+  padding: 10px;
+  width: 10vw;
+  outline: none;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+  background-color: #a7c102;
+  border-radius: 5px;
+  box-shadow: #b1cb04 0px 4px 0px 0px;
+  color: #fff;
+}
