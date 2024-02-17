@@ -44,7 +44,7 @@ VALUES
 
 INSERT INTO diseases (description, name, severity, specialization_id)
 VALUES
-('A group of diseases characterized by the uncontrolled growth and spread of abnormal cells.', 'Cancer', 3, 1);
+('A group of diseases characterized by the uncontrolled growth and spread of abnormal cells.', 'Cancer', 3, 1),
     ('A condition affecting the heart and blood vessels.', 'Heart Disease', 3, 2),  
     ('A skin condition characterized by inflammation.', 'Eczema', 1, 3),            
     ('A disorder of the endocrine system.', 'Diabetes', 1, 4),                    
