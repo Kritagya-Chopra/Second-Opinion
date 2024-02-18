@@ -143,9 +143,7 @@ const PatientProfile = () => {
                     onChange={handleProfileDataChange}
                   />
                 </div>
-
               </div>
-
               <div className="col-md-6 profile-pic">
                 <label className="-label" htmlFor="photo">
                   <span className="glyphicon glyphicon-camera"></span>
