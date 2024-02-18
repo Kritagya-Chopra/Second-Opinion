@@ -1,10 +1,12 @@
 package com.app.exc_handler;
 
+import java.sql.SQLException;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
@@ -51,7 +53,21 @@ public class GlobalExceptionHandler {
 		System.out.println("in res not found " + e);
 		return new ResponseDTO(false,e.getMessage(),"ERROR" , "NOT OK");
 	}
-
+	
+	@ExceptionHandler(SQLException.class)
+	public ResponseDTO handleSQLException(
+			SQLException e) {
+		System.out.println("in res not found " + e);
+		return new ResponseDTO(false,e.getMessage(),"ERROR" , "NOT OK");
+	}
+	
+	@ExceptionHandler(DataIntegrityViolationException.class)
+	public ResponseDTO handleDataIntegrityException(
+			SQLException e) {
+		System.out.println("in res not found " + e);
+		return new ResponseDTO(false,e.getMessage(),"ID Already exists" , "NOT OK");
+	}
+	
 	// method level anno to tell SC , following is an exc handling method : to
 	// handle any other remaining exc => catch all
 	@ExceptionHandler(RuntimeException.class)

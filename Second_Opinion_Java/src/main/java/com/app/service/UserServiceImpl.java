@@ -16,15 +16,13 @@ import com.app.repository.UserRepository;
 public class UserServiceImpl implements UserService{
 	@Autowired
 	private UserRepository userRepository;
-	
-
 	@Override
 	public ResponseDTO addUser(UserRequestDTO u) {
 		ModelMapper map = new ModelMapper();
 		UserEntity user = map.map(u, UserEntity.class);
 		user.setValid(true);
 		ResponseDTO resp  = new ResponseDTO();
-		if(userRepository.findByUserName(u.getUserName())==null) {
+		
 		UserEntity addedUser = userRepository.save(user);
 		
 		if(addedUser == null)
@@ -41,13 +39,7 @@ public class UserServiceImpl implements UserService{
 		resp.setMessage("User Added Successfully");
 		resp.setCode("Ok");
 		}
-		}
-		else{
-			resp.setStatus(false);
-			resp.setData(null);
-			resp.setMessage("Email id is existing");
-			resp.setCode("ERROR");
-		}
+		
 		return resp;
 	}
 	
