@@ -18,7 +18,7 @@ export default class Header1 extends Component {
           <a className="p-2 text-dark"style={{fontSize:'150%'}} href="/contact">Contact Us</a>
           <a className="p-2 text-dark" style={{fontSize:'150%'}}href="#">FAQs</a>
         </nav>
-        <a className="btn btn-outline-primary" style={{fontSize:'150%'}} href="#">Login</a>
+        <a className="btn btn-outline-primary" style={{fontSize:'150%'}} href="/login">Login</a>
       </div>
     )
   }
