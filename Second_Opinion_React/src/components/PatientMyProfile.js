@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Header from './Header';
 import Footer from './Footer';
-import "./profile-pic.css";
+import '../styles/profile-pic.css';
 import VerticalNavBar from './VerticalNavBar';
 import axios from 'axios';
 import { useLocation, useNavigate } from 'react-router-dom';
