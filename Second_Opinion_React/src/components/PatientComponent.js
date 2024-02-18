@@ -1,5 +1,5 @@
 import React from "react";
-import "./PatientDashboard.css";
+// import "./PatientDashboard.css";
 import { FaHospitalUser } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 const PatientComponent=()=>{

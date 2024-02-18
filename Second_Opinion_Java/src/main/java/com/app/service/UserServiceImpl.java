@@ -23,13 +23,15 @@ public class UserServiceImpl implements UserService{
 		ModelMapper map = new ModelMapper();
 		UserEntity user = map.map(u, UserEntity.class);
 		user.setValid(true);
-		UserEntity addedUser = userRepository.save(user);
 		ResponseDTO resp  = new ResponseDTO();
+		if(userRepository.findByUserName(u.getUserName())==null) {
+		UserEntity addedUser = userRepository.save(user);
+		
 		if(addedUser == null)
 		{
 			resp.setStatus(false);
 			resp.setData(null);
-			resp.setMessage("Some Error Occered, kindly Contact");
+			resp.setMessage("Some Error Occured");
 			resp.setCode("ERROR");
 		}
 		else
@@ -38,6 +40,13 @@ public class UserServiceImpl implements UserService{
 		resp.setData(addedUser);
 		resp.setMessage("User Added Successfully");
 		resp.setCode("Ok");
+		}
+		}
+		else{
+			resp.setStatus(false);
+			resp.setData(null);
+			resp.setMessage("Email id is existing");
+			resp.setCode("ERROR");
 		}
 		return resp;
 	}

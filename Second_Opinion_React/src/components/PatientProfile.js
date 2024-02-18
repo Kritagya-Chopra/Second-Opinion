@@ -4,9 +4,13 @@ import Footer from './Footer';
 import "./profile-pic.css";
 import VerticalNavBar from './VerticalNavBar';
 import axios from 'axios';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 const PatientProfile = () => {
   // State variables to store profile data
+  const naviagte=useNavigate();
+  const patientData=useLocation();
+  console.log(patientData.state.data.id)
   const [profileData, setProfileData] = useState({
     name: 'John Doe',
     email: 'johndoe@example.com',
@@ -100,8 +104,9 @@ const PatientProfile = () => {
         zipcode: profileData.zipcode,
         region: profileData.region}
     };
-    axios.post('http://localhost:8080/patient/profile?id=1'/*TO DO*/, postData)
+    axios.post('http://localhost:8080/patient/profile?id='+patientData.state.data.id/*TO DO*/, postData)
     .then(response => {
+      naviagte("/patient/dashboard");
       console.log('Profile data successfully updated:', response.data);
     });
 
@@ -157,7 +162,7 @@ const PatientProfile = () => {
                   className="form-control"
                   id="email"
                   name="email"
-                  value={profileData.email}
+                  value={patientData.state.data.userName}
                   onChange={handleProfileDataChange}
                   readOnly // Prevents editing email
                 />

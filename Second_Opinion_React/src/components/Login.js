@@ -1,8 +1,9 @@
 import React, { useState } from "react";
-import "./Login.css";
+// import "./Login.css";
 import axios from "axios";
 import { ToastContainer, toast } from 'react-toastify';
   import 'react-toastify/dist/ReactToastify.css';
+import { Link } from "react-router-dom";
 
 const Login = () => {
   const [loginData, setLoginData] = useState({
@@ -21,7 +22,7 @@ const Login = () => {
 
   const Handlelogin = () => {
     console.log(loginData);
-    axios.post('http://localhost:8080/login', loginData,{headers: {'Content-Type': 'application/json',}}  )
+    axios.post('http://localhost:8080/user/login', loginData,{headers: {'Content-Type': 'application/json',}}  )
         .then(response => {
           console.log(typeof(response.data.status));
             if(response.data.status==false){
@@ -52,7 +53,7 @@ const Login = () => {
         <label>E-mail address</label>
         <input
           type="email"
-          name="user"
+          name="userName"
           value={loginData.user}
           onChange={handleData}
         />
@@ -65,7 +66,7 @@ const Login = () => {
         />
         <button onClick={Handlelogin} className="btn">LOGIN</button>
         <p className="account">
-          No account? <span className="create-one">Create one!</span>
+          No account? <span className="create-one"><Link to="/register">create one</Link></span>
         </p>
         <p className="go-back">Go back</p>
         <div className="back-side">

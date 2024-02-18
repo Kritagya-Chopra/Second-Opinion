@@ -1,5 +1,5 @@
 import React from "react";
-import "./AddCase.css"
+// import "./AddCase.css"
 const AddCase=()=>{
     return(
         <>

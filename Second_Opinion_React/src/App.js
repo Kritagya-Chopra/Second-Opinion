@@ -1,26 +1,31 @@
 import React from "react";
-import { BrowserRouter } from "react-router-dom";
-import Routing from "./Component/Routing";
-import Login from "./Component/Login";
-import Slider from "./Component/Slider";
-import ThreeCards from "./Component/ThreeCards";
-import Step from "./Component/Step";
-import DoctorDashboard from "./Component/DoctorDashboard";
 
+import Registration from "./components/Registration";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import Login from "./components/Login";
+import Terms from "./components/Terms";
+import AddCases from "./components/AddCases";
+import PatientProfile from "./components/PatientProfile";
+import DoctorDashboard from "./components/DoctorDashboard";
+import PatientDashboard from "./components/PatientDashboard";
+import DoctorProfile from "./components/DoctorProfile";
 const App = () => {
   return (
     <>
-      {/* <Login /> */}
-      {/* <Navbar/>
-      <PatientDashboard/> */}
-      {/* <AddCase/> */}
-      {/* <Slider /> */}
-      {/* <ThreeCards /> */}
-      {/* <Step/> */}
-      <DoctorDashboard />
-      <BrowserRouter>
-        <Routing />
-      </BrowserRouter>
+    {/* <BrowserRouter>
+    <Routes>
+      <Route path="/register" element={<Registration/>}/>
+      <Route path="/login" element={<Login/>}/>
+      <Route path="/terms" element={<Terms/>}/>
+      <Route path="/patient/profile" element={<PatientProfile/>}/>
+      <Route path="/doctor/profile" element={<DoctorDashboard/>}/>
+      <Route path="/patient/dashboard" element={<PatientDashboard/>}/>
+      <Route path="/new-case" element={<AddCases/>}/>
+    </Routes>
+    </BrowserRouter> */}
+
+    <DoctorProfile></DoctorProfile>
+      
     </>
   );
 };
