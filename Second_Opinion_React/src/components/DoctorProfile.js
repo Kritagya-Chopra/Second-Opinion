@@ -136,7 +136,7 @@ const DoctorProfile = () => {
             },
 
         };
-
+        console.log(doctorData.state.data.id);
         axios.post('http://localhost:8080/doctor/profile?id=' + doctorData.state.data.id, postData)
             .then(response => {
                 navigation("/doctor/dashboard");
@@ -160,7 +160,7 @@ const DoctorProfile = () => {
                 <VerticalNavBar />
                 <div className="container">
 
-                    <Form onSubmit={handleSubmit}>
+                    <form onSubmit={handleSubmit}>
 
                         <div className="row gx-3 mb-3">
                             <div className="col-md-6">
@@ -649,7 +649,7 @@ const DoctorProfile = () => {
                         <button type="submit" className="btn btn-primary float-right">Save Changes</button>
                         <br></br>
                         <br></br>
-                    </Form>
+                    </form>
                 </div>
             </div>
             <Footer />

@@ -2,10 +2,15 @@ import React from "react";
 import '../styles/PatientDashboard.css';
 import { FaHospitalUser } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
+import Header from "./Header";
+import Footer from "./Footer";
+import Navbar from "./Navbar";
 const PatientComponent=()=>{
     const navigate=useNavigate();
     return (
         <>
+             <Header/>
+            <Navbar/>
             <p className="heading">Dashboard</p>
             <div className="dashboard">
             <FaHospitalUser className="icon"/>
@@ -16,6 +21,7 @@ const PatientComponent=()=>{
             </div>
             <button className="addCaseBtn" onClick={()=>{navigate("/new-case")}}>Add Case</button>
             </div>
+            <Footer/>
         </>
     )
 }

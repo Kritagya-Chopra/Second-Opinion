@@ -30,7 +30,7 @@ const ThreeCards = () => {
     <>
       <div className="card-container">
         <div className="heading1">
-          <h2>Why Diagnose.me</h2>
+          <h2>Why Second Opinion</h2>
           <p>
             "When we manage to help just one person, one family in distress, we
             consider our job well done."
