@@ -21,7 +21,7 @@ public class PatientDTO {
 	private String bloodGroup;
 	private float height;
 	private float weight;
-	private String photos;
+	private String photo;
 	private AddressEntity address;
 
 }

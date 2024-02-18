@@ -22,7 +22,7 @@ const PatientMyProfile = () => {
     bloodGroup: 'A+',
     height: '175',
     weight: '70',
-    photo: null,
+    photo: '',
     street: 'street',
     city: 'city',
     state: 'state',
@@ -32,6 +32,7 @@ const PatientMyProfile = () => {
   });
   useEffect(()=>{
     axios.get("http://localhost:8080/patient/"+ids).then(response => {
+      console.log(response.data.data);
       setData(response.data.data);
       profileData.name=response.data.data.name;
       profileData.email=response.data.data.email;
@@ -46,6 +47,7 @@ const PatientMyProfile = () => {
       profileData.country=response.data.data.address.country;
       profileData.zipcode=response.data.data.address.zipcode;
       profileData.weight=response.data.data.weight;
+      profileData.photo=response.data.data.photo;
     })
   },[])
   // Function to handle changes in profile data
@@ -143,7 +145,7 @@ const PatientMyProfile = () => {
         <VerticalNavBar />
         <div className="container">
 
-          <form onSubmit={handleSubmit} method='put'>
+          <form onSubmit={handleSubmit}>
 
             <div class="row gx-3 mb-3">
               <div className="col-md-6">
@@ -161,16 +163,14 @@ const PatientMyProfile = () => {
                     onChange={handleProfileDataChange}
                   />
                 </div>
-
               </div>
-
               <div className="col-md-6 profile-pic">
-                <label className="-label" htmlFor="file">
+                <label className="-label" htmlFor="photo">
                   <span className="glyphicon glyphicon-camera"></span>
                   <span>Change Image</span>
                 </label>
-                <input id="file" type="file" onChange={handleFileChange} />
-                <img src={imageUrl} id="output" width="200" alt="Profile" />
+                <input id="photo" type="file" onChange={handleFileChange} />
+                <img src={profileData.photo} id="output" width="200" alt="Profile" />
               </div>
             </div>
             {/* <div class="row gx-3 mb-3">
@@ -181,12 +181,12 @@ const PatientMyProfile = () => {
                   className="form-control"
                   id="email"
                   name="email"
-                  value={profileData.email}
+                  value={patientData.state.data.userName}
                   onChange={handleProfileDataChange}
                   readOnly // Prevents editing email
                 />
-              </div>
-            </div> */}
+              </div> */}
+            </div>
             <div class="row gx-3 mb-3">
               <div className="col-md-4">
                 <label htmlFor="contact" className="form-label">Mobile</label>

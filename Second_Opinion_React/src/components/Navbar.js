@@ -13,7 +13,7 @@ const Navbar=()=>{
             <div className='right'>
                 <Link to={"/patient/dashboard"}>Dashboard</Link>
                 <a href='#'>My Cases</a>
-                <Link to={"/patient/profile"}>Profile</Link>
+                <Link to={"/patient/Myprofile"}>Profile</Link>
             </div>
            </nav> 
         </>

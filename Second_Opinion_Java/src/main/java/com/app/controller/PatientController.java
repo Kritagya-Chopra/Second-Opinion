@@ -67,7 +67,6 @@ public class PatientController {
 		 }
 		return response;
 	}
-	
 	@DeleteMapping("/{id}")
 	public ResponseDTO deletePatient(@PathVariable Long id)
 	{
