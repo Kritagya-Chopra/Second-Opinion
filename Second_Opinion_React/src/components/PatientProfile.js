@@ -21,7 +21,7 @@ const PatientProfile = () => {
     bloodGroup: 'A+',
     height: '175',
     weight: '70',
-    photo: null,
+    photo: '/profile-icon.png',
     street: 'street',
     city: 'city',
     state: 'state',
@@ -73,15 +73,6 @@ const PatientProfile = () => {
       });
   }
 
-  // Function to handle profile photo upload
-  const handleProfilePhotoChange = (e) => {
-    const file = e.target.files[0];
-    setProfileData((prevData) => ({
-      ...prevData,
-      photo: file,
-    }));
-  };
-
   // Function to handle profile data submission
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -104,17 +95,27 @@ const PatientProfile = () => {
         zipcode: profileData.zipcode,
         region: profileData.region}
     };
-    axios.post('http://localhost:8080/patient/profile?id='+patientData.state.data.id/*TO DO*/, postData)
+    axios.post('http://localhost:8080/patient/profile?id='+patientData.state.data.id, postData)
     .then(response => {
       naviagte("/patient/dashboard");
       console.log('Profile data successfully updated:', response.data);
     });
 
   };
-  const [imageUrl, setImageUrl] = useState('profile-icon.png');
+  
 
-  const handleFileChange = (event) => {
-    setImageUrl(URL.createObjectURL(event.target.files[0]));
+  const handleFileChange = (e) => {
+    const file = e.target.files[0];
+    const reader = new FileReader();
+    reader.onloadend = () => {
+      setProfileData((prevData) => ({
+        ...prevData,
+        photo: reader.result,
+      }));
+    };
+     reader.readAsDataURL(file);
+
+  
   };
 
   return (
@@ -146,12 +147,12 @@ const PatientProfile = () => {
               </div>
 
               <div className="col-md-6 profile-pic">
-                <label className="-label" htmlFor="file">
+                <label className="-label" htmlFor="photo">
                   <span className="glyphicon glyphicon-camera"></span>
                   <span>Change Image</span>
                 </label>
-                <input id="file" type="file" onChange={handleFileChange} />
-                <img src={imageUrl} id="output" width="200" alt="Profile" />
+                <input id="photo" type="file" onChange={handleFileChange} />
+                <img src={profileData.photo} id="output" width="200" alt="Profile" />
               </div>
             </div>
             <div class="row gx-3 mb-3">
