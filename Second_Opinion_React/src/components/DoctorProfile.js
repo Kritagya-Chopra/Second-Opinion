@@ -5,11 +5,14 @@ import "./profile-pic.css";
 import VerticalNavBar from './VerticalNavBar';
 import Form from 'react-bootstrap/Form';
 import axios from 'axios';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 const DoctorProfile = () => {
 
     const [checkedItems, setCheckedItems] = useState([]);
-    console.log(checkedItems);
+   
+    const navigation = useNavigate();
+    const doctorData = useLocation();
     // State variables to store profile data
     const [profileData, setProfileData] = useState({
         name: '',
@@ -61,8 +64,41 @@ const DoctorProfile = () => {
         setProfileData((prevData) => ({
             ...prevData,
             [name]: value,
-        }));
+        })); 
+        if (name === 'zipcode') {
+            fetchLocationDetails(value)
+                .then(location => {
+                    setProfileData(prevData => ({
+                        ...prevData,
+                        city: location.city,
+                        state: location.state,
+                        country: location.country
+                    }));
+                })
+                .catch(error => {
+
+                });
+        }
     };
+
+    //function to get Location details
+    async function fetchLocationDetails(pincode) {
+        const apiUrl = `https://api.postalpincode.in/pincode/${pincode}`;
+
+        const response = await fetch(apiUrl);
+        const data = await response.json();
+        if (data && data.length > 0 && data[0].PostOffice && data[0].PostOffice.length > 0) {
+            const location = data[0].PostOffice[0];
+            console.log('Location details:', location);
+            return {
+                city: location.Division,
+                state: location.State,
+                country: location.Country
+            };
+        } else {
+            throw new Error('Location not found');
+        }
+    }
 
     // Function to handle profile photo upload
     const handleProfilePhotoChange = (e) => {
@@ -77,15 +113,13 @@ const DoctorProfile = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
         const postData = {
-
-            id: 1,
             name: profileData.name,
             email: profileData.email,
             licenseExpiry: profileData.licenseExpiry,
             licenseNo: profileData.licenseNo,
             yearOfExperience: profileData.yearOfExperience,
-            languagesSpoken: profileData.languagesSpoken,
-            specializationName: profileData.specializationName,
+            languages: [profileData.languagesSpoken],
+            specializationId: profileData.specializationName,
             photo: profileData.photo,
             address: {
                 street: profileData.street,
@@ -94,21 +128,31 @@ const DoctorProfile = () => {
                 country: profileData.country,
                 zipcode: profileData.zipcode,
                 region: profileData.region
-            }
+            },
+            qualification: {
+                name: profileData.qualificationName,
+                university: profileData.university,
+                document: profileData.document
+            },
+
         };
-        axios.post('http://localhost:8080/doctor/profile?id=1'/*TO DO*/, postData)
+
+        axios.post('http://localhost:8080/doctor/profile?id=' + doctorData.state.data.id, postData)
             .then(response => {
+                navigation("/doctor/dashboard");
                 console.log('Profile data successfully updated:', response.data);
             });
 
-        console.log(profileData);
+        
 
     };
-    const [imageUrl, setImageUrl] = useState('profile-icon.png');
+    const [imageUrl, setImageUrl] = useState('/profile-icon.png');
 
     const handleFileChange = (event) => {
         setImageUrl(URL.createObjectURL(event.target.files[0]));
     };
+
+    console.log(profileData);
     return (
         <>
             <Header />
@@ -155,7 +199,7 @@ const DoctorProfile = () => {
                                     className="form-control"
                                     id="email"
                                     name="email"
-                                    value={profileData.email}
+                                    value={doctorData.state.data.userName}
                                     onChange={handleProfileDataChange}
                                     readOnly // Prevents editing email
                                 />

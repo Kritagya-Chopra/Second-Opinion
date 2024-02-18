@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./Slider.css";
+import '../styles/Slider.css';
 import { GrPrevious, GrNext } from "react-icons/gr";
 
 const data = [

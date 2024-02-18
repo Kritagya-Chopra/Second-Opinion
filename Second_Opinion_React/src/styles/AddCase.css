@@ -13,7 +13,7 @@
     font-weight: 100;
     font-size: 400%;
 }
-input{
+.addCase-input{
     width: 60vw;
     margin-left:16% ;
     height: 7vh;
@@ -23,7 +23,7 @@ input{
     border: 1px solid black;
     box-shadow: 10px 10px 10px gray;
 }
-.search{
+.addCase-search{
     position: relative;
         background-color: #a7c102;
         border-radius: 5px;
@@ -41,7 +41,7 @@ input{
         z-index: 1;
         overflow: hidden;
 }
-.search::before {
+.addCase-search::before {
     content: "";
     background-color: #d5eb40;
     width: 0;
@@ -53,6 +53,6 @@ input{
     transition: width 700ms ease-in-out;
     display: inline-block;
   }
-.search:hover::before {
+.addCase-search:hover::before {
     width: 100%;
   }

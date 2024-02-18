@@ -8,4 +8,5 @@ import lombok.Setter;
 public class SpecializationDTO {
 	private Long id;
 	private String name;
+	
 }

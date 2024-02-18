@@ -1,10 +1,10 @@
 import React from  'react';
-// import './Navbar.css'
+import '../styles/Navbar.css';
 import { Link } from 'react-router-dom';
 const Navbar=()=>{
     return (
         <>
-           <nav>
+           <nav className='navbar'>
             <div className='left'>
                 <p>Contact Us</p>
                 <a href="mailto:secondopinion@gmail.com">secondopinion@gmail.com</a>

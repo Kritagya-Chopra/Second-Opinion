@@ -4,7 +4,7 @@
     box-sizing: border-box;
 }
 
-nav{
+.navbar{
     background-color:#49bec7;
     display: flex;
     justify-content: space-evenly;

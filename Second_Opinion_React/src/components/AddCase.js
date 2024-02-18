@@ -1,5 +1,5 @@
 import React from "react";
-// import "./AddCase.css"
+import '../styles/AddCase.css';
 const AddCase=()=>{
     return(
         <>
@@ -11,8 +11,11 @@ const AddCase=()=>{
             </p>
             </div>
             
-            <input type="text" placeholder="Enter Disease"></input>
-            <button className="search">Search</button>
+            <input className="addCase-input" type="text" placeholder="Enter Disease"></input>
+            <button className="addCase-search">Search</button>
+            <br></br>
+            <br></br>
+            <br></br>
         </>
     )
 }
