@@ -7,7 +7,7 @@ import { Link, Navigate, useNavigate } from "react-router-dom";
 const Login = () => {
   const naviagte=useNavigate();
   const [loginData, setLoginData] = useState({
-    user: "",
+    userName: "",
     password: "",
   });
   
@@ -55,7 +55,7 @@ const Login = () => {
         <input
           type="email"
           name="userName"
-          value={loginData.user}
+          value={loginData.userName}
           onChange={handleData}
         />
         <label>Password</label>
@@ -65,7 +65,7 @@ const Login = () => {
           value={loginData.password}
           onChange={handleData}
         />
-        <button onClick={Handlelogin} className="btn">LOGIN</button>
+        <button onClick={Handlelogin} className="btn-login">LOGIN</button>
         <p className="account">
           No account? <span className="create-one"><Link to="/register">create one</Link></span>
         </p>
