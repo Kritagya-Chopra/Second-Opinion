@@ -13,10 +13,10 @@ export default class Header1 extends Component {
            
         <h2 className="my-0 mr-md-auto font-weight-normal" style={{color:'#2AB8C3'}}>Second Opinion</h2>
         <nav className="my-2 my-md-0 mr-md-3">
-          <a className="p-2 text-dark" style={{fontSize:'150%'}} href="#">Home</a>
-          <a className="p-2 text-dark"style={{fontSize:'150%'}} href="#">About Us</a>
-          <a className="p-2 text-dark"style={{fontSize:'150%'}} href="#">Contact Us</a>
-          <a className="p-2 text-dark" style={{fontSize:'150%'}}href="#"></a>
+          <a className="p-2 text-dark" style={{fontSize:'150%'}} href="/">Home</a>
+          <a className="p-2 text-dark"style={{fontSize:'150%'}} href="/about">About Us</a>
+          <a className="p-2 text-dark"style={{fontSize:'150%'}} href="/contact">Contact Us</a>
+          <a className="p-2 text-dark" style={{fontSize:'150%'}}href="#">FAQs</a>
         </nav>
         <a className="btn btn-outline-primary" style={{fontSize:'150%'}} href="#">Login</a>
       </div>

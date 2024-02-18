@@ -14,7 +14,7 @@
     color: white;
     font-size: large;
 }
-select{
+.select-navbar{
     border: none;
     background-color:#49bec7 ;
     color: white;
@@ -26,11 +26,11 @@ select option{
     background-color: white;
     color: black;
 }
-.left{
+.left-navbar{
     display: flex;
 
 }
-.right{
+.right-navbar{
     margin-left: 20vw;
 }
 nav a{

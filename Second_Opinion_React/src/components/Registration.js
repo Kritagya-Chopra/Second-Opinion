@@ -102,18 +102,21 @@ const Registration = () => {
                       <h2 className="text-uppercase text-center mb-4">Create an account</h2>
                       <form>
                         <div className="form-outline mb-4">
+                        <label className="form-label" htmlFor="email">Enter Email</label>
                           <input type="email" name="userName" id="email" className="form-control form-control-lg" onChange={handleData}/>
-                          <label className="form-label" htmlFor="email">Enter Email</label>
+                          
                         </div>
     
                         <div className="form-outline mb-4">
+                        <label className="form-label" htmlFor="password">Enter Password</label>
                           <input type="password" id="password" name="password" className="form-control form-control-lg" onChange={handleData} />
-                          <label className="form-label" htmlFor="password">Enter Password</label>
+                         
                         </div>
     
                         <div className="form-outline mb-4">
+                        <label className="form-label" htmlFor="repeatPassword">Repeat your password</label>
                           <input type="password" id="repeatPassword" name="repeatPassword" className="form-control form-control-lg" onChange={handleData} />
-                          <label className="form-label" htmlFor="repeatPassword">Repeat your password</label>
+                         
                         </div>
 
                         <div className="form-outline mb-4">
@@ -144,7 +147,7 @@ const Registration = () => {
           
     
                         <div className="d-flex justify-content-center">
-                          <button type="button" onClick={HandleRegistration} className="btn btn-success btn-block btn-lg gradient-custom-4 text-body">Register</button>
+                          <button type="button" onClick={HandleRegistration} className="btn btn-success btn-block btn-lg gradient-custom-4 text-body" >Register</button>
                         </div>
     
                         <p className="text-center text-muted mt-5 mb-0">Have already an account? <Link to={"/login"}>Login here</Link></p>

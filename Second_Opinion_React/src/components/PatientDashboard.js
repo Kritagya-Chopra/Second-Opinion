@@ -1,7 +1,7 @@
 import React from "react";
 import Navbar from "./Navbar";
 import PatientComponent from "./PatientComponent";
-import Header from "./Header";
+import Header1 from "./Header1";
 import Footer from "./Footer";
 import { useLocation, useNavigate } from 'react-router-dom';
 const Dashboard=()=>{
@@ -9,7 +9,7 @@ const Dashboard=()=>{
     return(
         <>
 
-            <Header/>
+            <Header1/>
             <Navbar/>
             <PatientComponent/>
             <Footer/>

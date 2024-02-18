@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import Header from './Header';
+import Header1 from './Header1';
 import Footer from './Footer';
 import '../styles/profile-pic.css';
 import VerticalNavBar from './VerticalNavBar';
@@ -140,7 +140,7 @@ const PatientMyProfile = () => {
 
   return (
     <>
-      <Header />
+      <Header1 />
       <div style={{ display: "flex" }} >
         <VerticalNavBar />
         <div className="container">
@@ -185,8 +185,8 @@ const PatientMyProfile = () => {
                   onChange={handleProfileDataChange}
                   readOnly // Prevents editing email
                 />
-              </div> */}
-            </div>
+              </div> 
+            </div>*/}
             <div class="row gx-3 mb-3">
               <div className="col-md-4">
                 <label htmlFor="contact" className="form-label">Mobile</label>

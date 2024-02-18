@@ -5,12 +5,12 @@ const Navbar=()=>{
     return (
         <>
            <nav className='navbar'>
-            <div className='left'>
+            <div className='left-navbar'>
                 <p>Contact Us</p>
-                <a href="mailto:secondopinion@gmail.com">secondopinion@gmail.com</a>
+                <a href="mailto:secondopinion@gmail.com">secondOpinion@gmail.com</a>
                 <a href="#">+91 7080920302</a>
             </div>
-            <div className='right'>
+            <div className='right-navbar'>
                 <Link to={"/patient/dashboard"}>Dashboard</Link>
                 <a href='#'>My Cases</a>
                 <Link to={"/patient/Myprofile"}>Profile</Link>
