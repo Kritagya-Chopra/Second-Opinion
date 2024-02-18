@@ -11,7 +11,6 @@ import PatientDashboard from "./components/PatientDashboard";
 import DoctorProfile from "./components/DoctorProfile";
 import Dashboard from "./components/PatientDashboard";
 import HomePage from "./components/HomePage";
-import PatientMyProfile from "./components/PatientMyProfile";
 const App = () => {
   return (
     <>
@@ -26,7 +25,6 @@ const App = () => {
       <Route path="/patient/dashboard" element={<PatientDashboard/>}/>
       <Route path="/doctor/dashboard" element={<DoctorDashboard />}/>
       <Route path="/new-case" element={<AddCases/>}/>
-      <Route path="/patient/Myprofile" element={<PatientMyProfile/>}/> 
       </Routes>
     </BrowserRouter>
  

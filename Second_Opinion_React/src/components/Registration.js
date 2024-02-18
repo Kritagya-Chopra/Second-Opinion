@@ -4,7 +4,6 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import validator from "validator";
 import { Link, useNavigate } from 'react-router-dom';
-import PatientMyProfile from "./PatientMyProfile";
 const exportdata=createContext();
 const Registration = () => {
   const naviagte=useNavigate();

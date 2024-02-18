@@ -1,4 +1,4 @@
-import React, { useState ,useContext} from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import Header from './Header';
 import Footer from './Footer';
 import '../styles/profile-pic.css';
@@ -7,8 +7,10 @@ import axios from 'axios';
 import { useLocation, useNavigate } from 'react-router-dom';
 const PatientProfile = () => {
   // State variables to store profile data
-  const naviagte=useNavigate();
-  const patientData=useLocation();
+  const naviagte = useNavigate();
+  const patientData = useLocation();
+  const ids = sessionStorage.getItem("id");
+  const [email , setEmail] = useState('');
   const [profileData, setProfileData] = useState({
     name: 'John Doe',
     email: 'johndoe@example.com',
@@ -20,13 +22,32 @@ const PatientProfile = () => {
     height: '175',
     weight: '70',
     photo: '/profile-icon.png',
-    street: 'street',
-    city: 'city',
-    state: 'state',
-    country: 'country',
-    zipcode: '000000',
-    region: 'region'
+    address: {
+      street: 'street',
+      city: 'city',
+      state: 'state',
+      country: 'country',
+      zipcode: '000000',
+      region: 'region'
+    }
   });
+
+  useEffect(() => {
+    if (ids != null) {
+      axios.get("http://localhost:8080/patient/" + ids).then(response => {
+        console.log(response.data.data);
+        setProfileData(response.data.data);
+      });
+      axios.get("http://localhost:8080/user/" + ids).then(response => {
+      console.log(response.data);
+      setEmail(response.data.data.userName);
+    });
+    }
+    else{
+      setEmail(patientData.state.data.userName);
+    }
+    
+  }, [])
 
   // Function to handle changes in profile data
   const handleProfileDataChange = (e) => {
@@ -35,25 +56,37 @@ const PatientProfile = () => {
       ...prevData,
       [name]: value,
     }));
+    
+  };
+  const handleAdressChange = (e) =>
+  {
+    const { name, value } = e.target;
+    setProfileData((prevData) => ({
+      ...prevData,
+      address: {...prevData.address , [name]: value}
+    }));
+    
     if (name === 'zipcode') {
       fetchLocationDetails(value)
         .then(location => {
           setProfileData(prevData => ({
             ...prevData,
-            city:location.city,
-            state: location.state,
-            country: location.country
+            address: {...prevData.address , city: location.city,
+              state: location.state,
+              country: location.country}
+            
           }));
         })
         .catch(error => {
-          
+
         });
     }
-  };
+  }
+
   //function to get Location details
   function fetchLocationDetails(pincode) {
     const apiUrl = `https://api.postalpincode.in/pincode/${pincode}`;
-    
+
     return fetch(apiUrl)
       .then(response => response.json())
       .then(data => {
@@ -75,7 +108,7 @@ const PatientProfile = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     const postData = {
-      id:1,
+      id: 1,
       name: profileData.name,
       email: profileData.email,
       password: profileData.password,
@@ -86,24 +119,32 @@ const PatientProfile = () => {
       height: profileData.height,
       weight: profileData.weight,
       photo: profileData.photo,
-      address :{street: profileData.street,
-        city: profileData.city,
-        state: profileData.state,
-        country: profileData.country,
-        zipcode: profileData.zipcode,
-        region: profileData.region}
+      address: profileData.address
     };
-    axios.post('http://localhost:8080/patient/profile?id='+patientData.state.data.id, postData)
-    .then(response => {
-      console.log(response.data.data);
-      sessionStorage.setItem("id",patientData.state.data.id)
-      naviagte("/patient/dashboard",{state:{data:patientData}});
+    if(ids==null){
+      console.log(postData+ " post data")
+    axios.post('http://localhost:8080/patient/profile?id=' + patientData.state.data.id, postData)
+      .then(response => {
+        console.log(response.data.data);
+        sessionStorage.setItem("id", patientData.state.data.id)
+        naviagte("/patient/dashboard", { state: { data: patientData } });
 
-      console.log('Profile data successfully updated:', response.data);
-    });
+        console.log('Profile data successfully updated:', response.data);
+      });
+    }
+    else
+    {
+      axios.put('http://localhost:8080/patient/' + ids, postData)
+      .then(response => {
+        console.log(response.data.data);
+        naviagte("/patient/dashboard", { state: { data: patientData } });
+
+        console.log('Profile data successfully updated:', response.data);
+      });
+    }
 
   };
-  
+
 
   const handleFileChange = (e) => {
     const file = e.target.files[0];
@@ -114,9 +155,9 @@ const PatientProfile = () => {
         photo: reader.result,
       }));
     };
-     reader.readAsDataURL(file);
+    reader.readAsDataURL(file);
 
-  
+
   };
 
   return (
@@ -162,7 +203,7 @@ const PatientProfile = () => {
                   className="form-control"
                   id="email"
                   name="email"
-                  value={patientData.state.data.userName}
+                  value={email}
                   onChange={handleProfileDataChange}
                   readOnly // Prevents editing email
                 />
@@ -250,8 +291,8 @@ const PatientProfile = () => {
                   className="form-control"
                   id="street"
                   name="street"
-                  value={profileData.street}
-                  onChange={handleProfileDataChange}
+                  value={profileData.address.street}
+                  onChange={handleAdressChange}
                 />
               </div>
               <div className="col-md-4">
@@ -261,8 +302,8 @@ const PatientProfile = () => {
                   className="form-control"
                   id="city"
                   name="city"
-                  value={profileData.city}
-                  onChange={handleProfileDataChange}
+                  value={profileData.address.city}
+                  onChange={handleAdressChange}
                 />
               </div>
               <div className="col-md-4">
@@ -272,8 +313,8 @@ const PatientProfile = () => {
                   className="form-control"
                   id="state"
                   name="state"
-                  value={profileData.state}
-                  onChange={handleProfileDataChange}
+                  value={profileData.address.state}
+                  onChange={handleAdressChange}
                 />
               </div>
               <div className="col-md-4">
@@ -282,7 +323,7 @@ const PatientProfile = () => {
                   className="form-control"
                   id="country"
                   name="country"
-                  value={profileData.country}
+                  value={profileData.address.country}
                   onChange={handleProfileDataChange}
                 >
                   <option value="Afghanistan">Afghanistan</option>
@@ -533,8 +574,8 @@ const PatientProfile = () => {
                   className="form-control"
                   id="zipcode"
                   name="zipcode"
-                  value={profileData.zipcode}
-                  onChange={handleProfileDataChange}
+                  value={profileData.address.zipcode}
+                  onChange={handleAdressChange}
                 />
               </div>
               <div className="col-md-4">
@@ -544,8 +585,8 @@ const PatientProfile = () => {
                   className="form-control"
                   id="region"
                   name="region"
-                  value={profileData.region}
-                  onChange={handleProfileDataChange}
+                  value={profileData.address.region}
+                  onChange={handleAdressChange}
                 />
               </div>
             </div>

@@ -8,4 +8,6 @@ public interface UserService {
 
 	ResponseDTO addUser(UserRequestDTO u);
 
+	ResponseDTO getUser(Long id);
+
 }
