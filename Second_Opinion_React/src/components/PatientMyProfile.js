@@ -1,14 +1,17 @@
-import React, { useState ,useContext} from 'react';
+import React, { useEffect, useState } from 'react';
 import Header from './Header';
 import Footer from './Footer';
-import '../styles/profile-pic.css';
+import "./profile-pic.css";
 import VerticalNavBar from './VerticalNavBar';
 import axios from 'axios';
 import { useLocation, useNavigate } from 'react-router-dom';
-const PatientProfile = () => {
+
+const PatientMyProfile = () => {
   // State variables to store profile data
   const naviagte=useNavigate();
-  const patientData=useLocation();
+  const userdata=sessionStorage.getItem("userdata");
+  const ids=sessionStorage.getItem("id");
+  const [data,setData]=useState(null);
   const [profileData, setProfileData] = useState({
     name: 'John Doe',
     email: 'johndoe@example.com',
@@ -19,7 +22,7 @@ const PatientProfile = () => {
     bloodGroup: 'A+',
     height: '175',
     weight: '70',
-    photo: '/profile-icon.png',
+    photo: null,
     street: 'street',
     city: 'city',
     state: 'state',
@@ -27,7 +30,24 @@ const PatientProfile = () => {
     zipcode: '000000',
     region: 'region'
   });
-
+  useEffect(()=>{
+    axios.get("http://localhost:8080/patient/"+ids).then(response => {
+      setData(response.data.data);
+      profileData.name=response.data.data.name;
+      profileData.email=response.data.data.email;
+      profileData.bloodGroup=response.data.data.bloodGroup;
+      profileData.city=response.data.data.address.city;
+      profileData.contact=response.data.data.contact;
+      profileData.dateOfBirth=response.data.data.dateOfBirth;
+      profileData.gender=response.data.data.gender;
+      profileData.height=response.data.data.height;
+      profileData.state=response.data.data.address.state;
+      profileData.street=response.data.data.address.street;
+      profileData.country=response.data.data.address.country;
+      profileData.zipcode=response.data.data.address.zipcode;
+      profileData.weight=response.data.data.weight;
+    })
+  },[])
   // Function to handle changes in profile data
   const handleProfileDataChange = (e) => {
     const { name, value } = e.target;
@@ -71,6 +91,15 @@ const PatientProfile = () => {
       });
   }
 
+  // Function to handle profile photo upload
+  const handleProfilePhotoChange = (e) => {
+    const file = e.target.files[0];
+    setProfileData((prevData) => ({
+      ...prevData,
+      photo: file,
+    }));
+  };
+
   // Function to handle profile data submission
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -93,30 +122,18 @@ const PatientProfile = () => {
         zipcode: profileData.zipcode,
         region: profileData.region}
     };
-    axios.post('http://localhost:8080/patient/profile?id='+patientData.state.data.id, postData)
+    axios.put('http://localhost:8080/patient?id=', profileData)
     .then(response => {
-      console.log(response.data.data);
-      sessionStorage.setItem("id",patientData.state.data.id)
-      naviagte("/patient/dashboard",{state:{data:patientData}});
-
+      
+      naviagte("/patient/dashboard");
       console.log('Profile data successfully updated:', response.data);
     });
 
   };
-  
+  const [imageUrl, setImageUrl] = useState('profile-icon.png');
 
-  const handleFileChange = (e) => {
-    const file = e.target.files[0];
-    const reader = new FileReader();
-    reader.onloadend = () => {
-      setProfileData((prevData) => ({
-        ...prevData,
-        photo: reader.result,
-      }));
-    };
-     reader.readAsDataURL(file);
-
-  
+  const handleFileChange = (event) => {
+    setImageUrl(URL.createObjectURL(event.target.files[0]));
   };
 
   return (
@@ -126,7 +143,7 @@ const PatientProfile = () => {
         <VerticalNavBar />
         <div className="container">
 
-          <form onSubmit={handleSubmit}>
+          <form onSubmit={handleSubmit} method='put'>
 
             <div class="row gx-3 mb-3">
               <div className="col-md-6">
@@ -148,15 +165,15 @@ const PatientProfile = () => {
               </div>
 
               <div className="col-md-6 profile-pic">
-                <label className="-label" htmlFor="photo">
+                <label className="-label" htmlFor="file">
                   <span className="glyphicon glyphicon-camera"></span>
                   <span>Change Image</span>
                 </label>
-                <input id="photo" type="file" onChange={handleFileChange} />
-                <img src={profileData.photo} id="output" width="200" alt="Profile" />
+                <input id="file" type="file" onChange={handleFileChange} />
+                <img src={imageUrl} id="output" width="200" alt="Profile" />
               </div>
             </div>
-            <div class="row gx-3 mb-3">
+            {/* <div class="row gx-3 mb-3">
               <div className="col-md-6">
                 <label htmlFor="email" className="form-label">Email</label>
                 <input
@@ -164,12 +181,12 @@ const PatientProfile = () => {
                   className="form-control"
                   id="email"
                   name="email"
-                  value={patientData.state.data.userName}
+                  value={profileData.email}
                   onChange={handleProfileDataChange}
                   readOnly // Prevents editing email
                 />
               </div>
-            </div>
+            </div> */}
             <div class="row gx-3 mb-3">
               <div className="col-md-4">
                 <label htmlFor="contact" className="form-label">Mobile</label>
@@ -562,4 +579,4 @@ const PatientProfile = () => {
   );
 };
 
-export default PatientProfile;
+export default PatientMyProfile;
