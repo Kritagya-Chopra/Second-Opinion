@@ -1,5 +1,5 @@
 import React from "react";
-// import "./DoctorDashboard.css";
+import '../styles/DoctorDashboard.css';
 import { useNavigate } from "react-router-dom";
 
 const DoctorDashboard = () => {

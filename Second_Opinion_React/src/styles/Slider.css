@@ -13,7 +13,7 @@
   margin-left: 3vw;
   margin-right: 3vw;
 }
-.left {
+.left-slider {
   display: flex;
   flex-direction: column;
   line-height: 3vh;

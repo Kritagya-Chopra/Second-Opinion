@@ -50,7 +50,7 @@ const Slider = () => {
         <GrPrevious />
       </button>
       <div className="slider-content">
-        <div className="left">
+        <div className="left-slider">
           <h3 className="heading3">{data[sliderIndex].heading3}</h3>
           <h2 className="heading2">{data[sliderIndex].heading2}</h2>
           <p className="para1">{data[sliderIndex].para}</p>
