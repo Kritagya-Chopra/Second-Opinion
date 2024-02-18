@@ -51,14 +51,14 @@ public class GlobalExceptionHandler {
 	public ResponseDTO handleResourceNotFoundException(
 			ResourceNotFoundException e) {
 		System.out.println("in res not found " + e);
-		return new ResponseDTO(false,e.getMessage(),"ERROR" , "NOT OK");
+		return new ResponseDTO(false,null,e.getMessage(),"ERROR");
 	}
 	
 	@ExceptionHandler(SQLException.class)
 	public ResponseDTO handleSQLException(
 			SQLException e) {
 		System.out.println("in res not found " + e);
-		return new ResponseDTO(false,e.getMessage(),"ERROR" , "NOT OK");
+		return new ResponseDTO(false,null,e.getMessage(),"ERROR" );
 	}
 	
 	@ExceptionHandler(DataIntegrityViolationException.class)
@@ -75,6 +75,6 @@ public class GlobalExceptionHandler {
 	public ResponseDTO handleAnyException(RuntimeException e) {
 		System.out.println("in catch-all " + e);
 		e.printStackTrace();
-		return new ResponseDTO(false,e.getMessage(),"ERROR" , "NOT OK");
+		return new ResponseDTO(false,null , e.getMessage(),"ERROR");
 	}
 }

@@ -29,7 +29,7 @@ public class PatientEntity extends BaseEntity {
 	private String name;
 	
 	@Lob
-	private byte[] photo;
+	private String photo;
 	
 	@Column(nullable = false,length=1)
 	private String gender;
