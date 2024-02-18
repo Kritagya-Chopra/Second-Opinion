@@ -1,25 +1,27 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { BrowserRouter } from "react-router-dom";
+import Routing from "./Component/Routing";
+import Login from "./Component/Login";
+import Slider from "./Component/Slider";
+import ThreeCards from "./Component/ThreeCards";
+import Step from "./Component/Step";
+import DoctorDashboard from "./Component/DoctorDashboard";
 
-function App() {
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      {/* <Login /> */}
+      {/* <Navbar/>
+      <PatientDashboard/> */}
+      {/* <AddCase/> */}
+      {/* <Slider /> */}
+      {/* <ThreeCards /> */}
+      {/* <Step/> */}
+      <DoctorDashboard />
+      <BrowserRouter>
+        <Routing />
+      </BrowserRouter>
+    </>
   );
-}
-
+};
 export default App;

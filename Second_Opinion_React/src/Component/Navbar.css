@@ -1,0 +1,40 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+nav{
+    background-color:#49bec7;
+    display: flex;
+    justify-content: space-evenly;
+    height: 7vh;
+    width: 100vw;
+    align-items: center;
+    color: white;
+    font-size: large;
+}
+select{
+    border: none;
+    background-color:#49bec7 ;
+    color: white;
+    font-size: large;
+    margin-left: 1vw;
+}
+
+select option{
+    background-color: white;
+    color: black;
+}
+.left{
+    display: flex;
+
+}
+.right{
+    margin-left: 20vw;
+}
+nav a{
+    text-decoration: none;
+    color: white;
+    margin-left:2vw ;
+}
