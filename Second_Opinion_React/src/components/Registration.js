@@ -1,18 +1,21 @@
-import React, { useState } from "react";
+import React, { useState ,createContext } from "react";
 import axios from "axios";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import validator from "validator";
 import { Link, useNavigate } from 'react-router-dom';
+import PatientMyProfile from "./PatientMyProfile";
+const exportdata=createContext();
 const Registration = () => {
   const naviagte=useNavigate();
+  const [data,setData]=useState("condom");
+  const [isDataFetched,setIsDataFatched]=useState(false);
   const [isChecked,setIsChecked]=useState();
   const [regData, setRegData] = useState({
     userName:"",
     password:"",
     repeatPassword:"",
     role:1,
-    
   });
   
   
@@ -58,16 +61,16 @@ const Registration = () => {
     axios.post('http://localhost:8080/user/register', regData,{headers: {'Content-Type': 'application/json',}}  )
         .then(response => {
             if(response.data.status===false){
-             
               toast.error(response.data.message, {
                 className: "toast-message"
               });
-             
             }
             else{
               toast.success("Registration successful",{
                 className:"toast-message"
               });
+              setData(response.data.data);
+              setIsDataFatched(true);
               if(regData?.role==1){
                 naviagte("/doctor/profile");
 
@@ -76,8 +79,8 @@ const Registration = () => {
                 naviagte("/patient/profile",{
                   state:{data:response.data.data}
                 });
-
               }
+              
             }
         })
         .catch(error => {
@@ -88,7 +91,7 @@ const Registration = () => {
 
    
       return (
-        
+        <>
         <section className="vh bg-image" >
           <div className="mask d-flex align-items-center h-100 gradient-custom-3">
             <div className="container h-100">
@@ -156,8 +159,10 @@ const Registration = () => {
           </div>
           <ToastContainer/>
         </section>
+        </>
       );
     };
     
 
 export default Registration
+export {exportdata}
