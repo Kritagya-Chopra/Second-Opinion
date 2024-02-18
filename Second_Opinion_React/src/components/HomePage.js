@@ -11,7 +11,7 @@ import Header1 from "./Header1";
 const HomePage=()=>{
     return(
         <>
-            <Header/>
+            <Header1/>
         
             <Slider />
             <Step />

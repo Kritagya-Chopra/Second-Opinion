@@ -1,5 +1,5 @@
 import React from 'react';
-import "./Footer.css";
+import '../styles/Footer.css';
 
  function Footer(){
   return (
@@ -50,7 +50,7 @@ import "./Footer.css";
               <div className="d-flex flex-column flex-sm-row w-100 gap-2">
               
                 <input id="newsletter1" type="text" className="form-control" placeholder="Email address" style={{marginRight:"2%"}} />
-                <button className="btn btn-primary" type="button">Subscribe</button>
+                <button className="btn btn-primary" type="button" >Subscribe</button>
               </div>
             </form>
           </div>

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Header from './Header';
 import Footer from './Footer';
-import "./profile-pic.css";
+import '../styles/profile-pic.css';
 import VerticalNavBar from './VerticalNavBar';
 import Form from 'react-bootstrap/Form';
 import axios from 'axios';
