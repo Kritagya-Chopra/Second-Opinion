@@ -3,9 +3,9 @@ import React, { useState } from "react";
 import axios from "axios";
 import { ToastContainer, toast } from 'react-toastify';
   import 'react-toastify/dist/ReactToastify.css';
-import { Link } from "react-router-dom";
-
+import { Link, Navigate, useNavigate } from "react-router-dom";
 const Login = () => {
+  const naviagte=useNavigate();
   const [loginData, setLoginData] = useState({
     user: "",
     password: "",
@@ -33,7 +33,8 @@ const Login = () => {
              
             }
             else{
-              
+              sessionStorage.setItem("id",response.data.data)
+              naviagte('/patient/dashboard');
             }
         })
         .catch(error => {
