@@ -9,14 +9,18 @@ import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -44,11 +48,12 @@ public class CaseEntity extends BaseEntity {
 	private LocalDateTime closeTime;
 	@Column(name = "response_time")
 	private LocalDateTime responseTime; 
-	@OneToMany(mappedBy = "myCase",cascade = CascadeType.ALL,orphanRemoval = true)
-	private List<OpinionEntity> opinions=new ArrayList<>();
-	@OneToMany(mappedBy="myCase")
+	@OneToOne(mappedBy = "myCase",cascade = CascadeType.ALL,orphanRemoval = true , fetch = FetchType.EAGER)
+	private OpinionEntity opinion;
+	@OneToMany(mappedBy="myCase" , cascade = CascadeType.ALL , orphanRemoval = true , fetch = FetchType.EAGER)
+	@Fetch(FetchMode.SUBSELECT)
 	private List<NotificationEntity> notifications=new ArrayList<>();
-	@ManyToMany
+	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name="case_symptoms")
 	private Set<SymptomEntity> symptoms=new HashSet<SymptomEntity>();
 	
@@ -74,19 +79,6 @@ public class CaseEntity extends BaseEntity {
 		this.notifications.remove(notification);
 		notification.setMyCase(null);
 	}
-	
-	public void addOpinion(OpinionEntity o) {
-		this.opinions.add(o);
-		o.setMyCase(this);
-	}
-	
-	public void removeOpinion(OpinionEntity o) {
-		this.opinions.remove(o);
-		o.setMyCase(null);
-	}
-	
-	
-	
 	
 	
 	@Override

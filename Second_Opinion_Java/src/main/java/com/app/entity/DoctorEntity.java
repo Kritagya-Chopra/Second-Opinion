@@ -1,16 +1,17 @@
 package com.app.entity;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.MapsId;
@@ -30,11 +31,14 @@ public class DoctorEntity extends BaseEntity {
 	@Column(name = "name", length = 50,nullable = false)
 	private String name;
 	
+	@Lob
+	private byte[] photo;
+	
 	@Column(name="years_of_experience",length=2,nullable=false)
 	private int yearsOfExperience;
 	
 	@Column(name="avg_response_time")
-	private LocalDateTime avgResponseTime;
+	private float avgResponseTime;
 	
 	@Column(name="avg_rating")
 	private float avgRating;
@@ -45,10 +49,20 @@ public class DoctorEntity extends BaseEntity {
 	@Column(name="license_expiry",nullable=false)
 	private LocalDate licenseExpiry;
 	
+	@Embedded
+	private QualificationEntity qualification;
+	
+	@Embedded
+	private AddressEntity address;
+
+	@OneToOne
+	@MapsId
+	private UserEntity user;
+	
 	@OneToMany(mappedBy = "doctor" , cascade=CascadeType.ALL,orphanRemoval = true)
 	private List<BlogEntity> blogs = new ArrayList<BlogEntity>();
 	
-	@ManyToMany(mappedBy = "doctors")
+	@ManyToMany(fetch = FetchType.EAGER)
 	private Set<LanguageEntity> languagesSpoken = new HashSet<LanguageEntity>();
 	
 	@OneToMany(mappedBy = "doctor" , cascade = CascadeType.ALL , orphanRemoval = true)
@@ -57,10 +71,6 @@ public class DoctorEntity extends BaseEntity {
 	@ManyToOne
 	@JoinColumn(name = "specialization_id")
 	private SpecializationEntity specialization ;
-	
-	@OneToOne
-	@MapsId
-	private UserEntity user;
 	
 	@OneToMany(mappedBy = "doctor",cascade = CascadeType.ALL,orphanRemoval = true)
 	private List<CaseEntity> myCases = new ArrayList<CaseEntity>();
@@ -125,7 +135,4 @@ public class DoctorEntity extends BaseEntity {
 			return false;
 		return true;
 	}
-	
-	
-	
 }

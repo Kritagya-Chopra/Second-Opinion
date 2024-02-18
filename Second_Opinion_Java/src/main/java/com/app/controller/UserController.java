@@ -8,25 +8,23 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.app.dto.ResponseDTO;
-import com.app.entity.Login;
+import com.app.dto.UserRequestDTO;
+import com.app.entity.UserEntity;
 import com.app.service.LoginService;
-
-
+import com.app.service.UserService;
 
 @RestController
-@RequestMapping("/login")
+@RequestMapping("/user")
 @CrossOrigin
-public class LoginController {
-	public LoginController() {
-		System.out.println("in ctor");
-	}
+public class UserController {
+	@Autowired
+	private UserService userService;
 	@Autowired
 	private LoginService loginService;
-	@PostMapping
-	public ResponseDTO validUser(@RequestBody Login User) {
-		System.out.println(User.getUser());
+	@PostMapping("/login")
+	public ResponseDTO validUser(@RequestBody UserRequestDTO user) {
 		ResponseDTO response=new ResponseDTO();
-		 Login u=loginService.validateUser(User);
+		 UserEntity u=loginService.validateUser(user);
 		 if(u!=null) {
 			 response.setData(u);
 			 response.setStatus(true);
@@ -41,5 +39,9 @@ public class LoginController {
 		 }
 		 return response;
 	}
+	@PostMapping("/register")
+	public ResponseDTO addUser(@RequestBody UserRequestDTO user)
+	{
+		return userService.addUser(user);
+	}
 }
-

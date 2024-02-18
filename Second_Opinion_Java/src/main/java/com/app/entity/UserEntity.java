@@ -21,6 +21,8 @@ public class UserEntity extends BaseEntity{
 	private String userName;
 	@Column(nullable = false)
 	private String password;
+	@Column
+	private boolean valid;
 	
 	@Transient
 	private String repeatPassword;

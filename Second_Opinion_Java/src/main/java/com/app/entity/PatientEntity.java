@@ -6,7 +6,10 @@ import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.Lob;
 import javax.persistence.MapsId;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
@@ -25,14 +28,17 @@ public class PatientEntity extends BaseEntity {
 	@Column(nullable = false,length=50,name="name")
 	private String name;
 	
+	@Lob
+	private byte[] photo;
+	
 	@Column(nullable = false,length=1)
-	private char gender;
+	private String gender;
 	
 	@Column(nullable = false,length=14)
 	private String contact;
 	
 	@Column(nullable = false,length=3,name="blood_group")
-	private char bloodGroup;
+	private String bloodGroup;
 	
 	@Column(nullable = false)
 	private float height;
@@ -42,6 +48,9 @@ public class PatientEntity extends BaseEntity {
 	
 	@Column(nullable = false,name="date_of_birth")
 	private LocalDate dateOfBirth;
+	
+	@Embedded
+	private AddressEntity address;
 
 	@OneToOne
 	@MapsId
@@ -79,6 +88,18 @@ public class PatientEntity extends BaseEntity {
 	public void removeCase(CaseEntity c) {
 		cases.remove(c);
 		c.setPatient(null);
+	}
+	
+	//helper method (add)
+	public void addTestimonial(TestimonialEntity t) {
+		this.testimonials.add(t);
+		t.setPatient(this);
+	}
+	
+	//helper method (remove)
+	public void removeTestimonial(TestimonialEntity t) {
+		this.testimonials.remove(t);
+		t.setPatient(null);
 	}
 
 }

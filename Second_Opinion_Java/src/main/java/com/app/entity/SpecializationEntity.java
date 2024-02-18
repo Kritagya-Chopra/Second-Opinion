@@ -9,6 +9,7 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Lob;
 import javax.persistence.MapsId;
 import javax.persistence.OneToMany;
@@ -27,11 +28,11 @@ public class SpecializationEntity extends BaseEntity {
 	@Column(length = 30,nullable=false)
 	private String name;
 	
-	@OneToMany(mappedBy = "specialization" , cascade = CascadeType.ALL , orphanRemoval = true)
+	@OneToMany(mappedBy = "specialization" , cascade = CascadeType.ALL , orphanRemoval = true,fetch = FetchType.EAGER)
 	private List<DoctorEntity> doctors = new ArrayList<DoctorEntity>();
 	
-	@OneToOne
-	private DiseaseEntity disease ;
+	@OneToOne(mappedBy = "specialization")
+	private DiseaseEntity disease;
 	
 	public void addDoctor(DoctorEntity doctor)
 	{
