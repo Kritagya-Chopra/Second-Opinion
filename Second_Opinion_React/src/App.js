@@ -8,10 +8,11 @@ import AddCases from "./components/AddCases";
 import PatientProfile from "./components/PatientProfile";
 import DoctorDashboard from "./components/DoctorDashboard";
 import PatientDashboard from "./components/PatientDashboard";
+import DoctorProfile from "./components/DoctorProfile";
 const App = () => {
   return (
     <>
-    <BrowserRouter>
+    {/* <BrowserRouter>
     <Routes>
       <Route path="/register" element={<Registration/>}/>
       <Route path="/login" element={<Login/>}/>
@@ -21,7 +22,9 @@ const App = () => {
       <Route path="/patient/dashboard" element={<PatientDashboard/>}/>
       <Route path="/new-case" element={<AddCases/>}/>
     </Routes>
-    </BrowserRouter>
+    </BrowserRouter> */}
+
+    <DoctorProfile></DoctorProfile>
       
     </>
   );

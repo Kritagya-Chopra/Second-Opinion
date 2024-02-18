@@ -21,7 +21,7 @@ import lombok.Setter;
 public class QualificationEntity {
 
 	@Column(name = "qualification_name" ,length = 30,nullable = false)
-	private String name;
+	private String qualificationName;
 	
 	@Column(length = 100,nullable = false)
 	private String university;
