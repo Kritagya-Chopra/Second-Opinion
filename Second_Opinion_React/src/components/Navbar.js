@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 const Navbar=()=>{
     return (
         <>
-           <nav className='navbar'>
+           <nav className='navbar-my'>
             <div className='left-navbar'>
                 <p>Contact Us</p>
                 <a href="mailto:secondopinion@gmail.com">secondOpinion@gmail.com</a>
