@@ -44,9 +44,9 @@ public class DoctorController {
 	}
 
 	@PostMapping("/profile")
-	public ResponseDTO addDoctor(@RequestParam Long userId , @RequestBody DoctorDTO d) {
+	public ResponseDTO addDoctor(@RequestParam Long id , @RequestBody DoctorDTO d) {
 		ResponseDTO response = new ResponseDTO();
-		DoctorDTO doc = doctorService.saveDoctor(userId , d);
+		DoctorDTO doc = doctorService.saveDoctor(id , d);
 		if (doc != null) {
 			response.setData(doc);
 			response.setStatus(true);

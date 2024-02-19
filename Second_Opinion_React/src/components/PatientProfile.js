@@ -9,36 +9,36 @@ const PatientProfile = () => {
   // State variables to store profile data
   const naviagte = useNavigate();
   const patientData = useLocation();
-  const ids = sessionStorage.getItem("id");
+  const id = sessionStorage.getItem("id");
   const [email , setEmail] = useState('');
   const [profileData, setProfileData] = useState({
-    name: 'John Doe',
-    email: 'johndoe@example.com',
-    password: 'password',
-    gender: 'M',
-    contact: '1234567890',
-    dateOfBirth: '1990-01-01',
-    bloodGroup: 'A+',
-    height: '175',
-    weight: '70',
+    name: '',
+    email: email,
+    password: '',
+    gender: '',
+    contact: '',
+    dateOfBirth: '',
+    bloodGroup: '',
+    height: '',
+    weight: '',
     photo: '/profile-icon.png',
     address: {
-      street: 'street',
-      city: 'city',
-      state: 'state',
-      country: 'country',
-      zipcode: '000000',
-      region: 'region'
+      street: '',
+      city: '',
+      state: '',
+      country: '',
+      zipcode: '',
+      region: ''
     }
   });
 
   useEffect(() => {
-    if (ids != null) {
-      axios.get("http://localhost:8080/patient/" + ids).then(response => {
+    if (id != null) {
+      axios.get("http://localhost:8080/patient/" + id).then(response => {
         console.log(response.data.data);
         setProfileData(response.data.data);
       });
-      axios.get("http://localhost:8080/user/" + ids).then(response => {
+      axios.get("http://localhost:8080/user/" + id).then(response => {
       console.log(response.data);
       setEmail(response.data.data.userName);
     });
@@ -121,7 +121,7 @@ const PatientProfile = () => {
       photo: profileData.photo,
       address: profileData.address
     };
-    if(ids==null){
+    if(id==null){
       console.log(postData+ " post data")
     axios.post('http://localhost:8080/patient/profile?id=' + patientData.state.data.id, postData)
       .then(response => {
@@ -134,7 +134,7 @@ const PatientProfile = () => {
     }
     else
     {
-      axios.put('http://localhost:8080/patient/' + ids, postData)
+      axios.put('http://localhost:8080/patient/' + id, postData)
       .then(response => {
         console.log(response.data.data);
         naviagte("/patient/dashboard", { state: { data: patientData } });

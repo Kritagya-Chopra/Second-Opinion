@@ -17,7 +17,7 @@ import lombok.Setter;
 @Setter
 public class DoctorDTO {
 	private String name;
-	private byte[] photo;
+	private String photo;
 	private int yearsOfExperience;
 	private float avgResponseTime;
 	private float avgRating;

@@ -1,50 +1,70 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Header from './Header';
 import Footer from './Footer';
 import '../styles/profile-pic.css';
 import VerticalNavBar from './VerticalNavBar';
-import Form from 'react-bootstrap/Form';
 import axios from 'axios';
 import { useLocation, useNavigate } from 'react-router-dom';
 
 const DoctorProfile = () => {
 
-    const [checkedItems, setCheckedItems] = useState([]);
-   
-    const navigation = useNavigate();
+    
+
+    const naviagte = useNavigate();
+    const id = sessionStorage.getItem("id");
     const doctorData = useLocation();
+    const [email , setEmail] = useState('');
     // State variables to store profile data
     const [profileData, setProfileData] = useState({
         name: '',
-        email: '',
+        email: email,
         licenseExpiry: '2024-01-01',
         licenseNo: '',
         yearOfExperience: '',
-        photo: null,
+        photo: '/profile-icon.png',
+        address: {
+            street: '',
+            city: '',
+            state: '',
+            country: '',
+            zipcode: '',
+            region: ''
+        },
 
-        street: 'street',
-        city: 'city',
-        state: 'state',
-        country: 'country',
-        zipcode: '000000',
-        region: 'region',
+        qualification: {
+            name: '',
+            university: '',
+            document: null
+        },
 
-        qualificationName: '',
-        university: '',
-        document: null,
+        languagesSpoken: [],
 
-        languagesSpoken: checkedItems,
-
-        specializationName: '1'
+        specialization: '1'
 
     });
 
 
+    useEffect(() => {
+        if (id != null) {
+          axios.get("http://localhost:8080/doctor/" + id).then(response => {
+            console.log(response.data.data);
+            setProfileData(response.data.data);
+            
+          });
+          axios.get("http://localhost:8080/user/" + id).then(response => {
+          console.log(response.data);
+          setEmail(response.data.data.userName);
+        });
+        }
+        else{
+          setEmail(doctorData.state.data.userName);
+        }
+        
+      }, [])
+
 
     const handleCheckboxChange = (event) => {
         const { id, checked } = event.target;
-        const label = event.target.getAttribute('data-label');
-
         if (checked) {
             setProfileData((prevData) => ({
                 ...prevData,
@@ -64,22 +84,43 @@ const DoctorProfile = () => {
         setProfileData((prevData) => ({
             ...prevData,
             [name]: value,
-        })); 
+        }));
+    };
+
+    const handleAdressChange = (e) => {
+        const { name, value } = e.target;
+        setProfileData((prevData) => ({
+            ...prevData,
+            address: { ...prevData.address, [name]: value }
+        }));
+
         if (name === 'zipcode') {
             fetchLocationDetails(value)
                 .then(location => {
                     setProfileData(prevData => ({
                         ...prevData,
-                        city: location.city,
-                        state: location.state,
-                        country: location.country
+                        address: {
+                            ...prevData.address, city: location.city,
+                            state: location.state,
+                            country: location.country
+                        }
+
                     }));
                 })
                 .catch(error => {
 
                 });
         }
-    };
+    }
+    const handleQualificationChange = (e) => {
+        const { name, value } = e.target;
+        setProfileData((prevData) => ({
+            ...prevData,
+            qualification: { ...prevData.qualification, [name]: value }
+        }));
+
+    }
+
 
     //function to get Location details
     async function fetchLocationDetails(pincode) {
@@ -100,15 +141,6 @@ const DoctorProfile = () => {
         }
     }
 
-    // Function to handle profile photo upload
-    const handleProfilePhotoChange = (e) => {
-        const file = e.target.files[0];
-        setProfileData((prevData) => ({
-            ...prevData,
-            photo: file
-        }));
-    };
-
     // Function to handle profile data submission
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -118,39 +150,49 @@ const DoctorProfile = () => {
             licenseExpiry: profileData.licenseExpiry,
             licenseNo: profileData.licenseNo,
             yearOfExperience: profileData.yearOfExperience,
-            languages: [profileData.languagesSpoken],
-            specializationId: profileData.specializationName,
+            languages: profileData.languagesSpoken.map(language => language.id),
+            specializationId: profileData.specialization,
             photo: profileData.photo,
-            address: {
-                street: profileData.street,
-                city: profileData.city,
-                state: profileData.state,
-                country: profileData.country,
-                zipcode: profileData.zipcode,
-                region: profileData.region
-            },
-            qualification: {
-                name: profileData.qualificationName,
-                university: profileData.university,
-                document: profileData.document
-            },
+            address: profileData.address,
+            qualification: profileData.qualification,
 
         };
-        console.log(doctorData.state.data.id);
-        axios.post('http://localhost:8080/doctor/profile?id=' + doctorData.state.data.id, postData)
+        if(id==null){
+            console.log(postData+ " post data")
+          axios.post('http://localhost:8080/doctor/profile?id=' + doctorData.state.data.id, postData)
             .then(response => {
-                navigation("/doctor/dashboard");
-                console.log('Profile data successfully updated:', response.data);
+              console.log(response.data.data);
+              sessionStorage.setItem("id", doctorData.state.data.id)
+              naviagte("/doctor/dashboard", { state: { data: doctorData } });
+      
+              console.log('Profile data successfully updated:', response.data);
             });
+          }
+          else
+          {
+            axios.put('http://localhost:8080/doctor/' + id, postData)
+            .then(response => {
+              console.log(response.data.data);
+              naviagte("/doctor/dashboard", { state: { data: doctorData } });
+      
+              console.log('Profile data successfully updated:', response.data);
+            });
+          }
 
-        
 
     };
-    const [imageUrl, setImageUrl] = useState('/profile-icon.png');
 
-    const handleFileChange = (event) => {
-        setImageUrl(URL.createObjectURL(event.target.files[0]));
-    };
+    const handleFileChange = (e) => {
+        const file = e.target.files[0];
+        const reader = new FileReader();
+        reader.onloadend = () => {
+          setProfileData((prevData) => ({
+            ...prevData,
+            photo: reader.result,
+          }));
+        };
+        reader.readAsDataURL(file);
+      };
 
     console.log(profileData);
     return (
@@ -183,12 +225,12 @@ const DoctorProfile = () => {
                             </div>
 
                             <div className="col-md-6 profile-pic">
-                                <label className="-label" htmlFor="file">
+                                <label className="-label" htmlFor="photo">
                                     <span className="glyphicon glyphicon-camera"></span>
                                     <span>Change Image</span>
                                 </label>
-                                <input id="file" type="file" onChange={handleFileChange} />
-                                <img src={imageUrl} id="output" width="200" alt="Profile" />
+                                <input id="photo" type="file" onChange={handleFileChange} />
+                                <img src={profileData.photo} id="output" width="200" alt="Profile" />
                             </div>
                         </div>
                         <div className="row gx-3 mb-3">
@@ -247,12 +289,12 @@ const DoctorProfile = () => {
 
 
                             <div className="col-md-4" style={{ paddingTop: '2%' }}>
-                                <label htmlFor="specializationName" className="form-label">Specialization</label>
+                                <label htmlFor="specializationId" className="form-label">Specialization</label>
                                 <select
                                     className="form-select"
-                                    id="specializationName"
-                                    name="specializationName"
-                                    value={profileData.specializationName}
+                                    id="specializationId"
+                                    name="specializationId"
+                                    value={profileData.specializationId}
                                     onChange={handleProfileDataChange}
                                 >
                                     <option value="1">Oncology</option>
@@ -316,8 +358,8 @@ const DoctorProfile = () => {
                                     className="form-control"
                                     id="street"
                                     name="street"
-                                    value={profileData.street}
-                                    onChange={handleProfileDataChange}
+                                    value={profileData.address.street}
+                                    onChange={handleAdressChange}
                                 />
                             </div>
                             <div className="col-md-4">
@@ -327,8 +369,8 @@ const DoctorProfile = () => {
                                     className="form-control"
                                     id="city"
                                     name="city"
-                                    value={profileData.city}
-                                    onChange={handleProfileDataChange}
+                                    value={profileData.address.city}
+                                    onChange={handleAdressChange}
                                 />
                             </div>
                             <div className="col-md-4">
@@ -338,17 +380,18 @@ const DoctorProfile = () => {
                                     className="form-control"
                                     id="state"
                                     name="state"
-                                    value={profileData.state}
-                                    onChange={handleProfileDataChange}
+                                    value={profileData.address.state}
+                                    onChange={handleAdressChange}
                                 />
                             </div>
+
                             <div className="col-md-4">
                                 <label htmlFor="country" className="form-label">Country</label>
                                 <select
                                     className="form-control"
                                     id="country"
                                     name="country"
-                                    value={profileData.country}
+                                    value={profileData.address.country}
                                     onChange={handleProfileDataChange}
                                 >
                                     <option value="Afghanistan">Afghanistan</option>
@@ -470,7 +513,7 @@ const DoctorProfile = () => {
                                     <option value="Kyrgyzstan">Kyrgyzstan</option>
                                     <option value="Lao">Lao People's Democratic Republic</option>
                                     <option value="Latvia">Latvia</option>
-                                    <option value="Lebanon">Lebanon</option>
+                                    <option value="Lebanon" selected>Lebanon</option>
                                     <option value="Lesotho">Lesotho</option>
                                     <option value="Liberia">Liberia</option>
                                     <option value="Libyan Arab Jamahiriya">Libyan Arab Jamahiriya</option>
@@ -599,8 +642,8 @@ const DoctorProfile = () => {
                                     className="form-control"
                                     id="zipcode"
                                     name="zipcode"
-                                    value={profileData.zipcode}
-                                    onChange={handleProfileDataChange}
+                                    value={profileData.address.zipcode}
+                                    onChange={handleAdressChange}
                                 />
                             </div>
                             <div className="col-md-4">
@@ -610,22 +653,23 @@ const DoctorProfile = () => {
                                     className="form-control"
                                     id="region"
                                     name="region"
-                                    value={profileData.region}
-                                    onChange={handleProfileDataChange}
+                                    value={profileData.address.region}
+                                    onChange={handleAdressChange}
                                 />
                             </div>
-
                         </div>
+
+
                         <div className="row gx-3 mb-3">
                             <div className="col-md-6">
-                                <label htmlFor="qualificationName" className="form-label">Qualification</label>
+                                <label htmlFor="name" className="form-label">Qualification</label>
                                 <input
                                     type="text"
                                     className="form-control"
-                                    id="qualificationName"
-                                    name="qualificationName"
-                                    value={profileData.qualificationName}
-                                    onChange={handleProfileDataChange}
+                                    id="name"
+                                    name="name"
+                                    value={profileData.qualification.name}
+                                    onChange={handleQualificationChange}
 
                                 />
                             </div>
@@ -636,25 +680,26 @@ const DoctorProfile = () => {
                                     className="form-control"
                                     id="university"
                                     name="university"
-                                    value={profileData.university}
-                                    onChange={handleProfileDataChange}
+                                    value={profileData.qualification.university}
+                                    onChange={handleQualificationChange}
 
                                 />
                             </div>
                         </div>
                         <div className="mb-3">
-                            <label for="formFileMultiple" className="form-label">Upload Documents</label>
-                            <input className="form-control" type="file" id="formFileMultiple" multiple />
+                            <label for="document" className="form-label">Upload Documents</label>
+                            <input className="form-control" type="file" id="document" value={profileData.qualification.document} onChange={handleQualificationChange} multiple />
                         </div>
                         <button type="submit" className="btn btn-primary float-right">Save Changes</button>
                         <br></br>
                         <br></br>
                     </form>
-                </div>
-            </div>
+                </div >
+            </div >
             <Footer />
         </>
     );
 };
+
 
 export default DoctorProfile;

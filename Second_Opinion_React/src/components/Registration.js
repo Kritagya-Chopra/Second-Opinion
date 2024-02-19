@@ -71,7 +71,10 @@ const Registration = () => {
               setData(response.data.data);
               setIsDataFatched(true);
               if(regData?.role==1){
-                naviagte("/doctor/profile");
+
+                naviagte("/doctor/profile",{
+                  state:{data:response.data.data}
+                });
 
               }
               else{
