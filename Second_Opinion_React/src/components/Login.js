@@ -25,8 +25,7 @@ const Login = () => {
     axios.post('http://localhost:8080/user/login', loginData,{headers: {'Content-Type': 'application/json',}}  )
         .then(response => {
           console.log(typeof(response.data.status));
-          console.log("Hello");
-          console.log(response.data.data.id);
+          console.log(response.data);
             if(response.data.status==false){
              
               toast.error("Invalid User Details", {
