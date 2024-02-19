@@ -1,5 +1,7 @@
 package com.app.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -94,6 +96,24 @@ public class DoctorController {
 			 response.setCode("ERROR");
 			 response.setMessage("Some error");
 		 }
+		return response;
+	}
+	
+	@GetMapping("/specialization/{id}")
+	public ResponseDTO getDoctorBySpecializationId(@PathVariable Long id) {
+		ResponseDTO response = new ResponseDTO();
+		List<DoctorDTO> doc = doctorService.getDoctorBySpecializationId(id);
+		if (doc != null) {
+			response.setData(doc);
+			response.setStatus(true);
+			response.setCode("OK");
+			response.setMessage("Doctor Available");
+		} else {
+			response.setData(doc);
+			response.setStatus(false);
+			response.setCode("ERROR");
+			response.setMessage("Some error , null doctor found");
+		}
 		return response;
 	}
 }
