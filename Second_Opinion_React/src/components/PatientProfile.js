@@ -163,9 +163,9 @@ const PatientProfile = () => {
   return (
     <>
       <Header1 />
-      <div className='container' >
+      <div className='flex' >
         <VerticalNavBar />
-        <div className="container">
+        <div className='container'>
 
           <form onSubmit={handleSubmit}>
 
