@@ -77,5 +77,15 @@ public class DoctorServiceImpl implements DoctorService {
 			return false;
 		}
 	}
+
+	@Override
+	public List<DoctorDTO> getDoctorBySpecializationId(Long id) {
+		
+		return doctorRepository.findAllBySpecialization(id).stream().map((DoctorEntity e)->{
+			return mapper.map(e, DoctorDTO.class);
+		}).collect(Collectors.toList());
 	
+	}
+	
+
 }
