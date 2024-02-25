@@ -13,6 +13,7 @@ import Dashboard from "./components/PatientDashboard";
 import HomePage from "./components/HomePage";
 import About from "./components/About";
 import Contact from "./components/Contact";
+import AddCaseData from "./components/AddCaseData";
 const App = () => {
   return (
     <>
@@ -29,6 +30,7 @@ const App = () => {
       <Route path="/patient/dashboard" element={<PatientDashboard/>}/>
       <Route path="/doctor/dashboard" element={<DoctorDashboard />}/>
       <Route path="/new-case" element={<AddCases/>}/>
+      <Route path="/add-case-data/:id" element={<AddCaseData/>}/>
       </Routes>
     </BrowserRouter>
  

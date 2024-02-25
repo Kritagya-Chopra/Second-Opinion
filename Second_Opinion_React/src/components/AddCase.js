@@ -7,11 +7,12 @@ const AddCase = () => {
     const navigate=useNavigate();
     const [data, setData] = useState([]);
     const [selectedOption, setSelectedOption] = useState(""); // State to store the selected option
-
+    const [disease,setDisease]=useState();
     useEffect(() => {
         axios.get("http://localhost:8080/disease")
             .then(resp => {
                 setData(resp.data);
+                console.log(resp.data);
             })
             .catch(error => {
                 console.error('Error fetching data:', error);
@@ -25,8 +26,7 @@ const AddCase = () => {
 
     // Function to handle form submission
     const handleSearch = () => {
-        sessionStorage.setItem("did",selectedOption);
-        navigate("/add-case-data");
+        navigate(`/add-case-data/${selectedOption}`);
         // Perform any action based on the selected option
     };
 
@@ -39,10 +39,12 @@ const AddCase = () => {
                     symptom, or body part of concern:
                 </p>
             </div>
-            <select value={selectedOption} onChange={handleOptionChange}>
+            <select value={selectedOption} onChange={(e)=>{
+                handleOptionChange(e)
+            }}>
                 <option value="">Select an option</option>
-                {data.map((e) => (
-                    <option key={e.id} value={e.id}>{e.name}</option>
+                {data.map((item) => (
+                    <option key={item.id} value={item.id}>{item.name}</option>
                 ))}
             </select>
             <button className="addCase-search" onClick={handleSearch}>Search</button>
