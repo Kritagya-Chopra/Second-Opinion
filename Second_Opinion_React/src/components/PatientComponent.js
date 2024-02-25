@@ -9,8 +9,7 @@ const PatientComponent=()=>{
     const navigate=useNavigate();
     return (
         <>
-             <Header/>
-            <Navbar/>
+            
             <p className="heading">Dashboard</p>
             <div className="dashboard">
             <FaHospitalUser className="icon"/>
@@ -21,7 +20,7 @@ const PatientComponent=()=>{
             </div>
             <button className="addCaseBtn" onClick={()=>{navigate("/new-case")}}>Add Case</button>
             </div>
-            <Footer/>
+           
         </>
     )
 }
