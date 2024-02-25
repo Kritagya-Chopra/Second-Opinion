@@ -16,6 +16,8 @@ import lombok.Setter;
 @Getter
 @Setter
 public class DoctorDTO {
+	@JsonProperty(access = Access.READ_ONLY)
+	private Long id;
 	private String name;
 	private String photo;
 	private int yearsOfExperience;
