@@ -1,5 +1,6 @@
 package com.app.service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -70,6 +71,9 @@ public class CaseServiceImpl implements CaseService {
 		DoctorEntity doctor = doctorRepository.findById(c.getDoctorId())
 				.orElseThrow(() -> new ResourceNotFoundException("Doctor not exists"));
 		CaseEntity newCase = mapper.map(c, CaseEntity.class);
+		newCase.setResponseTime(null);
+		newCase.setOpenTime(LocalDateTime.now());
+		newCase.setCloseTime(null);
 		doctor.addCase(newCase);
 		patient.addCase(newCase);
 		newCase.getSymptoms().addAll(symptomRepository.findAllById(c.getSymptomIds()));
