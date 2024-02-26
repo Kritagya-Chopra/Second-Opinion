@@ -19,6 +19,6 @@ public class PartnerEntity extends BaseEntity {
 	@Column(length = 50)
 	private String contactEmail;
 	@Lob
-	private byte[] logo;
+	private String logo;
 	private String address;
 }
