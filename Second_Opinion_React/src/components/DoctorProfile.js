@@ -46,11 +46,7 @@ const DoctorProfile = () => {
 
     useEffect(() => {
         if (id != null) {
-          axios.get("http://localhost:8080/doctor/" + id).then(response => {
-            console.log(response.data.data);
-            setProfileData(response.data.data);
-            
-          });
+          getDoctorDetails();
           axios.get("http://localhost:8080/user/" + id).then(response => {
           console.log(response.data);
           setEmail(response.data.data.userName);
@@ -61,7 +57,15 @@ const DoctorProfile = () => {
         }
         
       }, [])
-
+      const getDoctorDetails=async()=>{
+       try {
+        const response=await axios.get("http://localhost:8080/doctor/" + id);
+        console.log(response);
+        setProfileData(response.data.data);
+       } catch (error) {
+        console.log(error);
+       }
+      }
 
     const handleCheckboxChange = (event) => {
         const { id, checked } = event.target;
