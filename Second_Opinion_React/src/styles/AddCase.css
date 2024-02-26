@@ -1,32 +1,30 @@
 *{
-    margin:0;
+    margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
-.heading{
-    text-align: center;
-    font-size: 500%;
+.headingAddCase{
+    margin-top: 5vh;
+    margin-left:16% ;
+    color: rgb(59, 59, 59);
+    margin-bottom: 10vh;
+}
+.headingAddCase h2{
     font-weight: 100;
-    color: rgb(59, 59, 59);
+    font-size: 400%;
 }
-.text h2{
-    font-weight: 100;
-    color: rgb(59, 59, 59);
-    font-size: 200%;
+.addCase-input{
+    width: 60vw;
+    margin-left:16% ;
+    height: 7vh;
+    font-size:x-large;
+    padding-left: 1%;
+    border-radius: 1vh;
+    border: 1px solid black;
+    box-shadow: 10px 10px 10px gray;
 }
-.text p{
-    color: rgb(59, 59, 59);
-}
-.dashboard{
-    margin-top: 10vh;
-    display: flex;
-    align-items: center;
-    margin-left: 15vw;
-}
-.addCaseBtn{
-    margin-left: 10vw;
-     
-        position: relative;
+.addCase-search{
+    position: relative;
         background-color: #a7c102;
         border-radius: 5px;
         box-shadow: #b1cb04 0px 4px 0px 0px;
@@ -42,9 +40,8 @@
         transition: all 0.3s ease-in-out;
         z-index: 1;
         overflow: hidden;
-      
 }
-.addCaseBtn::before {
+.addCase-search::before {
     content: "";
     background-color: #d5eb40;
     width: 0;
@@ -56,11 +53,6 @@
     transition: width 700ms ease-in-out;
     display: inline-block;
   }
-  
-  .addCaseBtn:hover::before {
+.addCase-search:hover::before {
     width: 100%;
   }
-.icon{
-    height: 10vh;
-    width: 10vw;
-}

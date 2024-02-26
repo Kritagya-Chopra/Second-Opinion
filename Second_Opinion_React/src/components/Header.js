@@ -13,7 +13,7 @@ export default class Header extends Component {
     
    <div className='ui menu'>
    
-      <img src="logo.png" />
+      <img src="/logo.png" />
       <Menu secondary>
      
         <MenuItem>  <h1 style={{color:'#2AB8C3'}}>Second Opinion</h1></MenuItem>

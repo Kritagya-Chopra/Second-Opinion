@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./Slider.css";
+import '../styles/Slider.css';
 import { GrPrevious, GrNext } from "react-icons/gr";
 
 const data = [
@@ -9,7 +9,7 @@ const data = [
     para: "Consult your medical condition with world-class specialists without any language barriers.",
     para2: "Erik Ranschaert, MD, PhD",
     para3: "Chief Medical Officer of Diagnose.me",
-    image: "https://www.diagnose.me/media/front/banner/erik_mobile.png",
+    image: "erik_mobile.png",
   },
   {
     heading3: "OUR MISSION",
@@ -17,7 +17,7 @@ const data = [
     para: "Get advice from top medical specialists who may not be available in your local hospital or even in your country.",
     para2: "Katja Pinker-Domenig, MD, Prof",
     para3: "Katja Pinker-Domenig, MD, Prof",
-    image: "https://www.diagnose.me/media/front/banner/katja_mobile.png",
+    image: "/katja_mobile.png",
   },
   {
     heading3: "OUR CLIENTS",
@@ -25,7 +25,7 @@ const data = [
     para: "Receive a personalized guidance and support from a medically trained team to help you navigate this process every step of the way.",
     para2: "Silvia Tršo",
     para3: "Medical customer support",
-    image: "https://www.diagnose.me/media/front/banner/silvia_mobile.png",
+    image: "/silvia_mobile.png",
   },
 ];
 
@@ -50,7 +50,7 @@ const Slider = () => {
         <GrPrevious />
       </button>
       <div className="slider-content">
-        <div className="left">
+        <div className="left-slider">
           <h3 className="heading3">{data[sliderIndex].heading3}</h3>
           <h2 className="heading2">{data[sliderIndex].heading2}</h2>
           <p className="para1">{data[sliderIndex].para}</p>

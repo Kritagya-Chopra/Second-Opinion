@@ -5,7 +5,8 @@ import { MdDelete } from "react-icons/md";
 import { IoSettings } from "react-icons/io5";
 const VerticalNavbar = () => {
   return (
-    <nav className="navbar navbar-expand-lg ">
+    <div style={{width:"15%"}}>
+     <nav className="navbar navbar-expand-lg ">
       <div className="container-fluid">
         <button
           className="navbar-toggler"
@@ -44,6 +45,8 @@ const VerticalNavbar = () => {
         </div>
       </div>
     </nav>
+    </div>
+   
   );
 };
 

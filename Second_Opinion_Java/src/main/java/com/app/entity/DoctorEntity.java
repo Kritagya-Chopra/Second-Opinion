@@ -32,7 +32,7 @@ public class DoctorEntity extends BaseEntity {
 	private String name;
 	
 	@Lob
-	private byte[] photo;
+	private String photo;
 	
 	@Column(name="years_of_experience",length=2,nullable=false)
 	private int yearsOfExperience;

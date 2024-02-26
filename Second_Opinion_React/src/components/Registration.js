@@ -1,18 +1,20 @@
-import React, { useState } from "react";
+import React, { useState ,createContext } from "react";
 import axios from "axios";
 import { ToastContainer, toast } from 'react-toastify';
-  import 'react-toastify/dist/ReactToastify.css';
-
+import 'react-toastify/dist/ReactToastify.css';
+import validator from "validator";
+import { Link, useNavigate } from 'react-router-dom';
+const exportdata=createContext();
 const Registration = () => {
-
+  const naviagte=useNavigate();
+  const [data,setData]=useState("condom");
+  const [isDataFetched,setIsDataFatched]=useState(false);
+  const [isChecked,setIsChecked]=useState();
   const [regData, setRegData] = useState({
-    firstName: "",
-    lastName: "",
     userName:"",
-    email:"",
     password:"",
+    repeatPassword:"",
     role:1,
-    
   });
   
   
@@ -33,30 +35,65 @@ const Registration = () => {
   };
 
   const HandleRegistration = () => {
-    console.log(regData);
-    axios.post('http://localhost:8080/registration', regData,{headers: {'Content-Type': 'application/json',}}  )
+    if(isChecked===undefined){
+      toast.error("Please check the terms")
+      return;
+    }
+    if (!validator.isEmail(regData.userName)){
+        toast.error("provide valid email address", {
+          className: "toast-message"
+        });
+        return;
+    }
+    if(regData.password.length<8){
+      toast.error("provide password of minimum 8 length", {
+        className: "toast-message"
+      });
+      return;
+    }
+    if(regData.password!=regData.repeatPassword){
+      toast.error("Password must be same", {
+        className: "toast-message"
+      });
+      return;
+    }
+    axios.post('http://localhost:8080/user/register', regData,{headers: {'Content-Type': 'application/json',}}  )
         .then(response => {
-          console.log(typeof(response.data.status));
             if(response.data.status===false){
-             
-              toast.error("Invalid User Details", {
+              toast.error(response.data.message, {
                 className: "toast-message"
               });
-             
             }
             else{
               toast.success("Registration successful",{
                 className:"toast-message"
               });
+              setData(response.data.data);
+              setIsDataFatched(true);
+              if(regData?.role==1){
+
+                naviagte("/doctor/profile",{
+                  state:{data:response.data.data}
+                });
+
+              }
+              else{
+                naviagte("/patient/profile",{
+                  state:{data:response.data.data}
+                });
+              }
+              
             }
         })
         .catch(error => {
             console.error('Error sending data:', error);
         });
+
   };
 
    
       return (
+        <>
         <section className="vh bg-image" >
           <div className="mask d-flex align-items-center h-100 gradient-custom-3">
             <div className="container h-100">
@@ -65,22 +102,23 @@ const Registration = () => {
                   <div className="card" style={{ borderRadius: '15px' }}>
                     <div className="card-body p-5">
                       <h2 className="text-uppercase text-center mb-4">Create an account</h2>
-    
                       <form>
-    
                         <div className="form-outline mb-4">
-                          <input type="email" id="email" className="form-control form-control-lg" onChange={handleData}/>
-                          <label className="form-label" htmlFor="email">Enter Email</label>
+                        <label className="form-label" htmlFor="email">Enter Email</label>
+                          <input type="email" name="userName" id="email" className="form-control form-control-lg" onChange={handleData}/>
+                          
                         </div>
     
                         <div className="form-outline mb-4">
-                          <input type="password" id="password" className="form-control form-control-lg" onChange={handleData} />
-                          <label className="form-label" htmlFor="password">Enter Password</label>
+                        <label className="form-label" htmlFor="password">Enter Password</label>
+                          <input type="password" id="password" name="password" className="form-control form-control-lg" onChange={handleData} />
+                         
                         </div>
     
                         <div className="form-outline mb-4">
-                          <input type="password" id="repeatPassword" className="form-control form-control-lg" onChange={handleData} />
-                          <label className="form-label" htmlFor="repeatPassword">Repeat your password</label>
+                        <label className="form-label" htmlFor="repeatPassword">Repeat your password</label>
+                          <input type="password" id="repeatPassword" name="repeatPassword" className="form-control form-control-lg" onChange={handleData} />
+                         
                         </div>
 
                         <div className="form-outline mb-4">
@@ -98,20 +136,24 @@ const Registration = () => {
 
 
                         <div className="form-check flex justify-content-center mb-5">
-                          <input className="form-check-input me-2" type="checkbox" value="" id="terms" />
+
+                          <input className="form-check-input me-2" type="checkbox" value="terms" id="terms"  
+                            onChange={(e)=>{setIsChecked(e.target.value)}}
+                          />
+
                           <label className="form-check-label" htmlFor="terms">
-                            I agree all statements in <a href="#!" className="text-body"><u>Terms of service</u></a>
+                            I agree all statements in <Link to="/terms" className="text-body">Terms of service</Link>
                           </label>
                         </div>
 
           
     
                         <div className="d-flex justify-content-center">
-                          <button type="button" onClick={HandleRegistration} className="btn btn-success btn-block btn-lg gradient-custom-4 text-body">Register</button>
+                          <button type="button" onClick={HandleRegistration} className="btn btn-success btn-block btn-lg gradient-custom-4 text-body" >Register</button>
                         </div>
     
-                        <p className="text-center text-muted mt-5 mb-0">Have already an account? <a href="#!" className="fw-bold text-body"><u>Login here</u></a></p>
-    
+                        <p className="text-center text-muted mt-5 mb-0">Have already an account? <Link to={"/login"}>Login here</Link></p>
+                        
                       </form>
     
                     </div>
@@ -120,9 +162,12 @@ const Registration = () => {
               </div>
             </div>
           </div>
+          <ToastContainer/>
         </section>
+        </>
       );
     };
     
 
 export default Registration
+export {exportdata}

@@ -1,4 +1,4 @@
-.container {
+.card-container {
   width: 100%;
   margin: 0 auto;
   padding: 20px;
@@ -19,12 +19,12 @@
   margin-bottom: 5%;
 }
 
-.card {
+.card1 {
   display: flex;
   justify-content: space-evenly;
 }
 
-.card-item {
+.card1-item {
   width: 25%;
   height: 30vh;
   padding: 20px;
@@ -39,15 +39,15 @@
   font-size: xx-large;
   color: gray;
 }
-.card-item p {
+.card1-item p {
   margin-top: 10px;
 }
 
-.card-item:hover p {
+.card1-item:hover p {
     visibility: hidden;
   }
   
-  .card-item:hover::after {
+  .card1-item:hover::after {
     content: attr(data-hover-text);
     visibility: visible;
     position: absolute;

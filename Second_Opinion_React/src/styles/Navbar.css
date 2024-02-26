@@ -4,7 +4,7 @@
     box-sizing: border-box;
 }
 
-nav{
+.navbar-my{
     background-color:#49bec7;
     display: flex;
     justify-content: space-evenly;
@@ -14,27 +14,11 @@ nav{
     color: white;
     font-size: large;
 }
-select{
-    border: none;
-    background-color:#49bec7 ;
-    color: white;
-    font-size: large;
-    margin-left: 1vw;
-}
 
-select option{
-    background-color: white;
-    color: black;
-}
-.left{
+.left-navbar{
     display: flex;
 
 }
-.right{
+.right-navbar{
     margin-left: 20vw;
-}
-nav a{
-    text-decoration: none;
-    color: white;
-    margin-left:2vw ;
 }

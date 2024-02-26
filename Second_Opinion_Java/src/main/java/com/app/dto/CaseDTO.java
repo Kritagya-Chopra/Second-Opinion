@@ -33,11 +33,11 @@ public class CaseDTO {
 	private char status;
 	
 	private byte[] document;
-	
+	@JsonProperty(access = Access.READ_ONLY)
 	private LocalDateTime openTime;
-	
+	@JsonProperty(access = Access.READ_ONLY)
 	private LocalDateTime closeTime;
-	@JsonProperty(access = Access.WRITE_ONLY)
+	@JsonProperty(access = Access.READ_ONLY)
 	private LocalDateTime responseTime;
 	@JsonProperty(access = Access.WRITE_ONLY)
 	private List<Long> symptomIds;

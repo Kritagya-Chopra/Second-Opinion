@@ -2,7 +2,7 @@ import React from "react";
 import { TiStarburst } from "react-icons/ti";
 import { MdPersonAddAlt1 } from "react-icons/md";
 import { MdPrivacyTip } from "react-icons/md";
-import "./ThreeCards.css";
+import '../styles/ThreeCards.css';
 
 const ThreeCards = () => {
   const data = [
@@ -28,23 +28,23 @@ const ThreeCards = () => {
 
   return (
     <>
-      <div className="container">
+      <div className="card-container">
         <div className="heading1">
-          <h2>Why Diagnose.me</h2>
+          <h2>Why Second Opinion</h2>
           <p>
             "When we manage to help just one person, one family in distress, we
             consider our job well done."
           </p>
         </div>
-        <div className="card">
-          {data.map((card, index) => (
+        <div className="card1">
+          {data.map((card1, index) => (
             <div
               key={index}
-              className="card-item"
-              data-hover-text={card.hoverText}
+              className="card1-item"
+              data-hover-text={card1.hoverText}
             >
-              {card.logo}
-              <p>{card.para}</p>
+              {card1.logo}
+              <p>{card1.para}</p>
             </div>
           ))}
         </div>

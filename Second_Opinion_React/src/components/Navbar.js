@@ -1,19 +1,19 @@
 import React from  'react';
-import './Navbar.css'
+import '../styles/Navbar.css';
 import { Link } from 'react-router-dom';
 const Navbar=()=>{
     return (
         <>
-           <nav>
-            <div className='left'>
+           <nav className='navbar-my'>
+            <div className='left-navbar'>
                 <p>Contact Us</p>
-                <a href="mailto:secondopinion@gmail.com">secondopinion@gmail.com</a>
+                <a href="mailto:secondopinion@gmail.com">secondOpinion@gmail.com</a>
                 <a href="#">+91 7080920302</a>
             </div>
-            <div className='right'>
-                <Link to={"/dashboard"}>Dashboard</Link>
+            <div className='right-navbar'>
+                <Link to={"/patient/dashboard"}>Dashboard</Link>
                 <a href='#'>My Cases</a>
-                <a href="#">Profile</a>
+                <Link to={"/patient/profile"}>Profile</Link>
             </div>
            </nav> 
         </>

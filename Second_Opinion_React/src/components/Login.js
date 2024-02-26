@@ -1,12 +1,13 @@
 import React, { useState } from "react";
-import "./Login.css";
+import '../styles/Login.css';
 import axios from "axios";
 import { ToastContainer, toast } from 'react-toastify';
   import 'react-toastify/dist/ReactToastify.css';
-
+import { Link, Navigate, useNavigate } from "react-router-dom";
 const Login = () => {
+  const naviagte=useNavigate();
   const [loginData, setLoginData] = useState({
-    user: "",
+    userName: "",
     password: "",
   });
   
@@ -21,9 +22,10 @@ const Login = () => {
 
   const Handlelogin = () => {
     console.log(loginData);
-    axios.post('http://localhost:8080/login', loginData,{headers: {'Content-Type': 'application/json',}}  )
+    axios.post('http://localhost:8080/user/login', loginData,{headers: {'Content-Type': 'application/json',}}  )
         .then(response => {
           console.log(typeof(response.data.status));
+          console.log(response.data);
             if(response.data.status==false){
              
               toast.error("Invalid User Details", {
@@ -32,7 +34,8 @@ const Login = () => {
              
             }
             else{
-              
+              sessionStorage.setItem("id",response.data.data.id)
+              naviagte('/patient/dashboard');
             }
         })
         .catch(error => {
@@ -52,8 +55,8 @@ const Login = () => {
         <label>E-mail address</label>
         <input
           type="email"
-          name="user"
-          value={loginData.user}
+          name="userName"
+          value={loginData.userName}
           onChange={handleData}
         />
         <label>Password</label>
@@ -63,9 +66,9 @@ const Login = () => {
           value={loginData.password}
           onChange={handleData}
         />
-        <button onClick={Handlelogin} className="btn">LOGIN</button>
+        <button onClick={Handlelogin} className="btn-login">LOGIN</button>
         <p className="account">
-          No account? <span className="create-one">Create one!</span>
+          No account? <span className="create-one"><Link to="/register">create one</Link></span>
         </p>
         <p className="go-back">Go back</p>
         <div className="back-side">

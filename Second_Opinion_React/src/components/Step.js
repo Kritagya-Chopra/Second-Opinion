@@ -1,5 +1,5 @@
 import React from "react";
-import "./Step.css";
+import '../styles/Step.css';
 
 const Step = () => {
   const data = [
