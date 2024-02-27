@@ -33,15 +33,17 @@ const MyCases = () => {
     <Navbar></Navbar>
     
     <div class="accordion" id="accordionExample">
+    <h2 className='heading1' style={{ color: "#2ab8c3" }}>All Cases</h2>
+
     {cases?.map((item)=>(
            //title description openTime  closeTime  document  opinion responseTime status symptoms[] id
        
   <div class="accordion-item" key={item.id}>
-    <h2 class="accordion-header" id="headingOne">
+    <h3 class="accordion-header" id="headingOne">
       <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
       <h3>{item.title}</h3>
       </button>
-    </h2>
+    </h3>
     <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
       <div class="accordion-body">
         <p>{item.description}</p>

@@ -1,19 +1,21 @@
 import React from  'react';
-import '../styles/Navbar.css';
 import { Link } from 'react-router-dom';
+import '../styles/Navbar.css';
 const Navbar=()=>{
     return (
         <>
-           <nav className='navbar-my'>
-            <div className='left-navbar'>
-                <p>Contact Us</p>
-                <a href="mailto:secondopinion@gmail.com">secondOpinion@gmail.com</a>
-                <a href="#">+91 7080920302</a>
+          <nav class="navbar navbar-light" style={{backgroundColor: "#e3f2fd",margin:"0"}}>
+           
+          <div className='left-navbar'>
+                <Link className="p-2 text-dark headerNavlink" style={{fontSize:'100%'}} to="mailto:secondopinion@gmail.com">Contact Us</Link>&nbsp;&nbsp;&nbsp;
+                <Link className="p-2 text-dark headerNavlink"style={{fontSize:'100%'}}  to="mailto:secondopinion@gmail.com">secondOpinion@gmail.com</Link>&nbsp;&nbsp;&nbsp;
+                <Link className="p-2 text-dark headerNavlink"style={{fontSize:'100%'}}  to="mailto:secondopinion@gmail.com">+91 7080920302</Link>
             </div>
             <div className='right-navbar'>
-                <Link to={"/patient/dashboard"}>Dashboard</Link> &nbsp;&nbsp;&nbsp;
-                <Link to={"/patient/mycases"}>My Cases</Link>&nbsp;&nbsp;&nbsp;
-                <Link to={"/patient/profile"}>Profile</Link>
+                <Link className="p-2 text-dark headerNavlink"style={{fontSize:'110%'}} to={"/patient/dashboard"}>Dashboard</Link> &nbsp;&nbsp;&nbsp;
+                <Link className="p-2 text-dark headerNavlink"style={{fontSize:'110%'}} to={"/patient/testimony"}>Testimonials</Link> &nbsp;&nbsp;&nbsp;
+                <Link className="p-2 text-dark headerNavlink"style={{fontSize:'110%'}} to={"/patient/mycases"}>My Cases</Link>&nbsp;&nbsp;&nbsp;
+                <Link className="p-2 text-dark headerNavlink"style={{fontSize:'110%'}} to={"/patient/profile"}>Profile</Link>
             </div>
            </nav> 
         </>
