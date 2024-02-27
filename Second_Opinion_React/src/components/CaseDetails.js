@@ -66,49 +66,60 @@ export const CaseDetails = () => {
                     </div>
                 </div>
                 <div className='row'>
-                <img src="https://mdbcdn.b-cdn.net/img/new/avatars/8.webp" class="rounded-circle mb-3" style="width: 150px;"
-  alt="Avatar" />
-
-<h5 class="mb-2"><strong>John Doe</strong></h5>
-<p class="text-muted">Web designer <span class="badge bg-primary">PRO</span></p>
+                    <div>
                     <h4>Doctor's Details: </h4>
-                        <img className='img-thumbnail rounded float-right' style={{ width:"30%", height:"30%"}} src={doctorData?.photo}></img>
-                </div>
-              
-                <div className="row">
-                <div className='col'>
-                    <p>Doctor's Name: {doctorData?.name}</p>
-                </div>
+                    
+                    
+                    </div>
+                    <div>
+                    <img src={doctorData?.photo} class="rounded-circle  float-right" style={{width: "150px"}}
+                        alt={doctorData?.name} />
+                    <div className="row">
+                    <div className='col'>
+                    
+                        <p>Doctor's Name: {doctorData?.name}</p>
+                    </div>
                     <div class="col">
                         <p>Specialization: {
                             doctorData?.specialization.name
                         }</p>
                     </div>
-                    
+
                     <div className="col">
-                        <p>Experience: { doctorData?.yearsOfExperience} years</p>
+                        <p>Experience: {doctorData?.yearsOfExperience} years</p>
                     </div>
                 </div>
 
+
+                <div class="row">
+                    <p>Education Details:</p>
+                </div>
+                <div className="row">
+                    <div className="col">
+                        <p>Qualification: {doctorData?.qualification.name}</p>
+                    </div>
+                    <div className="col">
+                        <p>University: {doctorData?.qualification.university} years</p>
+                    </div>
+                    <div className="col">
+                        <p>License No: {doctorData?.licenseNo}</p>
+                    </div>
+                </div>
                 
-                    <div class="row">
-                        <p>Education Details:</p>
-                    </div>
-                    <div className="row">
-                    <div className="col">
-                        <p>Qualification: { doctorData?.qualification.name}</p>
-                    </div>
-                    <div className="col">
-                        <p>University: { doctorData?.qualification.university} years</p>
-                    </div>
-                    <div className="col">
-                        <p>License No: { doctorData?.licenseNo}</p>
-                    </div>
+                        </div>
+                    {/* <h5 className="mb-2"><strong>{doctorData?.name}</strong></h5> */}
+                    {/* <p class="text-muted">Web designer <span class="badge bg-primary">PRO</span></p> */}
+{/* <img className='img-thumbnail rounded float-right' style={{ width: "30%", height: "30%" }} ></img> */}
                 </div>
 
+                <div class="text-center"> 
+                <button type='button' className='btn btn-primary ' >Close Case</button>
                 </div>
-                <Footer />
-            </>
+                <br></br>
+                <br></br>
+            </div>
+            <Footer />
+        </>
 
-            )
+    )
 }
