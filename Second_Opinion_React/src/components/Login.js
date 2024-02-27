@@ -35,7 +35,14 @@ const Login = () => {
             }
             else{
               sessionStorage.setItem("id",response.data.data.id)
-              naviagte('/patient/dashboard');
+              console.log(response.data.data);
+              if(response.data.data.role=="DOCTOR"){
+                naviagte('/doctor/dashboard');
+              }
+              else{
+                naviagte('/patient/dashboard');
+            }
+              
             }
         })
         .catch(error => {
