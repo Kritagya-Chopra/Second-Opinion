@@ -153,7 +153,7 @@ const DoctorProfile = () => {
             email: profileData.email,
             licenseExpiry: profileData.licenseExpiry,
             licenseNo: profileData.licenseNo,
-            yearOfExperience: profileData.yearOfExperience,
+            yearsOfExperience: profileData.yearOfExperience,
             languages: profileData.languagesSpoken.map(language => language.id),
             specializationId: profileData.specialization,
             photo: profileData.photo,
@@ -293,12 +293,12 @@ const DoctorProfile = () => {
 
 
                             <div className="col-md-4" style={{ paddingTop: '2%' }}>
-                                <label htmlFor="specializationId" className="form-label">Specialization</label>
+                                <label htmlFor="specialization" className="form-label">Specialization</label>
                                 <select
                                     className="form-select"
-                                    id="specializationId"
-                                    name="specializationId"
-                                    value={profileData.specializationId}
+                                    id="specialization"
+                                    name="specialization"
+                                    value={profileData.specialization}
                                     onChange={handleProfileDataChange}
                                 >
                                     <option value="1">Oncology</option>

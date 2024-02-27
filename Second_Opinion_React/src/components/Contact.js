@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import '../styles/contact.css';
-import Header1 from "./Header1";
+import Header from "./Header";
 import Footer from "./Footer";
 const Contact = () => {
   const [text, setText] = useState("");
@@ -13,7 +13,7 @@ const Contact = () => {
     
    
     <>
-     <Header1></Header1>
+     <Header />
       <p className="heading">Contact Us</p>
       <div className="Container">
         <div className="left">

@@ -1,57 +1,26 @@
-import React, { Component } from 'react'
-import { MenuMenu, MenuItem, Input, Menu, Container } from 'semantic-ui-react'
-import '../App';
-export default class Header extends Component {
-  state = { activeItem: 'home' }
+import React, { Component } from 'react';
 
-  handleItemClick = (e, { name }) => this.setState({ activeItem: name })
-  handleLogin = (()=>{})
+import '../App';
+import { Link } from 'react-router-dom';
+export default class Header extends Component {
+
+
   render() {
-    const { activeItem } = this.state
+ 
 
     return (
-    
-   <div className='ui menu'>
-   
-      <img src="/logo.png" />
-      <Menu secondary>
-     
-        <MenuItem>  <h1 style={{color:'#2AB8C3'}}>Second Opinion</h1></MenuItem>
-    
-        <MenuItem 
-          name='home'
-          active={activeItem === 'home'}
-          onClick={this.handleItemClick}
-          style={{ fontSize: '20px' }} 
-        />
-        <MenuItem
-          name='About Us'
-          active={activeItem === 'about'}
-          onClick={this.handleItemClick}
-          style={{ fontSize: '20px' }} 
-        />
-        <MenuItem
-          name='Contact Us'
-          active={activeItem === 'contact'}
-          onClick={this.handleItemClick}
-          style={{ fontSize: '20px' }} 
-        />
-        <MenuMenu position='right'>
-          <MenuItem  style={{ fontSize: '20px' }} >
-            <Input icon='search' placeholder='Search...' />
-          </MenuItem>
-          <MenuItem
-            name='Login'
-            active={activeItem === 'login'}
-            onClick={()=>{this.handleItemClick();this.handleLogin()}}
-            style={{ fontSize: '20px' }} 
-          />
-        </MenuMenu>
-        
-      </Menu>
-     
+       
+        <div className="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm">
+           
+        <h2 className="my-0 mr-md-auto font-weight-normal" style={{color:'#2AB8C3'}}>Second Opinion</h2>
+        <nav className="my-2 my-md-0 mr-md-3">
+          <Link className="p-2 text-dark headerNavlink" style={{fontSize:'150%'}} to="/">Home</Link>
+          <Link className="p-2 text-dark headerNavlink"style={{fontSize:'150%'}} to="/about">About Us</Link>
+          <Link className="p-2 text-dark headerNavlink"style={{fontSize:'150%'}} to="/contact">Contact Us</Link>
+          <Link className="p-2 text-dark headerNavlink" style={{fontSize:'150%'}} to="#">FAQs</Link>
+        </nav>
+        <Link className="btn btn-outline-primary" style={{fontSize:'150%'}} to="/login">Login</Link>
       </div>
-      
     )
   }
 }

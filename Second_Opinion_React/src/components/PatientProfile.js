@@ -1,5 +1,5 @@
 import React, { useState, useContext, useEffect } from 'react';
-import Header1 from './Header1';
+import Header from './Header';
 import Footer from './Footer';
 import '../styles/profile-pic.css';
 import VerticalNavBar from './VerticalNavBar';
@@ -162,7 +162,7 @@ const PatientProfile = () => {
 
   return (
     <>
-      <Header1 />
+      <Header/>
       <div className='flex' >
         <VerticalNavBar />
         <div className='container'>

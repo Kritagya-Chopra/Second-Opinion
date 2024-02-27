@@ -11,8 +11,8 @@ const Navbar=()=>{
                 <a href="#">+91 7080920302</a>
             </div>
             <div className='right-navbar'>
-                <Link to={"/patient/dashboard"}>Dashboard</Link>
-                <Link to={"/patient/mycases"}>My Cases</Link>
+                <Link to={"/patient/dashboard"}>Dashboard</Link> &nbsp;&nbsp;&nbsp;
+                <Link to={"/patient/mycases"}>My Cases</Link>&nbsp;&nbsp;&nbsp;
                 <Link to={"/patient/profile"}>Profile</Link>
             </div>
            </nav> 
