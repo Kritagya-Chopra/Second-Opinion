@@ -96,9 +96,13 @@ public class CaseServiceImpl implements CaseService {
 
 	@Override
 	public CaseDTO getCasesById(Long id) {
-		return mapper.map(
-				caseRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Case Not Found")),
+		CaseEntity c = caseRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Case Not Found"));
+		CaseDTO cc = mapper.map(
+				c,
 				CaseDTO.class);
+		cc.setDoctorId(c.getDoctor().getId());
+		cc.setPatientId(c.getPatient().getId());
+		return cc;
 	}
 
 }

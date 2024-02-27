@@ -16,9 +16,7 @@ import lombok.Setter;
 @Getter
 @Setter
 public class CaseDTO {
-	@JsonProperty(access = Access.WRITE_ONLY)
 	private Long patientId;
-	@JsonProperty(access = Access.WRITE_ONLY)
 	private Long doctorId;
 	@JsonProperty(access = Access.WRITE_ONLY)
 	private Long diseaseId;
@@ -40,7 +38,7 @@ public class CaseDTO {
 	@JsonProperty(access = Access.READ_ONLY)
 	private LocalDateTime responseTime;
 	@JsonProperty(access = Access.WRITE_ONLY)
-	private List<Long> symptomIds;
+	private List<Long> symptomIds ;
 	@JsonProperty(access = Access.READ_ONLY)
 	private List<SymptomDTO> symptoms;
 	

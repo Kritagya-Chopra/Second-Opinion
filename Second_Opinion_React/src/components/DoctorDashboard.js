@@ -1,6 +1,7 @@
 import React from "react";
 import '../styles/DoctorDashboard.css';
 import { useNavigate } from "react-router-dom";
+import Navbar from "./Navbar";
 
 const DoctorDashboard = () => {
   const navigate = useNavigate();
@@ -10,6 +11,7 @@ const DoctorDashboard = () => {
 
   return (
     <>
+    <Navbar/>
       <div className="Container">
         <div className="logo">
           <img src="" alt="logo" />

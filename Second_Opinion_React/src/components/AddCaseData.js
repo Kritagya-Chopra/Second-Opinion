@@ -5,7 +5,7 @@ import { StepDescription } from 'semantic-ui-react';
 
 const AddCaseData = () => {
     const navigate=useNavigate();
-    const [getSymp, setGetSymp] = useState(['Fever', 'Sore throat', 'Muscle or body aches']);
+    const [getSymp, setGetSymp] = useState(['','Fever','Chills', 'Sore throat', 'Muscle or body aches']);
     const { id } = useParams();
     const [getDoctors, setGetDoctors] = useState([]);
     const [title, setTitle] = useState();
@@ -28,6 +28,7 @@ const AddCaseData = () => {
     const SubmitCase = async() => {
         const date = new Date();
         const postData = {
+
             patientId: parseInt(patientId),
             doctorId: parseInt(doctorId),
             diseaseId: parseInt(id),
@@ -55,10 +56,14 @@ const AddCaseData = () => {
                         getSymp?.map((symptom, index) => {
                             return (
                                 <div>
-
-                                    {/* need to be updated */}
-                                    <input type='checkbox' value={index} id={symptom} onChange={(e) => setSymptom([...symptoms, e.target.value])} />
+                               
+                                    {index!==0 &&
+                                    (
+                                        <div><input type='checkbox' value={index} id={symptom} onChange={(e) => setSymptom([...symptoms, e.target.value])} />
                                     <label htmlFor={symptom}>{symptom}</label>
+                                    </div>)
+                                    }
+                                    
                                 </div>
                             )
                         })
