@@ -17,6 +17,7 @@ import AddCaseData from "./components/AddCaseData";
 import MyCases from "./components/MyCases";
 import { CaseDetails } from "./components/CaseDetails";
 import DoctorCases from "./components/DoctorCases";
+import { DoctorCaseDetails } from "./components/DoctorCaseDetails";
 const App = () => {
   return (
     <>
@@ -37,6 +38,7 @@ const App = () => {
       <Route path="/patient/mycases" element={<MyCases/>}/>
       <Route path="/doctor/cases" element={<DoctorCases />}/>
       <Route path="/patient/mycases/:id" element={<CaseDetails/>}/>
+      <Route path="/doctor/mycases/:id" element={<DoctorCaseDetails/>}/>
       </Routes>
     </BrowserRouter>
  
