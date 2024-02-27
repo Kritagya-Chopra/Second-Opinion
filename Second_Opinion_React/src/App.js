@@ -21,7 +21,7 @@ const App = () => {
     <>
     <BrowserRouter>
     <Routes>
-      <Route path="/" element={<HomePage/>}/>
+    <Route path="/" element={<HomePage/>}/>
       <Route path="/about" element={<About/>}/>
       <Route path="/contact" element={<Contact/>}/>
       <Route path="/register" element={<Registration/>}/>
@@ -34,6 +34,7 @@ const App = () => {
       <Route path="/new-case" element={<AddCases/>}/>
       <Route path="/add-case-data/:id" element={<AddCaseData/>}/>
       <Route path="/patient/mycases" element={<MyCases/>}/>
+      <Route path="/doctor/cases" element={<DoctorCases/>}/>
       <Route path="/patient/mycases/:id" element={<CaseDetails/>}/>
       </Routes>
     </BrowserRouter>

@@ -37,7 +37,7 @@ const Login = () => {
               sessionStorage.setItem("id",response.data.data.id)
               console.log(response.data.data);
               if(response.data.data.role=="DOCTOR"){
-                naviagte('/doctor/dashboard');
+                naviagte('/doctor/cases');
               }
               else{
                 naviagte('/patient/dashboard');

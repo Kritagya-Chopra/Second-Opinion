@@ -50,7 +50,12 @@ public class CaseServiceImpl implements CaseService {
 	@Override
 	public List<CaseDTO> getCasesByPatientId(Long id) {
 		List<CaseEntity> entityCases = caseRepository.findAllByPatientId(id);
-		List<CaseDTO> dtoCases = entityCases.stream().map((CaseEntity e) -> mapper.map(e, CaseDTO.class))
+		List<CaseDTO> dtoCases = entityCases.stream().map((CaseEntity e) ->{
+			CaseDTO cc = mapper.map(e, CaseDTO.class);
+			cc.setPatientId(id);
+			cc.setDoctorId(e.getDoctor().getId());
+			return cc;
+		})
 				.collect(Collectors.toList());
 		return dtoCases;
 	}
@@ -59,7 +64,12 @@ public class CaseServiceImpl implements CaseService {
 	public List<CaseDTO> getCasesByDoctorId(Long id) {
 
 		List<CaseEntity> entityCases = caseRepository.findAllByDoctorId(id);
-		List<CaseDTO> dtoCases = entityCases.stream().map((CaseEntity e) -> mapper.map(e, CaseDTO.class))
+		List<CaseDTO> dtoCases = entityCases.stream().map((CaseEntity e) -> {
+			CaseDTO cc =mapper.map(e, CaseDTO.class);
+			cc.setDoctorId(id);
+			cc.setPatientId(e.getPatient().getId());
+			return cc;
+			})
 				.collect(Collectors.toList());
 		return dtoCases;
 	}
@@ -97,9 +107,7 @@ public class CaseServiceImpl implements CaseService {
 	@Override
 	public CaseDTO getCasesById(Long id) {
 		CaseEntity c = caseRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Case Not Found"));
-		CaseDTO cc = mapper.map(
-				c,
-				CaseDTO.class);
+		CaseDTO cc = mapper.map(c,CaseDTO.class);
 		cc.setDoctorId(c.getDoctor().getId());
 		cc.setPatientId(c.getPatient().getId());
 		return cc;
