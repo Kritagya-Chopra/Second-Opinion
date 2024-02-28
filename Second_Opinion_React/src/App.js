@@ -17,6 +17,8 @@ import MyCases from "./components/MyCases";
 import { CaseDetails } from "./components/CaseDetails";
 import DoctorCases from "./components/DoctorCases";
 import { DoctorCaseDetails } from "./components/DoctorCaseDetails";
+import Testimony from "./components/Testimony";
+import CaseFeedback from "./components/CaseFeedback";
 const App = () => {
   return (
     <>
