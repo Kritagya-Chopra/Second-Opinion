@@ -12,7 +12,7 @@ import lombok.Setter;
 @Setter
 public class TestimonialDTO {
 
-	@JsonProperty(access = Access.WRITE_ONLY)
+	
 	private Long patientId;
 	
 	private String testimony;

@@ -4,6 +4,7 @@ import Footer from "./Footer";
 import ThreeCards from "./ThreeCards";
 import Slider from "./Slider";
 import Step from "./Step";
+import ShowTestimony from "./ShowTestimony";
 
 const HomePage=()=>{
     return(
@@ -13,7 +14,7 @@ const HomePage=()=>{
             <Slider />
             <Step />
             <ThreeCards />
-           
+            <ShowTestimony/>
             <Footer/>
         </>
     )

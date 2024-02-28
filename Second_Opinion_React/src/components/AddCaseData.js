@@ -1,7 +1,6 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom';
-import { StepDescription } from 'semantic-ui-react';
 
 const AddCaseData = () => {
     const navigate=useNavigate();
