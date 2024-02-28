@@ -1,5 +1,4 @@
 import React from "react";
-
 import Registration from "./components/Registration";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Login from "./components/Login";
@@ -39,11 +38,10 @@ const App = () => {
       <Route path="/doctor/cases" element={<DoctorCases />}/>
       <Route path="/patient/mycases/:id" element={<CaseDetails/>}/>
       <Route path="/doctor/mycases/:id" element={<DoctorCaseDetails/>}/>
+      <Route path="/patient/case/feedback" element={<CaseFeedback/>}/>
+      <Route path="/patient/testimony" element={<Testimony/>}/>    
       </Routes>
     </BrowserRouter>
- 
-    
-      
     </>
   );
 };

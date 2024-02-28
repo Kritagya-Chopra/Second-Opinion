@@ -1,11 +1,12 @@
 import React, { useState } from 'react'
-import { useParams } from 'react-router'
+import { useNavigate, useParams } from 'react-router-dom';
 import Header from './Header';
 import Footer from './Footer';
 import { useEffect } from 'react';
 import axios from 'axios';
 
 export const CaseDetails = () => {
+    const navigate=useNavigate();
     const { id } = useParams();
     useEffect(() => {
         getCaseDetails();
@@ -19,12 +20,15 @@ export const CaseDetails = () => {
         //console.log(doctordata.data.data);
         setData(response.data);
         setDoctorData(doctordata.data.data);
-        console.log(response.data);
+        console.log(response.data.doctorId);
     }
 
     //title description openTime  closeTime  document  opinion responseTime status symptoms[] id
     //doctor name photo qualification.name qualification.university languagesSpoken licenseNo specialization.name yearsOfExperience
-
+    const feedback=()=>{
+        
+        navigate("/patient/case/feedback",{state:{data:data.doctorId}});
+    }
     return (
         <>
             <Header />
@@ -113,7 +117,7 @@ export const CaseDetails = () => {
                 </div>
 
                 <div class="text-center"> 
-                <button type='button' className='btn btn-primary ' >Close Case</button>
+                <button type='button' className='btn btn-primary ' onClick={()=>feedback()} >Close Case</button>
                 </div>
                 <br></br>
                 <br></br>
