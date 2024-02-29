@@ -4,12 +4,12 @@ import { GrPrevious, GrNext } from "react-icons/gr";
 
 const data = [
   {
-    heading3: "DIAGNOSE.ME",
+    heading3: "SECOND OPINION",
     heading2: "Access to international medical expertise",
     para: "Consult your medical condition with world-class specialists without any language barriers.",
-    para2: "Erik Ranschaert, MD, PhD",
-    para3: "Chief Medical Officer of Diagnose.me",
-    image: "erik_mobile.png",
+    para2: "DR STRANGE, MD, PhD",
+    para3: "Chief Medical Officer",
+    image: "drStrange.png",
   },
   {
     heading3: "OUR MISSION",
