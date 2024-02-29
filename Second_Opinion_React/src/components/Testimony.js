@@ -14,7 +14,7 @@ const Testimony = () => {
         else {
             try {
                 const response = await axios.get('http://localhost:8080/user/' + id);
-                setUser(response.data.data);
+                setUser(response?.data?.data);
             } catch (error) {
                 console.error('Error fetching user data:', error);
             }
@@ -28,7 +28,7 @@ const Testimony = () => {
     useEffect(() => {
         if (user) {
             console.log('User:', user);
-            if (user.role !== 'PATIENT') {
+            if (user?.role !== 'PATIENT') {
                 navigate('/login');
             }
         }

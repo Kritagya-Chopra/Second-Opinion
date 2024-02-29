@@ -46,11 +46,11 @@ const DoctorProfile = () => {
                 }));
             });
             axios.get("http://localhost:8080/user/" + id).then(response => {
-                setEmail(response.data.data.userName);
+                setEmail(response?.data?.data?.userName);
             });
         }
         else {
-            setEmail(doctorData.state.data.userName);
+            setEmail(doctorData?.state?.data?.userName);
         }
     }, [])
 
@@ -118,8 +118,8 @@ const DoctorProfile = () => {
         const apiUrl = `https://api.postalpincode.in/pincode/${pincode}`;
 
         const response = await fetch(apiUrl);
-        const data = await response.json();
-        if (data && data.length > 0 && data[0].PostOffice && data[0].PostOffice.length > 0) {
+        const data = await response?.json();
+        if (data && data?.length > 0 && data[0].PostOffice && data[0].PostOffice.length > 0) {
             const location = data[0].PostOffice[0];
             return {
                 city: location.Division,
@@ -149,9 +149,9 @@ const DoctorProfile = () => {
         };
         console.log(postData);
         if (id == null) {
-            axios.post('http://localhost:8080/doctor/profile?id=' + doctorData.state.data.id, postData)
+            axios.post('http://localhost:8080/doctor/profile?id=' + doctorData?.state?.data?.id, postData)
                 .then(response => {
-                    sessionStorage.setItem("id", doctorData.state.data.id)
+                    sessionStorage.setItem("id", doctorData?.state?.data?.id)
                     naviagte("/doctor/dashboard", { state: { data: doctorData } });
                 });
         }

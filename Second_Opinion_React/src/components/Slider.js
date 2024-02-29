@@ -34,13 +34,13 @@ const Slider = () => {
 
   const handlePrevious = () => {
     setSliderIndex((prevIndex) =>
-      prevIndex === 0 ? data.length - 1 : prevIndex - 1
+      prevIndex === 0 ? data?.length - 1 : prevIndex - 1
     );
   };
 
   const handleNext = () => {
     setSliderIndex((prevIndex) =>
-      prevIndex === data.length - 1 ? 0 : prevIndex + 1
+      prevIndex === data?.length - 1 ? 0 : prevIndex + 1
     );
   };
 

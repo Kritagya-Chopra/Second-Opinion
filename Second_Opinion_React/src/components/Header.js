@@ -8,6 +8,7 @@ export default class Header extends Component {
   render() {
     
     const id=sessionStorage.getItem('id');
+    
     return (
        
         <div className="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm" style={{marginBottom:"0"}}>
@@ -20,7 +21,7 @@ export default class Header extends Component {
           <Link className="p-2 text-dark headerNavlink" style={{fontSize:'150%'}} to="#">FAQs</Link>
         </nav>
         {id ? (
-          <Link className="btn btn-outline-primary" style={{fontSize:'150%'}} to="/logout">Logout</Link>
+          <Link className="btn btn-outline-primary" style={{fontSize:'150%'}} to="/" onClick={()=>{sessionStorage.clear();}}>Logout</Link>
         ) : (
           <Link className="btn btn-outline-primary" style={{fontSize:'150%'}} to="/login">Login</Link>
         )}

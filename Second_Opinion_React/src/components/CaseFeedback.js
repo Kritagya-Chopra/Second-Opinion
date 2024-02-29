@@ -13,7 +13,7 @@ const CaseFeedback = () => {
     const id = sessionStorage.getItem("id");
     const did = useLocation();
     const navigate = useNavigate();
-    console.log(did.state.data);
+    console.log(did?.state.data);
     // Function to handle rating change
     
     const handleRatingChange = (value) => {
@@ -22,7 +22,7 @@ const CaseFeedback = () => {
     const submitData = () => {
         const postData = {
             patientId: parseInt(id),
-            doctorID: did.state.data,
+            doctorID: did?.state.data,
             review: description,
             rating: rating,
             responseTime: "2024-02-27T15:00:23.525Z"

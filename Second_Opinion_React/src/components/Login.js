@@ -24,9 +24,9 @@ const Login = () => {
     console.log(loginData);
     axios.post('http://localhost:8080/user/login', loginData,{headers: {'Content-Type': 'application/json',}}  )
         .then(response => {
-          console.log(typeof(response.data.status));
-          console.log(response.data);
-            if(response.data.status==false){
+          console.log(typeof(response?.data?.status));
+          console.log(response?.data);
+            if(response?.data?.status==false){
              
               toast.error("Invalid User Details", {
                 className: "toast-message"
@@ -34,10 +34,10 @@ const Login = () => {
              
             }
             else{
-              sessionStorage.setItem("id",response.data.data.id)
-              sessionStorage.setItem("valid",response.data.data.valid)
-              console.log(response.data.data);
-              if(response.data.data.role=="DOCTOR"){
+              sessionStorage.setItem("id",response?.data?.data?.id)
+              sessionStorage.setItem("valid",response?.data?.data?.valid)
+              console.log(response?.data?.data);
+              if(response?.data?.data?.role=="DOCTOR"){
                 naviagte('/doctor/cases');
               }
               else{
@@ -64,14 +64,14 @@ const Login = () => {
         <input
           type="email"
           name="userName"
-          value={loginData.userName}
+          value={loginData?.userName}
           onChange={handleData}
         />
         <label>Password</label>
         <input
           type="password"
           name="password"
-          value={loginData.password}
+          value={loginData?.password}
           onChange={handleData}
         />
         <button onClick={Handlelogin} className="btn-login">LOGIN</button>

@@ -16,18 +16,18 @@ export const CaseDetails = () => {
     const [doctorData, setDoctorData] = useState();
     const getCaseDetails = async () => {
         const response = await axios.get("http://localhost:8080/case/" + id);
-        const doctordata = await axios.get("http://localhost:8080/doctor/" + response.data.doctorId);
-        //console.log(doctordata.data.data);
+        const doctordata = await axios.get("http://localhost:8080/doctor/" + response.data?.doctorId);
+        //console.log(doctordata.data?.data);
         setData(response.data);
-        setDoctorData(doctordata.data.data);
-        console.log(response.data.doctorId);
+        setDoctorData(doctordata.data?.data);
+        console.log(response.data?.doctorId);
     }
 
     //title description openTime  closeTime  document  opinion responseTime status symptoms[] id
     //doctor name photo qualification.name qualification.university languagesSpoken licenseNo specialization.name yearsOfExperience
     const feedback=()=>{
         
-        navigate("/patient/case/feedback",{state:{data:data.doctorId}});
+        navigate("/patient/case/feedback",{state:{data:data?.doctorId}});
     }
     return (
         <>
@@ -51,7 +51,7 @@ export const CaseDetails = () => {
 
 
                 <div className="row">
-                    <div class="col">
+                    <div className="col">
                         <p>Case Open Time: {
                             data?.openTime
                         }</p>
@@ -76,14 +76,14 @@ export const CaseDetails = () => {
                     
                     </div>
                     <div>
-                    <img src={doctorData?.photo} class="rounded-circle  float-right" style={{width: "150px"}}
+                    <img src={doctorData?.photo} className="rounded-circle  float-right" style={{width: "150px"}}
                         alt={doctorData?.name} />
                     <div className="row">
                     <div className='col'>
                     
                         <p>Doctor's Name: {doctorData?.name}</p>
                     </div>
-                    <div class="col">
+                    <div className="col">
                         <p>Specialization: {
                             doctorData?.specialization.name
                         }</p>
@@ -95,7 +95,7 @@ export const CaseDetails = () => {
                 </div>
 
 
-                <div class="row">
+                <div className="row">
                     <p>Education Details:</p>
                 </div>
                 <div className="row">
@@ -112,11 +112,11 @@ export const CaseDetails = () => {
                 
                         </div>
                     {/* <h5 className="mb-2"><strong>{doctorData?.name}</strong></h5> */}
-                    {/* <p class="text-muted">Web designer <span class="badge bg-primary">PRO</span></p> */}
+                    {/* <p className="text-muted">Web designer <span className="badge bg-primary">PRO</span></p> */}
 {/* <img className='img-thumbnail rounded float-right' style={{ width: "30%", height: "30%" }} ></img> */}
                 </div>
 
-                <div class="text-center"> 
+                <div className="text-center"> 
                 <button type='button' className='btn btn-primary ' onClick={()=>feedback()} >Close Case</button>
                 </div>
                 <br></br>

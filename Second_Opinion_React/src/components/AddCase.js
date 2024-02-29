@@ -11,7 +11,7 @@ const AddCase = () => {
     useEffect(() => {
         axios.get("http://localhost:8080/disease")
             .then(resp => {
-                setData(resp.data);
+                setData(resp?.data);
                 console.log(resp.data);
             })
             .catch(error => {
@@ -43,8 +43,8 @@ const AddCase = () => {
                 handleOptionChange(e)
             }}>
                 <option value="">Select an option</option>
-                {data.map((item) => (
-                    <option key={item.id} value={item.id}>{item.name}</option>
+                {data?.map((item) => (
+                    <option key={item?.id} value={item?.id}>{item?.name}</option>
                 ))}
             </select>
             <button className="addCase-search" onClick={handleSearch}>Search</button>

@@ -60,7 +60,7 @@ const PatientProfile = () => {
     const { name, value } = e.target;
     setProfileData((prevData) => ({
       ...prevData,
-      address: { ...prevData.address, [name]: value }
+      address: { ...prevData?.address, [name]: value }
     }));
 
     if (name === 'zipcode') {
@@ -161,7 +161,7 @@ const PatientProfile = () => {
 
           <form onSubmit={handleSubmit}>
 
-            <div class="row gx-3 mb-3">
+            <div className="row gx-3 mb-3">
               <div className="col-md-6">
                 <div className='d-flex flex-column '>
                   <h2 className='text-muted'>My Profile</h2>
@@ -187,7 +187,7 @@ const PatientProfile = () => {
                 <img src={profileData?.photo} id="output" width="200" alt="Profile" />
               </div>
             </div>
-            <div class="row gx-3 mb-3">
+            <div className="row gx-3 mb-3">
               <div className="col-md-6">
                 <label htmlFor="email" className="form-label">Email</label>
                 <input
@@ -201,7 +201,7 @@ const PatientProfile = () => {
                 />
               </div>
             </div>
-            <div class="row gx-3 mb-3">
+            <div className="row gx-3 mb-3">
               <div className="col-md-4">
                 <label htmlFor="contact" className="form-label">Mobile</label>
                 <input
@@ -240,7 +240,7 @@ const PatientProfile = () => {
               </div>
             </div>
 
-            <div class="row gx-3 mb-3">
+            <div className="row gx-3 mb-3">
 
               <div className="col-md-4">
                 <label htmlFor="bloodGroup" className="form-label">Blood Group</label>

@@ -4,7 +4,7 @@ import '../styles/Navbar.css';
 const Navbar=()=>{
     return (
         <>
-          <nav class="navbar navbar-light" style={{backgroundColor: "#e3f2fd",margin:"0"}}>
+          <nav className="navbar navbar-light" style={{backgroundColor: "#e3f2fd",margin:"0"}}>
            
           <div className='left-navbar'>
                 <Link className="p-2 text-dark headerNavlink" style={{fontSize:'100%'}} to="mailto:secondopinion@gmail.com">Contact Us</Link>&nbsp;&nbsp;&nbsp;

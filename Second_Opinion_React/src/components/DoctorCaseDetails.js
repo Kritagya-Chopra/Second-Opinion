@@ -10,17 +10,17 @@ export const DoctorCaseDetails = () => {
     useEffect(() => {
         getCaseDetails();
     }, []);
-    const msg = "Please wait for Doctor's Response."
+    const msg = "Please wait for Doctor's response?."
     const [data, setData] = useState(null); // Set initial state to null
     const [patientData, setPatientData] = useState(null); // Set initial state to null
     const [symp, setSymp] = useState([]);
     const getCaseDetails = async () => {
         try {
             const response = await axios.get("http://localhost:8080/case/" + id);
-            const pData = await axios.get("http://localhost:8080/patient/" + response.data.patientId);
-            setData(response.data);
-            setPatientData(pData.data.data);
-            setSymp(response.data.symptoms);
+            const pData = await axios.get("http://localhost:8080/patient/" + response?.data?.patientId);
+            setData(response?.data);
+            setPatientData(pData?.data?.data);
+            setSymp(response?.data?.symptoms);
         } catch (error) {
             console.error("Error fetching data:", error);
         }
@@ -47,8 +47,8 @@ export const DoctorCaseDetails = () => {
                     <p>Symptoms:</p>
                     {symp?.map((item) => {
                         return (
-                            <div className='row' key={item.id}>
-                                <li>{item.name}</li>
+                            <div className='row' key={item?.id}>
+                                <li>{item?.name}</li>
                             </div>
                         );
 
@@ -56,7 +56,7 @@ export const DoctorCaseDetails = () => {
 
 
                     <div className="row">
-                        <div class="col">
+                        <div className="col">
                             <p>Case Open Time: {
                                 data?.openTime
                             }</p>
@@ -92,7 +92,7 @@ export const DoctorCaseDetails = () => {
 
                                 <p>Patient's Name: {patientData?.name}</p>
                             </div>
-                            <div class="col">
+                            <div className="col">
                                 <p>Blood Group: {
                                     patientData?.bloodGroup
                                 }</p>
@@ -110,11 +110,11 @@ export const DoctorCaseDetails = () => {
                         </>)
                     }
                     {/* <h5 className="mb-2"><strong>{patientData?.name}</strong></h5> */}
-                    {/* <p class="text-muted">Web designer <span class="badge bg-primary">PRO</span></p> */}
+                    {/* <p className="text-muted">Web designer <span className="badge bg-primary">PRO</span></p> */}
                     {/* <img className='img-thumbnail rounded float-right' style={{ width: "30%", height: "30%" }} ></img> */}
                 </div>
 
-                <div class="text-center">
+                <div className="text-center">
                     <button type='button' className='btn btn-primary ' >Submit Opinion</button>
                 </div>
                 <br></br>

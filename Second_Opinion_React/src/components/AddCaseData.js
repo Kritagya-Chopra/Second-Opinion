@@ -18,7 +18,7 @@ const AddCaseData = () => {
     const getDoctorsHandler = async () => {
         try {
             const response = await axios.get("http://localhost:8080/doctor/specialization/" + id)
-            console.log(response.data?.data);
+            console.log(response?.data?.data);
             setGetDoctors(response?.data?.data);
         } catch (error) {
             console.log(error);
