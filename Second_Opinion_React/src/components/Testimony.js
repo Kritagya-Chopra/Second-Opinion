@@ -1,5 +1,5 @@
 import axios from 'axios';
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 
 const Testimony = () => {
@@ -7,6 +7,13 @@ const Testimony = () => {
     const [description, setDescription] = useState();
     const id = sessionStorage.getItem("id");
     const navigate=useNavigate();
+    useEffect(() => {
+        const isAuthenticated = sessionStorage.getItem('valid');
+        if (!isAuthenticated) {
+            
+            navigate('/login'); 
+        }
+    }, [navigate]);
     const handleRatingChange = (value) => {
         setRating(value);
     };

@@ -15,6 +15,7 @@ const CaseFeedback = () => {
     const navigate = useNavigate();
     console.log(did.state.data);
     // Function to handle rating change
+    
     const handleRatingChange = (value) => {
         setRating(value);
     };
