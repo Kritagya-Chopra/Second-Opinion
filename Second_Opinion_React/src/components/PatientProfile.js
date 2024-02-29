@@ -10,7 +10,7 @@ const PatientProfile = () => {
   const naviagte = useNavigate();
   const patientData = useLocation();
   const id = sessionStorage.getItem("id");
-  const [email , setEmail] = useState('');
+  const [email, setEmail] = useState('');
   const [profileData, setProfileData] = useState({
     name: '',
     email: email,
@@ -35,18 +35,16 @@ const PatientProfile = () => {
   useEffect(() => {
     if (id != null) {
       axios.get("http://localhost:8080/patient/" + id).then(response => {
-        console.log(response.data.data);
         setProfileData(response.data.data);
       });
       axios.get("http://localhost:8080/user/" + id).then(response => {
-      console.log(response.data);
-      setEmail(response.data.data.userName);
-    });
+        setEmail(response.data.data.userName);
+      });
     }
-    else{
+    else {
       setEmail(patientData.state.data.userName);
     }
-    
+
   }, [])
 
   // Function to handle changes in profile data
@@ -56,25 +54,26 @@ const PatientProfile = () => {
       ...prevData,
       [name]: value,
     }));
-    
+
   };
-  const handleAdressChange = (e) =>
-  {
+  const handleAdressChange = (e) => {
     const { name, value } = e.target;
     setProfileData((prevData) => ({
       ...prevData,
-      address: {...prevData.address , [name]: value}
+      address: { ...prevData.address, [name]: value }
     }));
-    
+
     if (name === 'zipcode') {
       fetchLocationDetails(value)
         .then(location => {
           setProfileData(prevData => ({
             ...prevData,
-            address: {...prevData.address , city: location.city,
+            address: {
+              ...prevData.address, city: location.city,
               state: location.state,
-              country: location.country}
-            
+              country: location.country
+            }
+
           }));
         })
         .catch(error => {
@@ -92,7 +91,6 @@ const PatientProfile = () => {
       .then(data => {
         if (data && data.length > 0 && data[0].PostOffice && data[0].PostOffice.length > 0) {
           const location = data[0].PostOffice[0];
-          console.log('Location details:', location);
           return {
             city: location.Division,
             state: location.State,
@@ -121,26 +119,20 @@ const PatientProfile = () => {
       photo: profileData.photo,
       address: profileData.address
     };
-    if(id==null){
-      console.log(postData+ " post data")
-    axios.post('http://localhost:8080/patient/profile?id=' + patientData.state.data.id, postData)
-      .then(response => {
-        console.log(response.data.data);
-        sessionStorage.setItem("id", patientData.state.data.id)
-        naviagte("/patient/dashboard", { state: { data: patientData } });
+    if (id == null) {
+      axios.post('http://localhost:8080/patient/profile?id=' + patientData.state.data.id, postData)
+        .then(response => {
+          sessionStorage.setItem("id", patientData.state.data.id)
+          naviagte("/patient/dashboard", { state: { data: patientData } });
 
-        console.log('Profile data successfully updated:', response.data);
-      });
+        });
     }
-    else
-    {
+    else {
       axios.put('http://localhost:8080/patient/' + id, postData)
-      .then(response => {
-        console.log(response.data.data);
-        naviagte("/patient/dashboard", { state: { data: patientData } });
+        .then(response => {
+          naviagte("/patient/dashboard", { state: { data: patientData } });
 
-        console.log('Profile data successfully updated:', response.data);
-      });
+        });
     }
 
   };
@@ -162,7 +154,7 @@ const PatientProfile = () => {
 
   return (
     <>
-      <Header/>
+      <Header />
       <div className='flex' >
         <VerticalNavBar />
         <div className='container'>
@@ -324,7 +316,7 @@ const PatientProfile = () => {
                   id="country"
                   name="country"
                   value={profileData.address.country}
-                  onChange={handleProfileDataChange}
+                  onChange={handleAdressChange}
                 >
                   <option value="Afghanistan">Afghanistan</option>
                   <option value="Albania">Albania</option>
