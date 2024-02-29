@@ -7,20 +7,17 @@ import axios from 'axios';
 import { useLocation, useNavigate } from 'react-router-dom';
 
 const DoctorProfile = () => {
-
-    
-
     const naviagte = useNavigate();
     const id = sessionStorage.getItem("id");
     const doctorData = useLocation();
-    const [email , setEmail] = useState('');
+    const [email, setEmail] = useState('');
     // State variables to store profile data
     const [profileData, setProfileData] = useState({
         name: '',
         email: email,
         licenseExpiry: '2024-01-01',
         licenseNo: '',
-        yearOfExperience: '',
+        yearsOfExperience: '',
         photo: '/profile-icon.png',
         address: {
             street: '',
@@ -30,42 +27,32 @@ const DoctorProfile = () => {
             zipcode: '',
             region: ''
         },
-
         qualification: {
             name: '',
             university: '',
             document: null
         },
-
         languagesSpoken: [],
-
         specialization: '1'
-
     });
-
 
     useEffect(() => {
         if (id != null) {
-          getDoctorDetails();
-          axios.get("http://localhost:8080/user/" + id).then(response => {
-          console.log(response.data);
-          setEmail(response.data.data.userName);
-        });
+            axios.get("http://localhost:8080/doctor/" + id).then(response => {
+                setProfileData(response.data.data);
+                setProfileData((prevData) => ({
+                    ...prevData,
+                    "specialization": response.data.data.specialization?.id,
+                }));
+            });
+            axios.get("http://localhost:8080/user/" + id).then(response => {
+                setEmail(response.data.data.userName);
+            });
         }
-        else{
-          setEmail(doctorData.state.data.userName);
+        else {
+            setEmail(doctorData.state.data.userName);
         }
-        
-      }, [])
-      const getDoctorDetails=async()=>{
-       try {
-        const response=await axios.get("http://localhost:8080/doctor/" + id);
-        console.log(response);
-        setProfileData(response.data.data);
-       } catch (error) {
-        console.log(error);
-       }
-      }
+    }, [])
 
     const handleCheckboxChange = (event) => {
         const { id, checked } = event.target;
@@ -134,7 +121,6 @@ const DoctorProfile = () => {
         const data = await response.json();
         if (data && data.length > 0 && data[0].PostOffice && data[0].PostOffice.length > 0) {
             const location = data[0].PostOffice[0];
-            console.log('Location details:', location);
             return {
                 city: location.Division,
                 state: location.State,
@@ -153,7 +139,7 @@ const DoctorProfile = () => {
             email: profileData.email,
             licenseExpiry: profileData.licenseExpiry,
             licenseNo: profileData.licenseNo,
-            yearsOfExperience: profileData.yearOfExperience,
+            yearsOfExperience: profileData.yearsOfExperience,
             languages: profileData.languagesSpoken.map(language => language.id),
             specializationId: profileData.specialization,
             photo: profileData.photo,
@@ -161,27 +147,20 @@ const DoctorProfile = () => {
             qualification: profileData.qualification,
 
         };
-        if(id==null){
-            console.log(postData+ " post data")
-          axios.post('http://localhost:8080/doctor/profile?id=' + doctorData.state.data.id, postData)
-            .then(response => {
-              console.log(response.data.data);
-              sessionStorage.setItem("id", doctorData.state.data.id)
-              naviagte("/doctor/dashboard", { state: { data: doctorData } });
-      
-              console.log('Profile data successfully updated:', response.data);
-            });
-          }
-          else
-          {
+        console.log(postData);
+        if (id == null) {
+            axios.post('http://localhost:8080/doctor/profile?id=' + doctorData.state.data.id, postData)
+                .then(response => {
+                    sessionStorage.setItem("id", doctorData.state.data.id)
+                    naviagte("/doctor/dashboard", { state: { data: doctorData } });
+                });
+        }
+        else {
             axios.put('http://localhost:8080/doctor/' + id, postData)
-            .then(response => {
-              console.log(response.data.data);
-              naviagte("/doctor/dashboard", { state: { data: doctorData } });
-      
-              console.log('Profile data successfully updated:', response.data);
-            });
-          }
+                .then(response => {
+                    naviagte("/doctor/dashboard", { state: { data: doctorData } });
+                });
+        }
 
 
     };
@@ -190,15 +169,14 @@ const DoctorProfile = () => {
         const file = e.target.files[0];
         const reader = new FileReader();
         reader.onloadend = () => {
-          setProfileData((prevData) => ({
-            ...prevData,
-            photo: reader.result,
-          }));
+            setProfileData((prevData) => ({
+                ...prevData,
+                photo: reader.result,
+            }));
         };
         reader.readAsDataURL(file);
-      };
+    };
 
-    console.log(profileData);
     return (
         <>
             <Header />
@@ -245,7 +223,7 @@ const DoctorProfile = () => {
                                     className="form-control"
                                     id="email"
                                     name="email"
-                                    value={doctorData.state.data.userName}
+                                    value={email}
                                     onChange={handleProfileDataChange}
                                     readOnly // Prevents editing email
                                 />
@@ -276,22 +254,17 @@ const DoctorProfile = () => {
                                 />
                             </div>
                             <div className="col-md-4">
-                                <label htmlFor="yearOfExperience" className="form-label">Years of Experience</label>
+                                <label htmlFor="yearsOfExperience" className="form-label">Years of Experience</label>
                                 <input
                                     type="number"
                                     className="form-control"
-                                    id="yearOfExperience"
-                                    name="yearOfExperience"
-                                    value={profileData.yearOfExperience}
+                                    id="yearsOfExperience"
+                                    name="yearsOfExperience"
+                                    value={profileData.yearsOfExperience}
                                     onChange={handleProfileDataChange}
                                 />
 
                             </div>
-
-
-
-
-
                             <div className="col-md-4" style={{ paddingTop: '2%' }}>
                                 <label htmlFor="specialization" className="form-label">Specialization</label>
                                 <select
