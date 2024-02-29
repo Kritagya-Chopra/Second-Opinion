@@ -11,17 +11,19 @@ export const DoctorCaseDetails = () => {
         getCaseDetails();
     }, []);
     const msg = "Please wait for Doctor's Response."
-    const [data, setData] = useState();
-    const [patientData, setPatientData] = useState();
-    const [symp,setSymp]=useState([]);
+    const [data, setData] = useState(null); // Set initial state to null
+    const [patientData, setPatientData] = useState(null); // Set initial state to null
+    const [symp, setSymp] = useState([]);
     const getCaseDetails = async () => {
-        const response = await axios.get("http://localhost:8080/case/" + id);
-        const pData = await axios.get("http://localhost:8080/patient/" + response.data.patientId);
-        //console.log(patientData.data.data);
-        setData(response.data);
-        setPatientData(pData.data.data);
-        //console.log("hel",pData.data.data.name);
-        setSymp(response.data.symptoms);
+        try {
+            const response = await axios.get("http://localhost:8080/case/" + id);
+            const pData = await axios.get("http://localhost:8080/patient/" + response.data.patientId);
+            setData(response.data);
+            setPatientData(pData.data.data);
+            setSymp(response.data.symptoms);
+        } catch (error) {
+            console.error("Error fetching data:", error);
+        }
     }
 
     //title description openTime  closeTime  document  opinion responseTime status symptoms[] id
@@ -32,80 +34,88 @@ export const DoctorCaseDetails = () => {
             <Header />
             <div className='container'>
                 <h2 className='heading1' style={{ color: "#2ab8c3" }}>Case Details</h2>
-                <div className='row'>
-                    <h4>Title: {data?.title}</h4>
-{console.log(patientData)}
-                </div>
-                <div className='row'>
-                    <p>Description: {data?.description}</p>
+                {data && (<>
+                    <div className='row'>
+                        <h4>Title: {data?.title}</h4>
+                        {console.log(patientData)}
+                    </div>
+                    <div className='row'>
+                        <p>Description: {data?.description}</p>
 
-                </div>
+                    </div>
 
-                 <p>Symptoms:</p>
-                    {symp?.map((item)=>{
-                        return(
+                    <p>Symptoms:</p>
+                    {symp?.map((item) => {
+                        return (
                             <div className='row' key={item.id}>
                                 <li>{item.name}</li>
-                        </div>
+                            </div>
                         );
-                       
+
                     })}
-                    
 
-                <div className="row">
-                    <div class="col">
-                        <p>Case Open Time: {
-                            data?.openTime
-                        }</p>
-                    </div>
-                    <div className="col">
-                        <p>Case Close Time:
-                            {data?.closeTime !== null && (data?.closeTime)}
-                            {data?.closeTime === null && (" Not closed yet")}
-                        </p>
-                    </div>
 
-                </div>
-                <div className='row'>
-                    <div className="col">
-                        <p>Status: {data?.status}</p>
-                    </div>
-                </div>
-                <div className='row'>
-                    <div>
-                    <h4>Patient's Details: </h4>
-                    
-                    
-                    </div>
-                    <div>
-                   
                     <div className="row">
-                    <div className='col'>
-                    
-                        <p>Doctor's Name: {patientData?.name}</p>
-                    </div>
-                    <div class="col">
-                        <p>Specialization: {
-                            patientData?.specialization.name
-                        }</p>
-                    </div>
-
-                    <div className="col">
-                        <p>Experience:  years</p>
-                    </div>
-                </div>
-
-
-                
-               
+                        <div class="col">
+                            <p>Case Open Time: {
+                                data?.openTime
+                            }</p>
                         </div>
+                        <div className="col">
+                            <p>Case Close Time:
+                                {data?.closeTime !== null && (data?.closeTime)}
+                                {data?.closeTime === null && (" Not closed yet")}
+                            </p>
+                        </div>
+
+                    </div>
+                    <div className='row'>
+                        <div className="col">
+                            <p>Status: {data?.status}</p>
+                        </div>
+                    </div>
+                </>)}
+                <div className='row'>
+                    {
+                        patientData &&
+                        (<>
+                            <div>
+                        <h4>Patient's Details: </h4>
+
+
+                    </div>
+                    <div>
+
+                        <div className="row">
+                        
+                            <div className='col'>
+
+                                <p>Doctor's Name: {patientData?.name}</p>
+                            </div>
+                            <div class="col">
+                                <p>Blood Group: {
+                                    patientData?.bloodGroup
+                                }</p>
+                            </div>
+
+                            <div className="col">
+                                <p>Weight:{patientData?.weight}</p>
+                            </div>
+                        </div>
+
+
+
+
+                    </div>
+                        </>)
+                    }
                     {/* <h5 className="mb-2"><strong>{patientData?.name}</strong></h5> */}
                     {/* <p class="text-muted">Web designer <span class="badge bg-primary">PRO</span></p> */}
-{/* <img className='img-thumbnail rounded float-right' style={{ width: "30%", height: "30%" }} ></img> */}
+                    {/* <img className='img-thumbnail rounded float-right' style={{ width: "30%", height: "30%" }} ></img> */}
                 </div>
 
-                <div class="text-center"> 
-                <button type='button' className='btn btn-primary ' >Submit Opinion</button>
+                <div class="text-center">
+                    <button type='button' className='btn btn-primary ' >Submit Opinion</button>
                 </div>
                 <br></br>
                 <br></br>
