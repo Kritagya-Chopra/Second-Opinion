@@ -18,8 +18,7 @@ import DoctorCases from "./components/DoctorCases";
 import { DoctorCaseDetails } from "./components/DoctorCaseDetails";
 import Testimony from "./components/Testimony";
 import CaseFeedback from "./components/CaseFeedback";
-import Signout from "./components/Signout";
-
+import InValidRoutes from "./components/InValidRoutes";
 const App = () => {
   return (
     <>
@@ -31,8 +30,13 @@ const App = () => {
       <Route path="/register" element={<Registration/>}/>
       <Route path="/login" element={<Login/>}/>
       <Route path="/terms" element={<Terms/>}/>
-      <Route path="/patient/profile" element={<PatientProfile/>}/>
-      <Route path="/doctor/profile" element={<DoctorProfile/>}/>
+
+
+
+
+
+      <Route path="/patient/profile" element={<InValidRoutes Component={PatientProfile}/>}/>
+      <Route path="/doctor/profile" element={<InValidRoutes Component={DoctorProfile}/>}/>
       <Route path="/patient/dashboard" element={<PatientDashboard/>}/>
       <Route path="/doctor/dashboard" element={<DoctorDashboard />}/>
       <Route path="/new-case" element={<AddCases/>}/>
@@ -42,8 +46,7 @@ const App = () => {
       <Route path="/patient/mycases/:id" element={<CaseDetails/>}/>
       <Route path="/doctor/mycases/:id" element={<DoctorCaseDetails/>}/>
       <Route path="/patient/case/feedback" element={<CaseFeedback/>}/>
-      <Route path="/patient/testimony" element={<Testimony/>}/> 
-      <Route path="/logout" element={<Signout/>}/> 
+      <Route path="/patient/testimony" element={<Testimony/>}/>    
       </Routes>
     </BrowserRouter>
     </>

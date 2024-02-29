@@ -35,14 +35,14 @@ const PatientProfile = () => {
   useEffect(() => {
     if (id != null) {
       axios.get("http://localhost:8080/patient/" + id).then(response => {
-        setProfileData(response.data.data);
+        setProfileData(response?.data?.data);
       });
       axios.get("http://localhost:8080/user/" + id).then(response => {
-        setEmail(response.data.data.userName);
+        setEmail(response?.data?.data?.userName);
       });
     }
     else {
-      setEmail(patientData.state.data.userName);
+      setEmail(patientData?.state?.data?.userName);
     }
 
   }, [])
@@ -69,9 +69,9 @@ const PatientProfile = () => {
           setProfileData(prevData => ({
             ...prevData,
             address: {
-              ...prevData.address, city: location.city,
-              state: location.state,
-              country: location.country
+              ...prevData?.address, city: location?.city,
+              state: location?.state,
+              country: location?.country
             }
 
           }));
@@ -87,14 +87,14 @@ const PatientProfile = () => {
     const apiUrl = `https://api.postalpincode.in/pincode/${pincode}`;
 
     return fetch(apiUrl)
-      .then(response => response.json())
+      .then(response => response?.json())
       .then(data => {
-        if (data && data.length > 0 && data[0].PostOffice && data[0].PostOffice.length > 0) {
-          const location = data[0].PostOffice[0];
+        if (data && data?.length > 0 && data[0]?.PostOffice && data[0]?.PostOffice.length > 0) {
+          const location = data[0]?.PostOffice[0];
           return {
-            city: location.Division,
-            state: location.State,
-            country: location.Country
+            city: location?.Division,
+            state: location?.State,
+            country: location?.Country
           };
         } else {
           throw new Error('Location not found');
@@ -107,22 +107,22 @@ const PatientProfile = () => {
     e.preventDefault();
     const postData = {
       id: 1,
-      name: profileData.name,
-      email: profileData.email,
-      password: profileData.password,
-      gender: profileData.gender,
-      contact: profileData.contact,
-      dateOfBirth: profileData.dateOfBirth,
-      bloodGroup: profileData.bloodGroup,
-      height: profileData.height,
-      weight: profileData.weight,
-      photo: profileData.photo,
-      address: profileData.address
+      name: profileData?.name,
+      email: profileData?.email,
+      password: profileData?.password,
+      gender: profileData?.gender,
+      contact: profileData?.contact,
+      dateOfBirth: profileData?.dateOfBirth,
+      bloodGroup: profileData?.bloodGroup,
+      height: profileData?.height,
+      weight: profileData?.weight,
+      photo: profileData?.photo,
+      address: profileData?.address
     };
     if (id == null) {
-      axios.post('http://localhost:8080/patient/profile?id=' + patientData.state.data.id, postData)
+      axios.post('http://localhost:8080/patient/profile?id=' + patientData?.state?.data?.id, postData)
         .then(response => {
-          sessionStorage.setItem("id", patientData.state.data.id)
+          sessionStorage.setItem("id", patientData?.state?.data?.id)
           naviagte("/patient/dashboard", { state: { data: patientData } });
 
         });
@@ -144,7 +144,7 @@ const PatientProfile = () => {
     reader.onloadend = () => {
       setProfileData((prevData) => ({
         ...prevData,
-        photo: reader.result,
+        photo: reader?.result,
       }));
     };
     reader.readAsDataURL(file);
@@ -173,7 +173,7 @@ const PatientProfile = () => {
                     className="form-control p-2 align-self-end"
                     id="name"
                     name="name"
-                    value={profileData.name}
+                    value={profileData?.name}
                     onChange={handleProfileDataChange}
                   />
                 </div>
@@ -184,7 +184,7 @@ const PatientProfile = () => {
                   <span>Change Image</span>
                 </label>
                 <input id="photo" type="file" onChange={handleFileChange} />
-                <img src={profileData.photo} id="output" width="200" alt="Profile" />
+                <img src={profileData?.photo} id="output" width="200" alt="Profile" />
               </div>
             </div>
             <div class="row gx-3 mb-3">
@@ -209,7 +209,7 @@ const PatientProfile = () => {
                   className="form-control"
                   id="contact"
                   name="contact"
-                  value={profileData.contact}
+                  value={profileData?.contact}
                   onChange={handleProfileDataChange}
                 />
               </div>
@@ -220,7 +220,7 @@ const PatientProfile = () => {
                   className="form-control"
                   id="dateOfBirth"
                   name="dateOfBirth"
-                  value={profileData.dateOfBirth}
+                  value={profileData?.dateOfBirth}
                   onChange={handleProfileDataChange}
                 />
               </div>
@@ -230,7 +230,7 @@ const PatientProfile = () => {
                   className="form-select"
                   id="gender"
                   name="gender"
-                  value={profileData.gender}
+                  value={profileData?.gender}
                   onChange={handleProfileDataChange}
                 >
                   <option value="M">Male</option>
@@ -249,7 +249,7 @@ const PatientProfile = () => {
                   className="form-control"
                   id="bloodGroup"
                   name="bloodGroup"
-                  value={profileData.bloodGroup}
+                  value={profileData?.bloodGroup}
                   onChange={handleProfileDataChange}
                 />
               </div>
@@ -260,7 +260,7 @@ const PatientProfile = () => {
                   className="form-control"
                   id="height"
                   name="height"
-                  value={profileData.height}
+                  value={profileData?.height}
                   onChange={handleProfileDataChange}
                 />
               </div>
@@ -271,7 +271,7 @@ const PatientProfile = () => {
                   className="form-control"
                   id="weight"
                   name="weight"
-                  value={profileData.weight}
+                  value={profileData?.weight}
                   onChange={handleProfileDataChange}
                 />
               </div>
@@ -283,7 +283,7 @@ const PatientProfile = () => {
                   className="form-control"
                   id="street"
                   name="street"
-                  value={profileData.address.street}
+                  value={profileData?.address?.street}
                   onChange={handleAdressChange}
                 />
               </div>
@@ -294,7 +294,7 @@ const PatientProfile = () => {
                   className="form-control"
                   id="city"
                   name="city"
-                  value={profileData.address.city}
+                  value={profileData?.address?.city}
                   onChange={handleAdressChange}
                 />
               </div>
@@ -305,7 +305,7 @@ const PatientProfile = () => {
                   className="form-control"
                   id="state"
                   name="state"
-                  value={profileData.address.state}
+                  value={profileData?.address?.state}
                   onChange={handleAdressChange}
                 />
               </div>
@@ -315,7 +315,7 @@ const PatientProfile = () => {
                   className="form-control"
                   id="country"
                   name="country"
-                  value={profileData.address.country}
+                  value={profileData?.address?.country}
                   onChange={handleAdressChange}
                 >
                   <option value="Afghanistan">Afghanistan</option>
@@ -566,7 +566,7 @@ const PatientProfile = () => {
                   className="form-control"
                   id="zipcode"
                   name="zipcode"
-                  value={profileData.address.zipcode}
+                  value={profileData?.address?.zipcode}
                   onChange={handleAdressChange}
                 />
               </div>
@@ -577,7 +577,7 @@ const PatientProfile = () => {
                   className="form-control"
                   id="region"
                   name="region"
-                  value={profileData.address.region}
+                  value={profileData?.address?.region}
                   onChange={handleAdressChange}
                 />
               </div>

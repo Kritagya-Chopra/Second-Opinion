@@ -39,10 +39,10 @@ const DoctorProfile = () => {
     useEffect(() => {
         if (id != null) {
             axios.get("http://localhost:8080/doctor/" + id).then(response => {
-                setProfileData(response.data.data);
+                setProfileData(response?.data?.data);
                 setProfileData((prevData) => ({
                     ...prevData,
-                    "specialization": response.data.data.specialization?.id,
+                    "specialization": response?.data?.data?.specialization?.id,
                 }));
             });
             axios.get("http://localhost:8080/user/" + id).then(response => {
