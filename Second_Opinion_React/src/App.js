@@ -18,6 +18,8 @@ import DoctorCases from "./components/DoctorCases";
 import { DoctorCaseDetails } from "./components/DoctorCaseDetails";
 import Testimony from "./components/Testimony";
 import CaseFeedback from "./components/CaseFeedback";
+import Signout from "./components/Signout";
+
 const App = () => {
   return (
     <>
@@ -40,7 +42,8 @@ const App = () => {
       <Route path="/patient/mycases/:id" element={<CaseDetails/>}/>
       <Route path="/doctor/mycases/:id" element={<DoctorCaseDetails/>}/>
       <Route path="/patient/case/feedback" element={<CaseFeedback/>}/>
-      <Route path="/patient/testimony" element={<Testimony/>}/>    
+      <Route path="/patient/testimony" element={<Testimony/>}/> 
+      <Route path="/logout" element={<Signout/>}/> 
       </Routes>
     </BrowserRouter>
     </>
