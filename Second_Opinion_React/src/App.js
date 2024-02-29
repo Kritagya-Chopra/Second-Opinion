@@ -37,16 +37,16 @@ const App = () => {
 
       <Route path="/patient/profile" element={<InValidRoutes Component={PatientProfile}/>}/>
       <Route path="/doctor/profile" element={<InValidRoutes Component={DoctorProfile}/>}/>
-      <Route path="/patient/dashboard" element={<PatientDashboard/>}/>
-      <Route path="/doctor/dashboard" element={<DoctorDashboard />}/>
-      <Route path="/new-case" element={<AddCases/>}/>
-      <Route path="/add-case-data/:id" element={<AddCaseData/>}/>
-      <Route path="/patient/mycases" element={<MyCases/>}/>
-      <Route path="/doctor/cases" element={<DoctorCases />}/>
-      <Route path="/patient/mycases/:id" element={<CaseDetails/>}/>
-      <Route path="/doctor/mycases/:id" element={<DoctorCaseDetails/>}/>
-      <Route path="/patient/case/feedback" element={<CaseFeedback/>}/>
-      <Route path="/patient/testimony" element={<Testimony/>}/>    
+      <Route path="/patient/dashboard" element={<InValidRoutes Component={PatientDashboard}/>}/>
+      <Route path="/doctor/dashboard" element={<InValidRoutes Component={DoctorDashboard }/>}/>
+      <Route path="/new-case" element={<InValidRoutes Component={AddCases}/>}/>
+      <Route path="/add-case-data/:id" element={<InValidRoutes Component={AddCaseData}/>}/>
+      <Route path="/patient/mycases" element={<InValidRoutes Component={MyCases}/>}/>
+      <Route path="/doctor/cases" element={<InValidRoutes Component={DoctorCases }/>}/>
+      <Route path="/patient/mycases/:id" element={<InValidRoutes Component={CaseDetails}/>}/>
+      <Route path="/doctor/mycases/:id" element={<InValidRoutes Component={DoctorCaseDetails}/>}/>
+      <Route path="/patient/case/feedback" element={<InValidRoutes Component={CaseFeedback}/>}/>
+      <Route path="/patient/testimony" element={<InValidRoutes Component={Testimony}/>}/>    
       </Routes>
     </BrowserRouter>
     </>

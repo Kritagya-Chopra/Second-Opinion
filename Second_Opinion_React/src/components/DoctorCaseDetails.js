@@ -90,7 +90,7 @@ export const DoctorCaseDetails = () => {
                         
                             <div className='col'>
 
-                                <p>Doctor's Name: {patientData?.name}</p>
+                                <p>Patient's Name: {patientData?.name}</p>
                             </div>
                             <div class="col">
                                 <p>Blood Group: {
