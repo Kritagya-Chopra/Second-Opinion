@@ -2,7 +2,6 @@ import React from "react";
 import Registration from "./components/Registration";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Login from "./components/Login";
-import Terms from "./components/Terms";
 import AddCases from "./components/AddCases";
 import PatientProfile from "./components/PatientProfile";
 import DoctorDashboard from "./components/DoctorDashboard";
@@ -19,6 +18,9 @@ import { DoctorCaseDetails } from "./components/DoctorCaseDetails";
 import Testimony from "./components/Testimony";
 import CaseFeedback from "./components/CaseFeedback";
 import InValidRoutes from "./components/InValidRoutes";
+import TermsOfUse from "./components/TermsOfUse";
+import PrivacyPolicy from "./components/PrivacyPolicy";
+import SubcribeNewsletter from "./components/SubscribeNewsletter";
 const App = () => {
   return (
     <>
@@ -29,9 +31,9 @@ const App = () => {
       <Route path="/contact" element={<Contact/>}/>
       <Route path="/register" element={<Registration/>}/>
       <Route path="/login" element={<Login/>}/>
-      <Route path="/terms" element={<Terms/>}/>
-
-
+      <Route path="/terms-conditions" element={<TermsOfUse/>}/>  
+      <Route path="/privacy-policy" element={<PrivacyPolicy/>}/> 
+      <Route path="/subscribe-newsletter" element={<SubcribeNewsletter/>}/>
 
 
 
@@ -46,7 +48,8 @@ const App = () => {
       <Route path="/patient/mycases/:id" element={<InValidRoutes Component={CaseDetails}/>}/>
       <Route path="/doctor/mycases/:id" element={<InValidRoutes Component={DoctorCaseDetails}/>}/>
       <Route path="/patient/case/feedback" element={<InValidRoutes Component={CaseFeedback}/>}/>
-      <Route path="/patient/testimony" element={<InValidRoutes Component={Testimony}/>}/>    
+      <Route path="/patient/testimony" element={<InValidRoutes Component={Testimony}/>}/> 
+           
       </Routes>
     </BrowserRouter>
     </>

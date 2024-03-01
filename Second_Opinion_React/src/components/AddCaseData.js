@@ -1,6 +1,8 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom';
+import Header from './Header';
+import Footer from './Footer';
 
 const AddCaseData = () => {
     const navigate=useNavigate();
@@ -43,12 +45,13 @@ const AddCaseData = () => {
     }
     return (
         <>
-            <div className='AddCaseDataContainer'>
+        <Header></Header>
+            <div className='container'>
                 <div className='Title_Container'>
-                    <input type='text' placeholder='Title' name='title' onChange={(e) => setTitle(e.target.value)} />
+                    <input className='form-label' type='text' placeholder='Add Case Title' name='title' onChange={(e) => setTitle(e.target.value)} />
                 </div>
                 <div className='Description_Container'>
-                    <textarea placeholder='Description' name='description' cols={10} rows={5} onChange={(e) => setDescription(e.target.value)} />
+                    <textarea className='form-label' placeholder='Add Case Description' name='description' cols={10} rows={5} onChange={(e) => setDescription(e.target.value)} />
                 </div>
                 <div className='Checkbox_Container'>
                     {
@@ -58,7 +61,7 @@ const AddCaseData = () => {
                                
                                     {index!==0 &&
                                     (
-                                        <div><input type='checkbox' value={index} id={symptom} onChange={(e) => setSymptom([...symptoms, e.target.value])} />
+                                        <div><input className='form-check-label'  type='checkbox' value={index} id={symptom} onChange={(e) => setSymptom([...symptoms, e.target.value])} />
                                     <label htmlFor={symptom}>{symptom}</label>
                                     </div>)
                                     }
@@ -68,7 +71,7 @@ const AddCaseData = () => {
                         })
                     }
                 </div>
-                <input type='file' onChange={(e) => {
+                <input className='form-label' type='file' onChange={(e) => {
                     console.log(e.target.value);
                 }} />
                 <div>
@@ -78,9 +81,12 @@ const AddCaseData = () => {
                             <option key={doctor?.id} id={doctor?.id} value={doctor?.id}>{doctor?.name}</option>
                         ))}
                     </select>
+                    <br></br><br></br>
                 </div>
-                <button onClick={() => { SubmitCase() }}>submit</button>
+                <button className='btn btn-primary ' onClick={() => { SubmitCase() }}>submit</button>
+                <br></br><br></br>
             </div>
+            <Footer></Footer>
         </>
     )
 }

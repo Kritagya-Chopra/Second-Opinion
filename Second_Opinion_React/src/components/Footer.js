@@ -1,7 +1,13 @@
 import React from 'react';
 import '../styles/Footer.css';
+import { useNavigate } from 'react-router-dom';
+
 
  function Footer(){
+  const navigate = useNavigate();
+  const subscribe = ()=>{
+    navigate("/subscribe-newsletter");
+  }
   return (
     <div className='footer' style={{left: 0,bottom: 0,width:'100%'}}>    
     
@@ -50,7 +56,7 @@ import '../styles/Footer.css';
               <div className="d-flex flex-column flex-sm-row w-100 gap-2">
               
                 <input id="newsletter1" type="text" className="form-control" placeholder="Email address" style={{marginRight:"2%"}} />
-                <button className="btn btn-primary" type="button" >Subscribe</button>
+                <button onClick={()=>{subscribe()}} className="btn btn-primary" type="button" >Subscribe</button>
               </div>
             </form>
           </div>

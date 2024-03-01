@@ -15,10 +15,10 @@ export default class Header extends Component {
            
         <h2 className="my-0 mr-md-auto font-weight-normal" style={{color:'#2AB8C3'}}>Second Opinion</h2>
         <nav className="my-2 my-md-0 mr-md-3">
-          <Link className="p-2 text-dark headerNavlink" style={{fontSize:'150%'}} to="/">Home</Link>
-          <Link className="p-2 text-dark headerNavlink"style={{fontSize:'150%'}} to="/about">About Us</Link>
-          <Link className="p-2 text-dark headerNavlink"style={{fontSize:'150%'}} to="/contact">Contact Us</Link>
-          <Link className="p-2 text-dark headerNavlink" style={{fontSize:'150%'}} to="#">FAQs</Link>
+          <Link className="p-2 text-dark headerNavlink" style={{fontSize:'150%'}} to="/">Home</Link> &nbsp;&nbsp;&nbsp;&nbsp;
+          <Link className="p-2 text-dark headerNavlink"style={{fontSize:'150%'}} to="/about">About Us</Link> &nbsp;&nbsp;&nbsp;&nbsp;
+          <Link className="p-2 text-dark headerNavlink"style={{fontSize:'150%'}} to="/contact">Contact Us</Link> &nbsp;&nbsp;&nbsp;&nbsp;
+         
         </nav>
         {id ? (
           <Link className="btn btn-outline-primary" style={{fontSize:'150%'}} to="/" onClick={()=>{sessionStorage.clear();}}>Logout</Link>

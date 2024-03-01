@@ -28,7 +28,7 @@ const Testimony = () => {
     useEffect(() => {
         if (user) {
             console.log('User:', user);
-            if (user?.role !== 'PATIENT') {
+            if (user.role !== 'PATIENT') {
                 navigate('/login');
             }
         }

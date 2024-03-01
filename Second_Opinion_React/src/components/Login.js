@@ -78,10 +78,10 @@ const Login = () => {
         <p className="account">
           No account? <span className="create-one"><Link to="/register">create one</Link></span>
         </p>
-        <p className="go-back">Go back</p>
+        <a href="/" className="go-back">Go back</a>
         <div className="back-side">
-          <p className="term">Terms of use</p>
-          <p className="privacy">Privacy Policy</p>
+          <a href="/terms-conditions" className="term">Terms of use</a>
+          <a href="/privacy-policy" className="privacy">Privacy Policy</a>
         </div>
       </div>
       <ToastContainer />
