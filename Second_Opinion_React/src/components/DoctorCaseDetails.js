@@ -14,6 +14,7 @@ export const DoctorCaseDetails = () => {
     const [data, setData] = useState(null); // Set initial state to null
     const [patientData, setPatientData] = useState(null); // Set initial state to null
     const [symp, setSymp] = useState([]);
+    const [feed, setFeed] = useState();
     const getCaseDetails = async () => {
         try {
             const response = await axios.get("http://localhost:8080/case/" + id);
@@ -25,7 +26,15 @@ export const DoctorCaseDetails = () => {
             console.error("Error fetching data:", error);
         }
     }
-
+    const Showfeedback = async () => {
+        try {
+            const response = await axios.get("http://localhost:8080/feedback/" + data?.id);
+            console.log(response.data);
+            setFeed(response?.data);
+        } catch (error) {
+            console.error("Error fetching feedback:", error);
+        }
+    };
     //title description openTime  closeTime  document  opinion responseTime status symptoms[] id
     //doctor name photo qualification.name qualification.university languagesSpoken licenseNo specialization.name yearsOfExperience
 
@@ -70,10 +79,10 @@ export const DoctorCaseDetails = () => {
 
                     </div>
                     <div className='row'>
-                        <div className="col">
-                            <p>Status: {data?.status}</p>
-                        </div>
+                    <div className="col">
+                        <p>Status: {data?.status === 'P' ? 'Pending' : 'Completed'}</p>
                     </div>
+                </div>
                 </>)}
                 <div className='row'>
                     {
@@ -113,9 +122,20 @@ export const DoctorCaseDetails = () => {
                     {/* <p className="text-muted">Web designer <span className="badge bg-primary">PRO</span></p> */}
                     {/* <img className='img-thumbnail rounded float-right' style={{ width: "30%", height: "30%" }} ></img> */}
                 </div>
-
+                <div>
+                    {feed && (
+                        <div>
+                            review: {feed.review} <br />
+                            rating: {feed.rating}
+                        </div>
+                    )}
+                </div>
                 <div className="text-center">
-                    <button type='button' className='btn btn-primary ' >Submit Opinion</button>
+                {data?.status === 'P' ? (
+                        <button type='button' className='btn btn-primary'>Opninon</button>
+                    ) : (
+                        <button type='button' className='btn btn-primary' onClick={() => Showfeedback()}>Show Feedback</button>
+                    )}
                 </div>
                 <br></br>
                 <br></br>
