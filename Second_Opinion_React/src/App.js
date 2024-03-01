@@ -19,6 +19,9 @@ import { DoctorCaseDetails } from "./components/DoctorCaseDetails";
 import Testimony from "./components/Testimony";
 import CaseFeedback from "./components/CaseFeedback";
 import InValidRoutes from "./components/InValidRoutes";
+import TermsOfUse from "./components/TermsOfUse";
+import PrivacyPolicy from "./components/PrivacyPolicy";
+import SubcribeNewsletter from "./components/SubscribeNewsletter";
 const App = () => {
   return (
     <>
@@ -29,7 +32,9 @@ const App = () => {
       <Route path="/contact" element={<Contact/>}/>
       <Route path="/register" element={<Registration/>}/>
       <Route path="/login" element={<Login/>}/>
-      {/* <Route path="/terms" element={<Terms/>}/> */}
+      <Route path="/terms-conditions" element={<TermsOfUse/>}/>
+      <Route path="/privacy-policy" element={<PrivacyPolicy/>}/>
+      <Route path="/subscribe-newsletter" element={<SubcribeNewsletter/>}/>
       <Route path="/patient/profile" element={<PatientProfile/>}/>
       <Route path="/doctor/profile" element={<DoctorProfile/>}/>
 
