@@ -81,10 +81,6 @@ const AddCaseData = () => {
                     }
                 </div>
 
-                <input className='form-label' type='file' onChange={(e) => {
-                    console.log(e.target.value);
-                }} />
-
                 <input type='file' onChange={handleFileChange} />
 
                 <div>

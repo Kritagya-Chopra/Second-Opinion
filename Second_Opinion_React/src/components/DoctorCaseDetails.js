@@ -15,12 +15,16 @@ export const DoctorCaseDetails = () => {
     const [patientData, setPatientData] = useState(null); // Set initial state to null
     const [symp, setSymp] = useState([]);
     const [feed, setFeed] = useState();
+    const [documentUrl, setDocumentUrl] = useState();
     const getCaseDetails = async () => {
         try {
             const response = await axios.get("http://localhost:8080/case/" + id);
             const pData = await axios.get("http://localhost:8080/patient/" + response?.data?.patientId);
             setData(response?.data);
+            console.log(response?.data)
+            setDocumentUrl(response?.data?.document)
             setPatientData(pData?.data?.data);
+            console.log(pData?.data?.data);
             setSymp(response?.data?.symptoms);
         } catch (error) {
             console.error("Error fetching data:", error);
@@ -79,48 +83,53 @@ export const DoctorCaseDetails = () => {
 
                     </div>
                     <div className='row'>
-                    <div className="col">
-                        <p>Status: {data?.status === 'P' ? 'Pending' : 'Completed'}</p>
+                        <div className="col">
+                            <p>Status: {data?.status === 'P' ? 'Pending' : 'Completed'}</p>
+                        </div>
                     </div>
-                </div>
                 </>)}
                 <div className='row'>
                     {
                         patientData &&
                         (<>
                             <div>
-                        <h4>Patient's Details: </h4>
+                                <h4>Patient's Details: </h4>
 
 
-                    </div>
-                    <div>
-
-                        <div className="row">
-                        
-                            <div className='col'>
-
-                                <p>Patient's Name: {patientData?.name}</p>
                             </div>
-                            <div className="col">
-                                <p>Blood Group: {
-                                    patientData?.bloodGroup
-                                }</p>
+                            <div>
+
+                                <div className="row">
+
+                                    <div className='col'>
+
+                                        <p>Patient's Name: {patientData?.name}</p>
+                                    </div>
+                                    <div className="col">
+                                        <p>Blood Group: {
+                                            patientData?.bloodGroup
+                                        }</p>
+                                    </div>
+
+                                    <div className="col">
+                                        <p>Weight:{patientData?.weight}</p>
+                                    </div>
+                                </div>
+
+
+
+
                             </div>
-
-                            <div className="col">
-                                <p>Weight:{patientData?.weight}</p>
-                            </div>
-                        </div>
-
-
-
-
-                    </div>
                         </>)
                     }
                     {/* <h5 className="mb-2"><strong>{patientData?.name}</strong></h5> */}
                     {/* <p className="text-muted">Web designer <span className="badge bg-primary">PRO</span></p> */}
                     {/* <img className='img-thumbnail rounded float-right' style={{ width: "30%", height: "30%" }} ></img> */}
+                </div>
+                <div>
+                    <a href={documentUrl} download>
+                        Download Patient Document
+                    </a>
                 </div>
                 <div>
                     {feed && (
@@ -131,7 +140,7 @@ export const DoctorCaseDetails = () => {
                     )}
                 </div>
                 <div className="text-center">
-                {data?.status === 'P' ? (
+                    {data?.status === 'P' ? (
                         <button type='button' className='btn btn-primary'>Opninon</button>
                     ) : (
                         <button type='button' className='btn btn-primary' onClick={() => Showfeedback()}>Show Feedback</button>

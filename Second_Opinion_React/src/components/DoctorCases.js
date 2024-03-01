@@ -12,12 +12,13 @@ const DoctorCases = () => {
     
     const [cases,setCases]=useState([]);
     const id=sessionStorage.getItem("id");
-    useEffect(()=>{
-        getCasesDetails();
+    useEffect(async()=>{
+        await getCasesDetails();
     },[]);
     const getCasesDetails=async()=>{
         if(!!id){
           const response=await axios.get("http://localhost:8080/case/doctor/"+id)
+          console.log("hello",response.data)
           setCases(response?.data);
         }
         
