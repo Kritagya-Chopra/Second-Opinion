@@ -41,13 +41,13 @@ public class CaseEntity extends BaseEntity {
 	@Column(nullable = false)
 	private char status;
 	@Lob
-	private byte[] document;
+	private String document;
 	@Column(name = "open_time")
 	private LocalDateTime openTime;
 	@Column(name = "close_time")
 	private LocalDateTime closeTime;
 	@Column(name = "response_time")
-	private LocalDateTime responseTime; 
+	private float responseTime; 
 	@OneToOne(mappedBy = "myCase",cascade = CascadeType.ALL,orphanRemoval = true , fetch = FetchType.EAGER)
 	private OpinionEntity opinion;
 	@OneToMany(mappedBy="myCase" , cascade = CascadeType.ALL , orphanRemoval = true , fetch = FetchType.EAGER)

@@ -5,34 +5,10 @@ import { useNavigate } from 'react-router-dom';
 const Testimony = () => {
     const [rating, setRating] = useState(0);
     const [description, setDescription] = useState();
-    const [user,setUser]=useState(null);
     const id = sessionStorage.getItem("id");
     const navigate=useNavigate();
 
-    const userAuthentications = async () => {
-        if (id == null) return null;
-        else {
-            try {
-                const response = await axios.get('http://localhost:8080/user/' + id);
-                setUser(response?.data?.data);
-            } catch (error) {
-                console.error('Error fetching user data:', error);
-            }
-        }
-    };
-   
-    useEffect(() => {
-        userAuthentications();
-    }, []); // Run only once after the component mounts
-
-    useEffect(() => {
-        if (user) {
-            console.log('User:', user);
-            if (user?.role !== 'PATIENT') {
-                navigate('/login');
-            }
-        }
-    }, [user, navigate]);
+    
     const handleRatingChange = (value) => {
         setRating(value);
     };

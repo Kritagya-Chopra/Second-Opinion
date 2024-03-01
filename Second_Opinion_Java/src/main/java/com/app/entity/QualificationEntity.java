@@ -23,6 +23,6 @@ public class QualificationEntity {
 	private String university;
 	
 	@Lob
-	private byte[] document;
+	private String document;
 
 }

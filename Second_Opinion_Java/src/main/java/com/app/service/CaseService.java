@@ -17,4 +17,6 @@ public interface CaseService {
 
 	CaseDTO getCasesById(Long id);
 
+	CaseDTO completeCase(Long id);
+
 }

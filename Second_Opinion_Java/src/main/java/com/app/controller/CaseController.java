@@ -72,9 +72,25 @@ public class CaseController {
 		 else {
 			 response.setStatus(false);
 			 response.setCode("ERROR");
-			 response.setMessage("Some error");
 		 }
 		return response;
 	}
-
+	@PostMapping("/complete/{id}")
+	public ResponseDTO completeCase(@PathVariable Long id)
+	{
+		ResponseDTO response  = new ResponseDTO();
+		CaseDTO cc = caseService.completeCase(id);
+		 if(cc!=null) {
+			 response.setStatus(true);
+			 response.setCode("OK");
+			 response.setMessage("Case Completed Successfully");
+		 }
+		 else {
+			 response.setStatus(false);
+			 response.setCode("ERROR");
+			 response.setMessage("Some error");
+		 }
+		 response.setData(cc);
+		return response;
+	}
 }

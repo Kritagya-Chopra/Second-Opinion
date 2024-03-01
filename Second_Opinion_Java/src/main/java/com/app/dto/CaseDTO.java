@@ -30,7 +30,7 @@ public class CaseDTO {
 	
 	private char status;
 	
-	private byte[] document;
+	private String document;
 	@JsonProperty(access = Access.READ_ONLY)
 	private LocalDateTime openTime;
 	@JsonProperty(access = Access.READ_ONLY)
