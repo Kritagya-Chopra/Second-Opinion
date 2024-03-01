@@ -30,7 +30,7 @@ public class OpinionEntity extends BaseEntity {
 	private boolean isRead;
 	
 	@Lob
-	private byte[] document;
+	private String document;
 	
 	@OneToOne
 	@MapsId

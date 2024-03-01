@@ -13,6 +13,7 @@ const AddCaseData = () => {
     const [description, setDescription] = useState();
     const [symptoms, setSymptom] = useState([]);
     const [doctorId, setDoctorId] = useState();
+    const [doc , setDoc] = useState();
     const patientId = sessionStorage.getItem("id");
     useEffect(() => {
         getDoctorsHandler();
@@ -27,7 +28,6 @@ const AddCaseData = () => {
         }
     }
     const SubmitCase = async() => {
-        const date = new Date();
         const postData = {
 
             patientId: parseInt(patientId),
@@ -35,14 +35,23 @@ const AddCaseData = () => {
             diseaseId: parseInt(id),
             description: description,
             title: title,
-            document: [
-                "null"
-            ],
+            document: doc,
             symptomIds: symptoms
         }
         const response=await axios.post("http://localhost:8080/case/newCase",postData)
         navigate("/patient/mycases");
     }
+
+    const handleFileChange = (e) => {
+        const file = e.target.files[0];
+        const reader = new FileReader();
+        reader.onloadend = () => {
+            setDoc(reader.result);
+        };
+        reader.readAsDataURL(file);
+    };
+
+
     return (
         <>
         <Header></Header>
@@ -71,9 +80,13 @@ const AddCaseData = () => {
                         })
                     }
                 </div>
+<<<<<<< HEAD
                 <input className='form-label' type='file' onChange={(e) => {
                     console.log(e.target.value);
                 }} />
+=======
+                <input type='file' onChange={handleFileChange} />
+>>>>>>> 5ac441538158f9f0cbc899a5af977c857445173c
                 <div>
                     <select onChange={(e) => setDoctorId(e.target.value)}>
                         <option value="" selected disabled>Select Doctor</option>

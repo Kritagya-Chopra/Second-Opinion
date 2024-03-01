@@ -34,11 +34,12 @@ const App = () => {
       <Route path="/terms-conditions" element={<TermsOfUse/>}/>  
       <Route path="/privacy-policy" element={<PrivacyPolicy/>}/> 
       <Route path="/subscribe-newsletter" element={<SubcribeNewsletter/>}/>
+      <Route path="/terms" element={<Terms/>}/>
+      <Route path="/patient/profile" element={<PatientProfile/>}/>
+      <Route path="/doctor/profile" element={<DoctorProfile/>}/>
 
 
 
-      <Route path="/patient/profile" element={<InValidRoutes Component={PatientProfile}/>}/>
-      <Route path="/doctor/profile" element={<InValidRoutes Component={DoctorProfile}/>}/>
       <Route path="/patient/dashboard" element={<InValidRoutes Component={PatientDashboard}/>}/>
       <Route path="/doctor/dashboard" element={<InValidRoutes Component={DoctorDashboard }/>}/>
       <Route path="/new-case" element={<InValidRoutes Component={AddCases}/>}/>

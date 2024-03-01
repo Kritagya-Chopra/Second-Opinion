@@ -109,7 +109,6 @@ const DoctorProfile = () => {
             ...prevData,
             qualification: { ...prevData.qualification, [name]: value }
         }));
-
     }
 
 
@@ -172,6 +171,18 @@ const DoctorProfile = () => {
             setProfileData((prevData) => ({
                 ...prevData,
                 photo: reader.result,
+            }));
+        };
+        reader.readAsDataURL(file);
+    };
+
+    const handleDocChange = (e) => {
+        const file = e.target.files[0];
+        const reader = new FileReader();
+        reader.onloadend = () => {
+            setProfileData((prevData) => ({
+                ...prevData,
+                qualification: { ...prevData.qualification, document: reader.result }
             }));
         };
         reader.readAsDataURL(file);
@@ -665,7 +676,7 @@ const DoctorProfile = () => {
                         </div>
                         <div className="mb-3">
                             <label for="document" className="form-label">Upload Documents</label>
-                            <input className="form-control" type="file" id="document" value={profileData.qualification.document} onChange={handleQualificationChange} multiple />
+                            <input className="form-control" type="file" id="document"  onChange={handleDocChange} multiple />
                         </div>
                         <button type="submit" className="btn btn-primary float-right">Save Changes</button>
                         <br></br>

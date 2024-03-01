@@ -66,7 +66,7 @@ public class DoctorController {
 	@PutMapping("/{id}")
 	public ResponseDTO updateDoctor(@PathVariable Long id, @RequestBody DoctorDTO d) {
 		ResponseDTO response = new ResponseDTO();
-		DoctorEntity doc = doctorService.updateDoctor(id , d);
+		DoctorDTO doc = doctorService.updateDoctor(id , d);
 		if (doc != null) {
 			response.setData(doc);
 			response.setStatus(true);

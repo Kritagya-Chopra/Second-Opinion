@@ -9,7 +9,7 @@ public interface DoctorService {
 
 	DoctorDTO getDoctor(Long id);
 	DoctorDTO saveDoctor(Long userId, DoctorDTO doc);
-	DoctorEntity updateDoctor(Long id, DoctorDTO doc);
+	DoctorDTO updateDoctor(Long id, DoctorDTO doc);
 	Boolean deleteDoctor(Long id);
 	List<DoctorDTO> getDoctorBySpecializationId(Long id);
 	

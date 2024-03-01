@@ -17,6 +17,6 @@ public class OpinionDTO {
 
 	private boolean isRead;
 	
-	private byte[] document;
+	private String document;
 
 }

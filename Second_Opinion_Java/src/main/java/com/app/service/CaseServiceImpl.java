@@ -81,9 +81,10 @@ public class CaseServiceImpl implements CaseService {
 		DoctorEntity doctor = doctorRepository.findById(c.getDoctorId())
 				.orElseThrow(() -> new ResourceNotFoundException("Doctor not exists"));
 		CaseEntity newCase = mapper.map(c, CaseEntity.class);
-		newCase.setResponseTime(null);
+		newCase.setResponseTime(7);
 		newCase.setOpenTime(LocalDateTime.now());
 		newCase.setCloseTime(null);
+		newCase.setStatus('P');
 		doctor.addCase(newCase);
 		patient.addCase(newCase);
 		newCase.getSymptoms().addAll(symptomRepository.findAllById(c.getSymptomIds()));
@@ -111,6 +112,16 @@ public class CaseServiceImpl implements CaseService {
 		cc.setDoctorId(c.getDoctor().getId());
 		cc.setPatientId(c.getPatient().getId());
 		return cc;
+	}
+
+	@Override
+	public CaseDTO completeCase(Long id) {
+		CaseEntity c = caseRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Case Not Found"));
+		c.setCloseTime(LocalDateTime.now());
+		c.setStatus('C');
+		DoctorEntity d = doctorRepository.findById(c.getDoctor().getId()).orElseThrow(() -> new ResourceNotFoundException("Doctor Not Found"));
+		d.setAvgResponseTime((d.getAvgResponseTime()+c.getResponseTime())/2);
+		return mapper.map(c, CaseDTO.class);
 	}
 
 }
