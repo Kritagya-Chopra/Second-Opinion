@@ -13,7 +13,7 @@ const Navbar=()=>{
             </div>
             <div className='right-navbar'>
                 <Link className="p-2 text-dark headerNavlink"style={{fontSize:'110%'}} to={"/patient/dashboard"}>Dashboard</Link> &nbsp;&nbsp;&nbsp;
-                <Link className="p-2 text-dark headerNavlink"style={{fontSize:'110%'}} to={"/patient/testimony"}>Testimonials</Link> &nbsp;&nbsp;&nbsp;
+                <Link className="p-2 text-dark headerNavlink"style={{fontSize:'110%'}} to={"/patient/testimony"}>Add Testimony</Link> &nbsp;&nbsp;&nbsp;
                 <Link className="p-2 text-dark headerNavlink"style={{fontSize:'110%'}} to={"/patient/mycases"}>My Cases</Link>&nbsp;&nbsp;&nbsp;
                 <Link className="p-2 text-dark headerNavlink"style={{fontSize:'110%'}} to={"/patient/profile"}>Profile</Link>
             </div>

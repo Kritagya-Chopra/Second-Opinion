@@ -1,6 +1,11 @@
 import axios from 'axios';
-import React, { useEffect, useState } from 'react'
-import { useNavigate } from 'react-router-dom';
+import React, { useState } from 'react'
+import { FaStar } from "react-icons/fa";
+import { Container, Radio, Rating } from "./RatingStyles";
+import { useLocation, useNavigate } from 'react-router-dom';
+import Header from './Header';
+import Footer from './Footer';
+import Navbar from './Navbar';
 
 const Testimony = () => {
     const [rating, setRating] = useState(0);
@@ -24,30 +29,60 @@ const Testimony = () => {
         navigate("/patient/dashboard");
     }
   return (
-    <div className="rating-container">
-            <h2>Provide your Valuable Testimony</h2>
-            <div className="rating-stars">
+    <>
+        <Header></Header>
+      <Navbar></Navbar>
+        <div className="container">
 
-                {[...Array(5)].map((_, index) => {
-                    const ratingValue = index + 1; // Rating value starts from 1
-                    return (
-                        <span
-                            key={index}
-                            className={ratingValue <= rating ? 'star filled' : 'star'}
-                            onClick={() => handleRatingChange(ratingValue)}
-                        >
-                            ★
-                        </span>
-                    );
-                })}
+            <h2>Provide your Valuable Testimony</h2>
+            <p >Dear Customer,<br />
+                Thank you for using SecondOpinion. We would like to know how our app performed.
+                Please spare some moments to give us your valuable testimony as it will help us in improving our service.</p>
+
+            <p style={{marginBottom:"0",paddingBottom:"0"}}>Please rate our app service experience</p>
+          
+            <div className="rating-stars"  style={{paddingTop:"0"}}>
+
+                <Container>
+
+                    {[...Array(5)].map((item, index) => {
+                        const givenRating = index + 1;
+                        return (
+                            <label>
+                                <Radio
+                                    type="radio"
+                                    value={givenRating}
+                                    onClick={() => {
+                                        setRating(givenRating);
+                                        alert(
+                                            `Are you sure you want to give ${givenRating} stars ?`
+                                        );
+                                    }}
+                                />
+                                <Rating>
+                                    <FaStar
+                                        color={
+                                            givenRating < rating || givenRating === rating
+                                                ? "#FFD700"
+                                                : "rgb(192,192,192)"
+                                        }
+                                    />
+                                </Rating>
+                            </label>
+                        );
+                    })}
+                </Container>
             </div>
             <div className='Description_Container'>
-                <textarea placeholder='Description' name='description' cols={10} rows={5} onChange={(e) => setDescription(e.target.value)} />
+                <textarea placeholder='Enter Detailed Testimony' name='description' cols={10} rows={5} onChange={(e) => setDescription(e.target.value)} />
             </div>
             <div>
-                <button onClick={() => { submitData() }}>Submit</button>
+                <button className='btn btn-success float-right' onClick={() => { submitData() }}>Submit</button>
+                <br></br><br></br><br></br>
             </div>
         </div>
+        <Footer></Footer>
+        </>
   )
 }
 
