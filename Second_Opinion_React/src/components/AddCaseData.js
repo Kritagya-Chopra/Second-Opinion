@@ -80,13 +80,13 @@ const AddCaseData = () => {
                         })
                     }
                 </div>
-<<<<<<< HEAD
+
                 <input className='form-label' type='file' onChange={(e) => {
                     console.log(e.target.value);
                 }} />
-=======
+
                 <input type='file' onChange={handleFileChange} />
->>>>>>> 5ac441538158f9f0cbc899a5af977c857445173c
+
                 <div>
                     <select onChange={(e) => setDoctorId(e.target.value)}>
                         <option value="" selected disabled>Select Doctor</option>

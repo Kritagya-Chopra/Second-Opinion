@@ -74,6 +74,7 @@ public class DoctorServiceImpl implements DoctorService {
 		List<LanguageEntity> list = doc.getLanguages().stream().map((Long e )->
 			languageRepository.findById(e).orElseThrow(()-> new ResourceNotFoundException("LANGUAGE NOT FOUND"))
 		).collect(Collectors.toList());
+		
 		d.getLanguagesSpoken().addAll(list);
 		return mapper.map(doctorRepository.save(d),DoctorDTO.class);
 	}

@@ -81,22 +81,22 @@ const ShowTestimony = () => {
 
 
 
-          <div className="slider-content">
-            <div className="left-slider">
-
-
-              <img style={{ width: "350px", height: "300px" }} className="rounded mx-auto d-block img-thumbnail" src={patients[sliderIndex].data?.photo} alt={patients[sliderIndex].data?.name} />
-            </div>
-            <div className="right-slider">
-              <h2>Testimonials</h2>
-              <br></br>
-              <h4 className="heading4">Patient Name: {patients[sliderIndex]?.data?.name}</h4>
-              <br></br>
-              <h5 className="heading4">{testimonials[sliderIndex]?.testimony}</h5>
-              <br></br>
-              <h5 className="heading4">Rating: {testimonials[sliderIndex]?.rating}</h5>
-            </div>
-          </div>
+        {patients.length > 0 && (
+  <div className="slider-content">
+    <div className="left-slider">
+      <img style={{ width: "350px", height: "300px" }} className="rounded mx-auto d-block img-thumbnail" src={patients[sliderIndex]?.data?.photo} alt={patients[sliderIndex]?.data?.name} />
+    </div>
+    <div className="right-slider">
+      <h2>Testimonials</h2>
+      <br></br>
+      <h4 className="heading4">Patient Name: {patients[sliderIndex]?.data?.name}</h4>
+      <br></br>
+      <h5 className="heading4">{testimonials[sliderIndex]?.testimony}</h5>
+      <br></br>
+      <h5 className="heading4">Rating: {testimonials[sliderIndex]?.rating}</h5>
+    </div>
+  </div>
+)}
         </div>
 
       </div>
