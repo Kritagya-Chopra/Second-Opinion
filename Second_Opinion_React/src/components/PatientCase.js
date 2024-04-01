@@ -12,8 +12,8 @@ const PatientCase=()=>{
     );
     useEffect(()=>{
         axios.get("http://localhost:8080/doctor/specialization/"+sid).then(resp=>{
-            console.log(resp.data);
-            setDoctor(resp.data);
+            console.log(resp?.data);
+            setDoctor(resp?.data);
         }).catch(e=>{
             console.log(e);
         })

@@ -1,4 +1,4 @@
-use p2;
+use second_opinion_db;
 insert into languages(name) values('English');
  insert into languages(name) values('Hindi');
  insert into languages(name) values('Marathi');

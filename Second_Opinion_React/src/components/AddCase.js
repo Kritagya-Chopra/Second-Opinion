@@ -11,7 +11,7 @@ const AddCase = () => {
     useEffect(() => {
         axios.get("http://localhost:8080/disease")
             .then(resp => {
-                setData(resp.data);
+                setData(resp?.data);
                 console.log(resp.data);
             })
             .catch(error => {
@@ -33,21 +33,22 @@ const AddCase = () => {
     return (
         <>
             <div className="headingAddCase">
-                <h2>Search for a specialist</h2>
+                <h2>Search for Disease</h2>
                 <p>
-                    To find the most suitable specialist for your case, please type a diagnosis, 
-                    symptom, or body part of concern:
+                    To find the most suitable specialist for your case, please select a disease:
                 </p>
             </div>
-            <select value={selectedOption} onChange={(e)=>{
+            <div className="container center">
+            <select className="form-select form-select-lg mb-3" value={selectedOption} onChange={(e)=>{
                 handleOptionChange(e)
             }}>
-                <option value="">Select an option</option>
-                {data.map((item) => (
-                    <option key={item.id} value={item.id}>{item.name}</option>
+                <option value="">Select Disease</option>
+                {data?.map((item) => (
+                    <option key={item?.id} value={item?.id}>{item?.name}</option>
                 ))}
             </select>
-            <button className="addCase-search" onClick={handleSearch}>Search</button>
+            <button className="addCase-search float-right " onClick={handleSearch}>Proceed</button>
+            </div>
             <br />
             <br />
             <br />

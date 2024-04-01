@@ -69,7 +69,7 @@ public class DoctorEntity extends BaseEntity {
 	private List<FeedbackEntity> feedbacks = new ArrayList<FeedbackEntity>();
 	
 	@ManyToOne
-	@JoinColumn(name = "specialization_id")
+	@JoinColumn(name = "specialization_id" )
 	private SpecializationEntity specialization ;
 	
 	@OneToMany(mappedBy = "doctor",cascade = CascadeType.ALL,orphanRemoval = true)

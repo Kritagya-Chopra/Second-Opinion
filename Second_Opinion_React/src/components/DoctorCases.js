@@ -1,47 +1,60 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
-import Navbar from './Navbar';
+import '../styles/Navbar.css';
 import Header from './Header';
 import Footer from './Footer';
 import { useNavigate } from 'react-router';
+import DoctorNavbar from './DoctorNavBar';
+    
 
-const MyCases = () => {
-    const patientId=sessionStorage.getItem("id");
+const DoctorCases = () => {
+
+    
     const [cases,setCases]=useState([]);
+    const id=sessionStorage.getItem("id");
+    useEffect(async()=>{
+        await getCasesDetails();
+    },[]);
+    const getCasesDetails=async()=>{
+        if(!!id){
+          const response=await axios.get("http://localhost:8080/case/doctor/"+id)
+          console.log("hello",response.data)
+          setCases(response?.data);
+        }
+        
+    }
+    const patientId=sessionStorage.getItem("id");
+    
 
     const navigate = useNavigate();
 
-    useEffect(()=>{
-        getMyCases();
-    },[]);
-    const getMyCases=async()=>{
-        const response = await axios.get("http://localhost:8080/case/patient/"+patientId);
-        console.log(response?.data);
-        setCases(response?.data);
+    // const getMyCases=async()=>{
+    //     const response = await axios.get("http://localhost:8080/case/patient/"+patientId);
+    //     console.log(response?.data);
+    //     setCases(response?.data);
         
-    }
+    // }
 
     const readMore = (e)=>{
         console.log(e.target.value);
-        navigate(`/patient/mycases/${e.target.value}`)
+        navigate(`/doctor/mycases/${e.target.value}`)
 
     }
 
   return (
    <>
    <Header />
-    <Navbar></Navbar>
-    
+    <DoctorNavbar />
+
     <div className="accordion" id="accordionExample">
     <h2 className='heading1' style={{ color: "#2ab8c3" }}>All Cases</h2>
-
     {cases?.map((item)=>(
            //title description openTime  closeTime  document  opinion responseTime status symptoms[] id
        
   <div className="accordion-item" key={item?.id}>
     <h3 className="accordion-header" id="headingOne">
       <button className="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-      <h3>{item?.title}</h3>
+      <h4>{item?.title}</h4>
       </button>
     </h3>
     <div id="collapseOne" className="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
@@ -59,4 +72,4 @@ const MyCases = () => {
   )
 }
 
-export default MyCases
+export default DoctorCases;

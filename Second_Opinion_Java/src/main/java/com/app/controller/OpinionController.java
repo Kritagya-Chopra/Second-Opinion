@@ -43,10 +43,10 @@ public class OpinionController {
 		return response;
 	}
 
-	@PostMapping("/add")
-	public ResponseDTO addOpinion(@RequestParam Long caseId , @RequestBody OpinionDTO d) {
+	@PostMapping("/add/{id}")
+	public ResponseDTO addOpinion(@PathVariable Long id , @RequestBody OpinionDTO d) {
 		ResponseDTO response = new ResponseDTO();
-		OpinionDTO opinion = opinionService.saveOpinion(caseId , d);
+		OpinionDTO opinion = opinionService.saveOpinion(id , d);
 		if (opinion != null) {
 			response.setData(opinion);
 			response.setStatus(true);

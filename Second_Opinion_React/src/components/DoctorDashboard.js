@@ -1,6 +1,9 @@
 import React from "react";
 import '../styles/DoctorDashboard.css';
 import { useNavigate } from "react-router-dom";
+import DoctorNavbar from "./DoctorNavBar";
+import Header from "./Header";
+import Footer from "./Footer";
 
 const DoctorDashboard = () => {
   const navigate = useNavigate();
@@ -10,11 +13,13 @@ const DoctorDashboard = () => {
 
   return (
     <>
+    <Header />
+    <DoctorNavbar/>
       <div className="Container">
         <div className="logo">
           <img src="" alt="logo" />
         </div>
-        <div className="welcome">
+        <div className="float-left">
           <p>Welcome Doctor</p>
         </div>
         <div className="buttons">
@@ -23,6 +28,7 @@ const DoctorDashboard = () => {
           <button>Completed</button>
         </div>
       </div>
+      <Footer />
     </>
   );
 };

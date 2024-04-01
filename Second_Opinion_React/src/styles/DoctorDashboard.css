@@ -15,11 +15,11 @@
   color: gray;
 }
 
-.buttons {
+.buttons-doctor {
   display: flex;
   justify-content: space-evenly;
 }
-.buttons button {
+.buttons-doctor button {
   font-size: 16px;
   font-weight: bold;
   padding: 10px;

@@ -1,22 +1,22 @@
 import React from "react";
-import Navbar from "./Navbar";
-import AddCase from "./AddCase";
 import Header from "./Header";
 import Footer from "./Footer";
 import ThreeCards from "./ThreeCards";
 import Slider from "./Slider";
 import Step from "./Step";
-import Header1 from "./Header1";
+import ShowTestimony from "./ShowTestimony";
+import Navbar from "./Navbar";
 
 const HomePage=()=>{
+    const id=sessionStorage.getItem('id');
     return(
         <>
-            <Header1/>
-        
+            <Header/>
+            {id !== null && <Navbar />}
             <Slider />
             <Step />
             <ThreeCards />
-           
+            <ShowTestimony/>
             <Footer/>
         </>
     )

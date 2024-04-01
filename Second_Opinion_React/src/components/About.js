@@ -1,12 +1,12 @@
 import React from "react";
 import '../styles/Footer.css';
-import Header1 from "./Header1";
+import Header from "./Header";
 import Footer from "./Footer";
 
 const About = () => {
   return (
     <>
-    <Header1></Header1>
+    <Header/>
     <div className="container ">
       <div >
      

@@ -10,6 +10,6 @@ import com.app.entity.DoctorEntity;
 
 public interface DoctorRepository extends JpaRepository<DoctorEntity, Long>{
 
-	Optional<DoctorEntity> findAllBySpecializationId(Long id);
+	List<DoctorEntity> findAllBySpecializationId(Long id);
 	
 }

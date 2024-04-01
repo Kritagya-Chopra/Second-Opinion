@@ -30,7 +30,7 @@ const Step = () => {
 
   return (
     <div className="step-container">
-      {data.map((card, index) => (
+      {data?.map((card, index) => (
         <div key={index} className="step-card">
           <img src={card.image} alt="step_pic" className="step-image" />
           <h3 className="step-heading">{card.heading}</h3>

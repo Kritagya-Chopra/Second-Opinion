@@ -39,19 +39,19 @@ const Registration = () => {
       toast.error("Please check the terms")
       return;
     }
-    if (!validator.isEmail(regData.userName)){
+    if (!validator.isEmail(regData?.userName)){
         toast.error("provide valid email address", {
           className: "toast-message"
         });
         return;
     }
-    if(regData.password.length<8){
+    if(regData?.password.length<8){
       toast.error("provide password of minimum 8 length", {
         className: "toast-message"
       });
       return;
     }
-    if(regData.password!=regData.repeatPassword){
+    if(regData?.password!=regData?.repeatPassword){
       toast.error("Password must be same", {
         className: "toast-message"
       });
@@ -59,8 +59,8 @@ const Registration = () => {
     }
     axios.post('http://localhost:8080/user/register', regData,{headers: {'Content-Type': 'application/json',}}  )
         .then(response => {
-            if(response.data.status===false){
-              toast.error(response.data.message, {
+            if(response?.data?.status===false){
+              toast.error(response?.data?.message, {
                 className: "toast-message"
               });
             }
@@ -68,18 +68,19 @@ const Registration = () => {
               toast.success("Registration successful",{
                 className:"toast-message"
               });
-              setData(response.data.data);
+              setData(response?.data?.data);
               setIsDataFatched(true);
+              
               if(regData?.role==1){
 
                 naviagte("/doctor/profile",{
-                  state:{data:response.data.data}
+                  state:{data:response?.data?.data}
                 });
 
               }
               else{
                 naviagte("/patient/profile",{
-                  state:{data:response.data.data}
+                  state:{data:response?.data?.data}
                 });
               }
               

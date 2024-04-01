@@ -1,20 +1,27 @@
 import React from "react";
-
 import Registration from "./components/Registration";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Login from "./components/Login";
-import Terms from "./components/Terms";
+// import Terms from "./components/Terms";
 import AddCases from "./components/AddCases";
 import PatientProfile from "./components/PatientProfile";
 import DoctorDashboard from "./components/DoctorDashboard";
 import PatientDashboard from "./components/PatientDashboard";
 import DoctorProfile from "./components/DoctorProfile";
-import Dashboard from "./components/PatientDashboard";
 import HomePage from "./components/HomePage";
 import About from "./components/About";
 import Contact from "./components/Contact";
 import AddCaseData from "./components/AddCaseData";
 import MyCases from "./components/MyCases";
+import { CaseDetails } from "./components/CaseDetails";
+import DoctorCases from "./components/DoctorCases";
+import { DoctorCaseDetails } from "./components/DoctorCaseDetails";
+import Testimony from "./components/Testimony";
+import CaseFeedback from "./components/CaseFeedback";
+import InValidRoutes from "./components/InValidRoutes";
+import TermsOfUse from "./components/TermsOfUse";
+import PrivacyPolicy from "./components/PrivacyPolicy";
+import SubcribeNewsletter from "./components/SubscribeNewsletter";
 const App = () => {
   return (
     <>
@@ -25,19 +32,26 @@ const App = () => {
       <Route path="/contact" element={<Contact/>}/>
       <Route path="/register" element={<Registration/>}/>
       <Route path="/login" element={<Login/>}/>
-      <Route path="/terms" element={<Terms/>}/>
+      <Route path="/terms-conditions" element={<TermsOfUse/>}/>
+      <Route path="/privacy-policy" element={<PrivacyPolicy/>}/>
+      <Route path="/subscribe-newsletter" element={<SubcribeNewsletter/>}/>
       <Route path="/patient/profile" element={<PatientProfile/>}/>
       <Route path="/doctor/profile" element={<DoctorProfile/>}/>
-      <Route path="/patient/dashboard" element={<PatientDashboard/>}/>
-      <Route path="/doctor/dashboard" element={<DoctorDashboard />}/>
-      <Route path="/new-case" element={<AddCases/>}/>
-      <Route path="/add-case-data/:id" element={<AddCaseData/>}/>
-      <Route path="/patient/mycases" element={<MyCases/>}/>
+
+
+
+      <Route path="/patient/dashboard" element={<InValidRoutes Component={PatientDashboard}/>}/>
+      <Route path="/doctor/dashboard" element={<InValidRoutes Component={DoctorDashboard }/>}/>
+      <Route path="/new-case" element={<InValidRoutes Component={AddCases}/>}/>
+      <Route path="/add-case-data/:id" element={<InValidRoutes Component={AddCaseData}/>}/>
+      <Route path="/patient/mycases" element={<InValidRoutes Component={MyCases}/>}/>
+      <Route path="/doctor/cases" element={<InValidRoutes Component={DoctorCases }/>}/>
+      <Route path="/patient/mycases/:id" element={<InValidRoutes Component={CaseDetails}/>}/>
+      <Route path="/doctor/mycases/:id" element={<InValidRoutes Component={DoctorCaseDetails}/>}/>
+      <Route path="/patient/case/feedback" element={<InValidRoutes Component={CaseFeedback}/>}/>
+      <Route path="/patient/testimony" element={<InValidRoutes Component={Testimony}/>}/>    
       </Routes>
     </BrowserRouter>
- 
-    
-      
     </>
   );
 };
